@@ -1,0 +1,40 @@
+project:
+  name: "pitch2iq"
+  type: tool           # tool | saas | app | content | agency | personal | ecommerce | community
+  stage: building      # idea | building | beta | launch | growth | mature
+  audience:
+    - developers
+    - indie-hackers
+  language: en         # ISO 639-1 language code for posts
+
+tone:
+  style: technical-honest  # professional | casual | technical-honest | inspirational | educational | humorous | minimal
+  avoid:
+    - hype
+    - competitor-mentions
+
+accounts:
+  linkedin: "@yourhandle"
+  x: "@yourhandle"
+  # instagram: "@yourhandle"
+  # reddit: "u/yourhandle"
+
+goals:
+  primary: awareness       # awareness | waitlist | sales | followers | engagement | feedback | hiring | partnerships
+  secondary: feedback
+
+status:
+  milestones:
+    - label: "MVP"
+      done: false
+    - label: "First beta user"
+      done: false
+    - label: "Launch"
+      done: false
+      target: "2026-06"
+
+content:
+  off_limits:
+    - pricing
+  evergreen_topics: []
+  current_focus: "Building the core feature"

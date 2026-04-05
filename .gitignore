@@ -65,3 +65,4 @@ AGENTS.md
 # Misc
 *.tmp
 *.bak
+node_modules

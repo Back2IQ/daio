@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+.next/
+out/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Zen tools
+.zencoder/
+.zenflow/
+
+# Binary archives (too large for git, excluded from public repo)
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Legacy Word documents (source of truth is Markdown)
+*.docx
+*.doc
+*.rtf
+
+# Cache
+.cache/
+.parcel-cache/
+.turbo/
+
+# Claude & MCP local state
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# Misc
+*.tmp
+*.bak

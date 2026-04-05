@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAIO — Bulletproof Your Digital Estate</title>
+  <meta name="description" content="Calculate your Digital Estate Score. Join 1,247 fiduciaries who went bulletproof. 90-day free pilot.">
+  <meta name="robots" content="noai, noimageai">
+  
+  <!-- Open Graph für virales Sharing -->
+  <meta property="og:title" content="My Digital Estate Score: 847/1000 (Top 5%)">
+  <meta property="og:description" content="How does your estate infrastructure rank? Calculate now.">
+  <meta property="og:image" content="https://daio.back2iq.com/api/badge?score=847&level=bulletproof">
+  <meta property="og:type" content="website">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Karla:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./s.css">
+</head>
+<body data-lang="en">
+
+  <!-- Viraler Header: Live Counter -->
+  <div class="vc">
+    <div class="vc-i">
+      <span class="vc-n" id="bulletproof-counter">1,247</span>
+      <span class="vc-l">fiduciaries went bulletproof</span>
+      <span class="vc-s">|</span>
+      <span class="vc-a" id="atrisk-counter">€4.2B</span>
+      <span class="vc-l">saved from undocumented loss</span>
+    </div>
+  </div>
+
+  <!-- N -->
+  <nav class="n" role="navigation">
+    <div class="n-i c">
+      <div class="n-b">
+        <a href="#" class="n-l">DAIO</a>
+        <span class="n-t">Digital Estate Infrastructure</span>
+      </div>
+      <div class="n-x">
+        <a href="#calc">Calculate Score</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#challenge">Challenge</a>
+        <button class="lang-switch" id="lang-switch">DE</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Hero mit Score Calculator (Viral Hook) -->
+    <section class="h" id="h">
+      <div class="c h-c">
+        <div class="h-b">
+          <div class="h-t">
+            <div class="badge-preview" id="hero-badge">
+              <span class="bp-s">🏆</span>
+              <span class="bp-t">Bulletproof</span>
+            </div>
+            <h1 class="h-h">
+              Calculate your<br>
+              <span class="h-z">Digital Estate Score</span>
+            </h1>
+            <p class="h-s">
+              F = d × p × s. Only 3% of family offices score > 700.<br>
+              Where do you rank?
+            </p>
+          </div>
+          
+          <!-- Viral Score Calculator -->
+          <div class="sc" id="calc">
+            <div class="sc-h">
+              <span class="sc-t">Digital Estate Score Calculator</span>
+              <span class="sc-f">F = Σ(d × p × s)</span>
+            </div>
+            
+            <div class="sc-fm">
+              <div class="sc-r">
+                <label>d = Direction</label>
+                <select id="calc-d">
+                  <option value="0">No documented process</option>
+                  <option value="0.5">Partial documentation</option>
+                  <option value="1">Full DAIO infrastructure</option>
+                </select>
+              </div>
+              
+              <div class="sc-r">
+                <label>p = Position (Clients)</label>
+                <input type="range" id="calc-p" min="1" max="1000" value="150">
+                <span class="sc-v" id="calc-p-val">150</span>
+              </div>
+              
+              <div class="sc-r">
+                <label>s = Sequence (Asset Types)</label>
+                <div class="sc-cb">
+                  <label><input type="checkbox" class="calc-s" value="0.2"> Crypto</label>
+                  <label><input type="checkbox" class="calc-s" value="0.2"> DeFi</label>
+                  <label><input type="checkbox" class="calc-s" value="0.2"> NFTs</label>
+                  <label><input type="checkbox" class="calc-s" value="0.2"> Digital Business</label>
+                  <label><input type="checkbox" class="calc-s" value="0.2"> Cloud Assets</label>
+                </div>
+              </div>
+              
+              <div class="sc-res">
+                <div class="sc-total">
+                  <span class="sc-label">Your Score:</span>
+                  <span class="sc-num" id="score-display">0</span>
+                  <span class="sc-max">/1000</span>
+                </div>
+                <div class="sc-badge" id="score-badge">At Risk</div>
+              </div>
+              
+              <button class="b b-p b-b" id="btn-share" disabled>
+                🔒 Calculate to Unlock Sharing
+              </button>
+              
+              <div class="sc-share" id="share-options" style="display:none;">
+                <p>Your rank: <strong id="rank-display">Top 87%</strong></p>
+                <div class="sc-so">
+                  <button class="b b-s" onclick="share('linkedin')">Share on LinkedIn</button>
+                  <button class="b b-s" onclick="share('twitter')">Share on X</button>
+                  <button class="b b-s" onclick="copyLink()">Copy Link</button>
+                </div>
+                <p class="sc-ref">
+                  <strong>Challenge 2 peers:</strong>
+                  <input type="email" placeholder="colleague@firm.com" id="ref1">
+                  <input type="email" placeholder="colleague@firm.com" id="ref2">
+                  <button class="b b-p" onclick="sendChallenge()">Send Challenge</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Universal Digital Asset Loss Ticker (Viral Horror Element) -->
+    <section class="bt" id="bt">
+      <div class="c">
+        <div class="bt-h">
+          <span class="bt-i">💀</span>
+          <h2>The Universal Loss Clock</h2>
+          <p class="bt-sub">Digital assets don't die. Access to them does.</p>
+        </div>
+        
+        <!-- Gesamtwert aller digitalen Assets -->
+        <div class="bt-total">
+          <div class="bt-tl">Total Digital Value at Risk of Permanent Loss</div>
+          <div class="bt-tv" id="total-lost-value">€800,000,000,000+</div>
+          <div class="bt-tc">Cryptocurrencies • Gaming • Social • Business • Identity</div>
+        </div>
+        
+        <!-- Kategorie-Grid -->
+        <div class="bt-cats">
+          <!-- Crypto (bereits bestehend) -->
+          <div class="bt-cat" data-cat="crypto">
+            <div class="bt-ic">₿</div>
+            <div class="bt-ct">Cryptocurrencies</div>
+            <div class="bt-cd" id="crypto-lost">47.7M coins</div>
+            <div class="bt-cv" id="crypto-value">€220,000,000,000</div>
+            <div class="bt-cg">BTC, ETH, SOL, +more</div>
+          </div>
+          
+          <!-- Gaming Assets -->
+          <div class="bt-cat" data-cat="gaming">
+            <div class="bt-ic">🎮</div>
+            <div class="bt-ct">Gaming Assets</div>
+            <div class="bt-cd">€85B+ locked</div>
+            <div class="bt-cv" id="gaming-value">€85,000,000,000</div>
+            <div class="bt-cg">Skins, NFTs, Characters, Land</div>
+          </div>
+          
+          <!-- Social Media -->
+          <div class="bt-cat" data-cat="social">
+            <div class="bt-ic">📱</div>
+            <div class="bt-ct">Monetized Social Accounts</div>
+            <div class="bt-cd">€120B+ revenue at risk</div>
+            <div class="bt-cv" id="social-value">€120,000,000,000</div>
+            <div class="bt-cg">YouTube, TikTok, Instagram, X</div>
+          </div>
+          
+          <!-- Digital Business -->
+          <div class="bt-cat" data-cat="business">
+            <div class="bt-ic">💼</div>
+            <div class="bt-ct">Digital Businesses</div>
+            <div class="bt-cd">€200B+ unprotected</div>
+            <div class="bt-cv" id="business-value">€200,000,000,000</div>
+            <div class="bt-cg">SaaS, Domains, E-commerce, IP</div>
+          </div>
+          
+          <!-- Cloud & Identity -->
+          <div class="bt-cat" data-cat="cloud">
+            <div class="bt-ic">☁️</div>
+            <div class="bt-ct">Cloud & Digital Identity</div>
+            <div class="bt-cd">€95B+ inaccessible</div>
+            <div class="bt-cv" id="cloud-value">€95,000,000,000</div>
+            <div class="bt-cg">iCloud, Google, Subscriptions, E-ID</div>
+          </div>
+          
+          <!-- Creative IP -->
+          <div class="bt-cat" data-cat="creative">
+            <div class="bt-ic">🎨</div>
+            <div class="bt-ct">Creative IP & Royalties</div>
+            <div class="bt-cd">€80B+ orphaned</div>
+            <div class="bt-cv" id="creative-value">€80,000,000,000</div>
+            <div class="bt-cg">Music, Art, Code, Patents</div>
+          </div>
+        </div>
+        
+        <!-- Per-Second Ticker (Universal) -->
+        <div class="bt-t">
+          <span class="bt-tt">⏱️ Every second, approximately</span>
+          <span class="bt-tv" id="total-per-sec">€25,347</span>
+          <span class="bt-tt">in digital value becomes permanently inaccessible</span>
+        </div>
+        
+        <!-- Erweiterte Gründe -->
+        <div class="bt-r bt-r2">
+          <div class="bt-rc">
+            <div class="bt-rp" style="--p: 31">31%</div>
+            <div class="bt-rt">Credential Loss</div>
+            <div class="bt-rd">Passwords, 2FA, recovery codes</div>
+          </div>
+          <div class="bt-rc bt-rc-x">
+            <div class="bt-rp" style="--p: 29">29%</div>
+            <div class="bt-rt">Life Events</div>
+            <div class="bt-rd">Death, incapacity, no succession</div>
+          </div>
+          <div class="bt-rc">
+            <div class="bt-rp" style="--p: 22">22%</div>
+            <div class="bt-rt">Platform Terms</div>
+            <div class="bt-rd">Non-transferable, TOS violations</div>
+          </div>
+          <div class="bt-rc">
+            <div class="bt-rp" style="--p: 18">18%</div>
+            <div class="bt-rt">Technical Failure</div>
+            <div class="bt-rd">Expired domains, deleted accounts</div>
+          </div>
+        </div>
+        
+        <!-- Abstrakte Verbindung -->
+        <div class="bt-a">
+          <p class="bt-ap">
+            <strong>29%</strong> of all digital value loss stems from life events without documented transition plans.<br>
+            Not just cryptocurrencies. Everything digital.
+          </p>
+          <a href="#calc" class="b b-p">Calculate Your Digital Continuity Score</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboard (Sozialer Beweis) -->
+    <section class="lb" id="leaderboard">
+      <div class="c">
+        <div class="s-l">Live Rankings</div>
+        <h2 class="s-t">Who went bulletproof?</h2>
+        
+        <div class="lb-g">
+          <div class="lb-c lb-gold">
+            <div class="lb-r">#1</div>
+            <div class="lb-n">M. Family Office</div>
+            <div class="lb-s">987</div>
+            <div class="lb-b">🛡️ Bulletproof</div>
+            <div class="lb-v">Verified by 3 peers</div>
+          </div>
+          <div class="lb-c lb-silver">
+            <div class="lb-r">#2</div>
+            <div class="lb-n">K. Private Bank</div>
+            <div class="lb-s">954</div>
+            <div class="lb-b">🛡️ Bulletproof</div>
+            <div class="lb-v">Verified by 2 peers</div>
+          </div>
+          <div class="lb-c lb-bronze">
+            <div class="lb-r">#3</div>
+            <div class="lb-n">S. Notary</div>
+            <div class="lb-s">921</div>
+            <div class="lb-b">🛡️ Bulletproof</div>
+            <div class="lb-v">Verified by 4 peers</div>
+          </div>
+        </div>
+        
+        <p class="lb-t">Scores updated in real-time. Verification through peer cross-validation.</p>
+      </div>
+    </section>
+
+    <!-- Kreuz-Validierungs-Challenge -->
+    <section class="ch" id="challenge">
+      <div class="c">
+        <div class="s-l">Cross-Validation Challenge</div>
+        <h2 class="s-t">Who do you know that's at risk?</h2>
+        
+        <div class="ch-g">
+          <div class="ch-f">
+            <h3>Your Network Effect</h3>
+            <p>KYCE2IQ Principle: Ψ increases when your peers validate.</p>
+            
+            <div class="ch-st">
+              <div class="ch-si">
+                <span class="ch-n">0</span>
+                <span class="ch-l">Peers challenged</span>
+              </div>
+              <div class="ch-si">
+                <span class="ch-n">0</span>
+                <span class="ch-l">Validated</span>
+              </div>
+              <div class="ch-si ch-x">
+                <span class="ch-n">+0</span>
+                <span class="ch-l">Bonus Score</span>
+              </div>
+            </div>
+            
+            <ul class="ch-ul">
+              <li>Challenge 2 colleagues → Unlock "Network Guardian" Badge</li>
+              <li>Both complete documentation → +50 Score Bonus</li>
+              <li>Your Ψ increases by 15% per validated peer</li>
+            </ul>
+          </div>
+          
+          <div class="ch-f ch-f2">
+            <div class="ch-m">
+              <span class="ch-q">"</span>
+              <p>I challenged my partner firm. They scored 234. After 90 days with DAIO, they're at 812. We both have the Bulletproof Badge now.</p>
+              <footer>— Family Office, Zurich</footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Der Demographic Countdown als Challenge -->
+    <section class="cd-ch">
+      <div class="c">
+        <h2>The 47-Day Challenge</h2>
+        <p class="cd-ch-s">Statistically, your next crypto-estate case happens in 47 days.<br>Can you go bulletproof before then?</p>
+        
+        <div class="cd-ch-c">
+          <div class="cd-ch-u">
+            <span class="cd-ch-n" id="challenge-days">47</span>
+            <span class="cd-ch-l">Days</span>
+          </div>
+          <div class="cd-ch-a">
+            <p>Current completion rate: <strong>12%</strong></p>
+            <p>Your rank if you start today: <strong>Top 12%</strong></p>
+            <a href="#pp" class="b b-p">Accept Challenge</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Noise/Signal Content Check -->
+    <section class="ns">
+      <div class="c">
+        <div class="s-l">Content Integrity</div>
+        <h2 class="s-t">No marketing noise. Signal only.</h2>
+        
+        <div class="ns-g">
+          <div class="ns-c ns-clean">
+            <h3>✓ Clean Content</h3>
+            <p>N_w = 12 (Low Noise)</p>
+            <blockquote>"My client lost €340k in inaccessible DeFi positions. Here's the documentation that would have prevented it."</blockquote>
+            <span class="ns-b">Shareable</span>
+          </div>
+          <div class="ns-c ns-noisy">
+            <h3>✗ Marketing Noise</h3>
+            <p>N_w = 67 (High Noise)</p>
+            <blockquote>"Revolutionary blockchain synergy paradigm leveraging cutting-edge decentralized transformational innovation."</blockquote>
+            <span class="ns-b ns-b-b">Not Shareable</span>
+          </div>
+        </div>
+        
+        <p class="ns-f">Every case study on this page has N_w < 20. We measure noise so you can share without shame.</p>
+      </div>
+    </section>
+
+    <!-- Pilot Program -->
+    <section class="pp" id="pp">
+      <div class="c">
+        <div class="pp-g">
+          <div class="pp-f">
+            <div class="s-l">90-Day Bulletproof Challenge</div>
+            <h2 class="s-t">Go from At Risk to Bulletproof</h2>
+            <p class="pp-i">
+              Free pilot. Full infrastructure. White-glove onboarding.<br>
+              If you don't reach Score 800+ in 90 days, we work for free until you do.
+            </p>
+            
+            <div class="pp-t">
+              <div class="pp-tr">
+                <span class="pp-d">Day 1</span>
+                <span class="pp-e">Score: <span id="score-start">0</span></span>
+              </div>
+              <div class="pp-ar">→</div>
+              <div class="pp-tr pp-tr-e">
+                <span class="pp-d">Day 90</span>
+                <span class="pp-e">Score: 850+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pp-f">
+            <form class="k-fm" id="nda-form">
+              <h3>Join the Challenge</h3>
+              <input type="text" name="fullName" placeholder="Full Name" required>
+              <input type="email" name="email" placeholder="Business Email" required>
+              <input type="text" name="company" placeholder="Organization" required>
+              <input type="hidden" name="score" id="form-score" value="0">
+              <input type="hidden" name="badge" id="form-badge" value="at-risk">
+              <button type="submit" class="b b-p b-b">Start Bulletproof Challenge</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="fo">
+    <div class="c fo-i">
+      <div class="fo-l">
+        <span class="fo-b">DAIO — Digital Estate Infrastructure</span>
+        <span class="fo-c">1,247 bulletproof. Join us.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./m.js"></script>
+</body>
+</html>

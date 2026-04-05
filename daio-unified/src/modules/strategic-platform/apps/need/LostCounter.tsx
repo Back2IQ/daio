@@ -67,7 +67,7 @@ export function LostCounter() {
 
   // Generate historical data
   const historicalData = Array.from({ length: 12 }, (_, i) => {
-    const month = new Date(2024, i, 1).toLocaleString("de-DE", { month: "short" });
+    const month = new Date(2024, i, 1).toLocaleString("en-US", { month: "short" });
     const baseLoss = 120_000_000_000;
     const growth = 1 + i * 0.05;
     return {
@@ -85,15 +85,15 @@ export function LostCounter() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Globaler Verlust-Algorithmus:</div>
+        <div className="text-slate-500 mb-2">Global loss algorithm:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          L(t) = L₀ × e^(rt) + Σ (Todesfälle × Ø-Portfolio)
+          L(t) = L₀ × e^(rt) + Σ (deaths × avg portfolio)
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          r = 0.01% tägliche Wachstumsrate · Geschätzte 1.500 tägliche Todesfälle mit Crypto
+          r = 0.01% daily growth rate · estimated 1,500 daily deaths with crypto holdings
         </div>
         <div className="text-amber-600 dark:text-amber-400 text-xs mt-2">
-          Hinweis: Alle Zahlen sind Branchenschätzungen (Chainalysis, Glassnode, WHO-Mortalitätsdaten) und dienen der Veranschaulichung.
+          Note: all figures are industry estimates (Chainalysis, Glassnode, WHO mortality data) and are illustrative.
         </div>
       </div>
 
@@ -106,24 +106,24 @@ export function LostCounter() {
           <div className="relative z-10">
             <div className="flex items-center justify-center gap-2 mb-4">
               <Clock className="w-5 h-5" />
-              <span className="text-sm opacity-80">Echtzeit-Verlust-Counter</span>
+              <span className="text-sm opacity-80">Real-time loss counter</span>
             </div>
             <div className="text-5xl md:text-6xl font-bold font-mono mb-2">
               {formatCurrency(stats.totalLost)}
             </div>
-            <div className="text-lg opacity-80">Geschätzter globaler Verlust</div>
+            <div className="text-lg opacity-80">Estimated global loss</div>
             <div className="mt-4 flex justify-center gap-6 text-sm">
               <div>
                 <div className="font-mono font-bold">{formatCurrency(perSecondLoss)}/s</div>
-                <div className="opacity-60">pro Sekunde</div>
+                <div className="opacity-60">per second</div>
               </div>
               <div>
                 <div className="font-mono font-bold">{formatCurrency(perMinuteLoss)}/min</div>
-                <div className="opacity-60">pro Minute</div>
+                <div className="opacity-60">per minute</div>
               </div>
               <div>
                 <div className="font-mono font-bold">{formatCurrency(perHourLoss)}/h</div>
-                <div className="opacity-60">pro Stunde</div>
+                <div className="opacity-60">per hour</div>
               </div>
             </div>
           </div>
@@ -137,12 +137,12 @@ export function LostCounter() {
             <Card className="bg-amber-50 dark:bg-amber-900/20 border-amber-200">
               <CardContent className="p-4 text-center">
                 <Bitcoin className="w-6 h-6 text-amber-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">BTC Geschätzt Verloren</div>
+                <div className="text-xs text-slate-500">BTC est. lost</div>
                 <div className="text-xl font-bold text-amber-700">
                   {(stats.btcLost / 1_000_000).toFixed(1)}M
                 </div>
                 <div className="text-xs text-amber-600">
-                  {(stats.btcLost / 21_000_000 * 100).toFixed(1)}% des Supply
+                  {(stats.btcLost / 21_000_000 * 100).toFixed(1)}% of supply
                 </div>
               </CardContent>
             </Card>
@@ -150,12 +150,12 @@ export function LostCounter() {
             <Card className="bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200">
               <CardContent className="p-4 text-center">
                 <Wallet className="w-6 h-6 text-indigo-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">ETH Geschätzt Verloren</div>
+                <div className="text-xs text-slate-500">ETH est. lost</div>
                 <div className="text-xl font-bold text-indigo-700">
                   {(stats.ethLost / 1_000_000).toFixed(1)}M
                 </div>
                 <div className="text-xs text-indigo-600">
-                  Unzugängliche Wallets
+                  Inaccessible wallets
                 </div>
               </CardContent>
             </Card>
@@ -163,12 +163,12 @@ export function LostCounter() {
             <Card className="bg-red-50 dark:bg-red-900/20 border-red-200">
               <CardContent className="p-4 text-center">
                 <AlertTriangle className="w-6 h-6 text-red-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Wallets Verloren</div>
+                <div className="text-xs text-slate-500">Wallets lost</div>
                 <div className="text-xl font-bold text-red-700">
                   {(stats.walletsLost / 1_000_000).toFixed(1)}M
                 </div>
                 <div className="text-xs text-red-600">
-                  Ohne Recovery-Option
+                  No recovery option
                 </div>
               </CardContent>
             </Card>
@@ -176,12 +176,12 @@ export function LostCounter() {
             <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200">
               <CardContent className="p-4 text-center">
                 <TrendingUp className="w-6 h-6 text-blue-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Täglicher Verlust</div>
+                <div className="text-xs text-slate-500">Daily loss</div>
                 <div className="text-xl font-bold text-blue-700">
                   {formatCurrency(stats.dailyLoss)}
                 </div>
                 <div className="text-xs text-blue-600">
-                  Globale Schätzung
+                  Global estimate
                 </div>
               </CardContent>
             </Card>
@@ -189,12 +189,12 @@ export function LostCounter() {
             <Card className="bg-green-50 dark:bg-green-900/20 border-green-200">
               <CardContent className="p-4 text-center">
                 <Globe className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Jährlicher Verlust</div>
+                <div className="text-xs text-slate-500">Yearly loss</div>
                 <div className="text-xl font-bold text-green-700">
                   {formatCurrency(stats.yearlyLoss)}
                 </div>
                 <div className="text-xs text-green-600">
-                  Projektion 2024
+                  2024 projection
                 </div>
               </CardContent>
             </Card>
@@ -202,12 +202,12 @@ export function LostCounter() {
             <Card className="bg-purple-50 dark:bg-purple-900/20 border-purple-200">
               <CardContent className="p-4 text-center">
                 <DollarSign className="w-6 h-6 text-purple-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">% Market Cap</div>
+                <div className="text-xs text-slate-500">% market cap</div>
                 <div className="text-xl font-bold text-purple-700">
                   {(stats.totalLost / GLOBAL_CRYPTO_MARKET_CAP * 100).toFixed(1)}%
                 </div>
                 <div className="text-xs text-purple-600">
-                  Von gesamtem Markt
+                  Of total market
                 </div>
               </CardContent>
             </Card>
@@ -218,7 +218,7 @@ export function LostCounter() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4" />
-                <CardTitle className="text-base">Historische Verlust-Entwicklung</CardTitle>
+                <CardTitle className="text-base">Historical loss trajectory</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -235,7 +235,7 @@ export function LostCounter() {
                       stroke="#ef4444"
                       fill="#ef4444"
                       fillOpacity={0.3}
-                      name="Verloren"
+                      name="Lost"
                     />
                     <Area
                       type="monotone"
@@ -243,7 +243,7 @@ export function LostCounter() {
                       stroke="#f59e0b"
                       fill="#f59e0b"
                       fillOpacity={0.3}
-                      name="Projiziert"
+                      name="Projected"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -256,25 +256,25 @@ export function LostCounter() {
         <div className="space-y-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Wichtige Statistiken</CardTitle>
+              <CardTitle className="text-base">Key statistics</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm">Bitcoin verloren:</span>
+                  <span className="text-sm">Bitcoin lost:</span>
                   <Badge variant="secondary">~4M BTC</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm">% von BTC Supply:</span>
+                  <span className="text-sm">% of BTC supply:</span>
                   <Badge variant="destructive">~19%</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm">Tägliche Todesfälle:</span>
-                  <Badge variant="secondary">~1.500</Badge>
+                  <span className="text-sm">Daily deaths:</span>
+                  <Badge variant="secondary">~1,500</Badge>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm">Ø Portfolio-Wert:</span>
-                  <Badge variant="secondary">$50.000</Badge>
+                  <span className="text-sm">Avg portfolio value:</span>
+                  <Badge variant="secondary">$50,000</Badge>
                 </div>
               </div>
             </CardContent>
@@ -284,17 +284,17 @@ export function LostCounter() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-amber-600" />
-                <CardTitle className="text-base text-amber-800">Warum das passiert</CardTitle>
+                <CardTitle className="text-base text-amber-800">Why this happens</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <ul className="text-sm space-y-2 text-amber-800">
-                <li>• Keine dokumentierten Seed Phrases</li>
-                <li>• Unbekannte Exchange-Konten</li>
-                <li>• Fehlende Testamentsvollstreckung</li>
-                <li>• Verlorene Hardware Wallets</li>
-                <li>• Unbekannte DeFi-Positionen</li>
-                <li>• Keine Notfall-Kontakte</li>
+                <li>• No documented seed phrases</li>
+                <li>• Unknown exchange accounts</li>
+                <li>• Missing executor arrangements</li>
+                <li>• Lost hardware wallets</li>
+                <li>• Unknown DeFi positions</li>
+                <li>• No emergency contacts</li>
               </ul>
             </CardContent>
           </Card>
@@ -303,18 +303,18 @@ export function LostCounter() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-green-600" />
-                <CardTitle className="text-base text-green-800">DAIO Impact</CardTitle>
+                <CardTitle className="text-base text-green-800">DAIO impact</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <div className="text-sm text-green-800 space-y-2">
                 <p>
-                  Mit DAIO-Governance könnten geschätzte{' '}
-                  <strong>85-95%</strong> dieser Verluste verhindert werden.
+                  With DAIO governance, an estimated{' '}
+                  <strong>85–95%</strong> of these losses could be prevented.
                 </p>
                 <div className="pt-2 border-t border-green-200">
                   <div className="flex justify-between">
-                    <span>Potenzielle Ersparnis:</span>
+                    <span>Potential savings:</span>
                     <span className="font-bold">
                       {formatCurrency(stats.totalLost * 0.9)}
                     </span>

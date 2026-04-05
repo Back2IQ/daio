@@ -38,7 +38,7 @@ interface System {
 const SYSTEMS: System[] = [
   {
     id: "server",
-    name: "Server & Infrastruktur",
+    name: "Servers & Infrastructure",
     icon: <Server className="w-4 h-4" />,
     downtimeCostPerHour: 5000,
     recoveryTimeHours: 48,
@@ -46,7 +46,7 @@ const SYSTEMS: System[] = [
   },
   {
     id: "banking",
-    name: "Geschäftskonten & Banking",
+    name: "Business Banking",
     icon: <CreditCard className="w-4 h-4" />,
     downtimeCostPerHour: 3000,
     recoveryTimeHours: 72,
@@ -54,7 +54,7 @@ const SYSTEMS: System[] = [
   },
   {
     id: "code",
-    name: "Code-Repositories",
+    name: "Code Repositories",
     icon: <Code className="w-4 h-4" />,
     downtimeCostPerHour: 2000,
     recoveryTimeHours: 24,
@@ -62,7 +62,7 @@ const SYSTEMS: System[] = [
   },
   {
     id: "email",
-    name: "E-Mail & Kommunikation",
+    name: "Email & Communication",
     icon: <Mail className="w-4 h-4" />,
     downtimeCostPerHour: 1500,
     recoveryTimeHours: 12,
@@ -70,7 +70,7 @@ const SYSTEMS: System[] = [
   },
   {
     id: "database",
-    name: "Datenbanken & Backups",
+    name: "Databases & Backups",
     icon: <Database className="w-4 h-4" />,
     downtimeCostPerHour: 8000,
     recoveryTimeHours: 96,
@@ -78,7 +78,7 @@ const SYSTEMS: System[] = [
   },
   {
     id: "access",
-    name: "Admin-Zugänge & Keys",
+    name: "Admin Access & Keys",
     icon: <Lock className="w-4 h-4" />,
     downtimeCostPerHour: 4000,
     recoveryTimeHours: 168,
@@ -159,12 +159,12 @@ export function KeyPersonRisk() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Business Impact Formel:</div>
+        <div className="text-slate-500 mb-2">Business impact formula:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          I = Σ (Kosten/Stunde × Ausfallzeit) + Recovery × 0.3
+          I = Σ (cost/hour × downtime) + recovery × 0.3
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Gesamtschaden = Sofortkosten + 30% der Wiederherstellungskosten (indirekter Impact) · Loaded Cost = 2× Gehalt (Branchenstandard)
+          Total damage = immediate cost + 30% of recovery cost (indirect impact) · Loaded cost = 2× salary (industry standard)
         </div>
       </div>
 
@@ -175,10 +175,10 @@ export function KeyPersonRisk() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <UserX className="w-5 h-5 text-red-500" />
-                <CardTitle className="text-base">Betroffene Systeme</CardTitle>
+                <CardTitle className="text-base">Affected Systems</CardTitle>
               </div>
               <p className="text-sm text-slate-500">
-                Welche Systeme sind vom Key-Person-Ausfall betroffen?
+                Which systems are affected by the key-person incident?
               </p>
             </CardHeader>
             <CardContent>
@@ -205,7 +205,7 @@ export function KeyPersonRisk() {
                       <div>
                         <div className="font-medium text-sm">{system.name}</div>
                         <div className="text-xs text-slate-500">
-                          {formatCurrency(system.downtimeCostPerHour)}/h · Wiederherstellung:{" "}
+                          {formatCurrency(system.downtimeCostPerHour)}/h · recovery:{" "}
                           {system.recoveryTimeHours}h
                         </div>
                       </div>
@@ -222,12 +222,12 @@ export function KeyPersonRisk() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Szenario-Parameter</CardTitle>
+              <CardTitle className="text-base">Scenario Parameters</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label>Stunden offline</Label>
+                  <Label>Hours offline</Label>
                   <span className="font-mono">{hoursOffline}h</span>
                 </div>
                 <Slider
@@ -247,7 +247,7 @@ export function KeyPersonRisk() {
 
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label>Key-Person Jahresgehalt</Label>
+                  <Label>Key-person annual salary</Label>
                   <span className="font-mono">{formatCurrency(keyPersonSalary)}</span>
                 </div>
                 <Slider
@@ -270,12 +270,12 @@ export function KeyPersonRisk() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="text-sm text-slate-500">Risiko-Level</div>
+                  <div className="text-sm text-slate-500">Risk level</div>
                   <div className="text-2xl font-bold capitalize">
-                    {riskLevel === "critical" && "Kritisch"}
-                    {riskLevel === "high" && "Hoch"}
-                    {riskLevel === "medium" && "Mittel"}
-                    {riskLevel === "low" && "Niedrig"}
+                    {riskLevel === "critical" && "Critical"}
+                    {riskLevel === "high" && "High"}
+                    {riskLevel === "medium" && "Medium"}
+                    {riskLevel === "low" && "Low"}
                   </div>
                 </div>
                 <div className={`w-16 h-16 rounded-full ${riskColors[riskLevel]} flex items-center justify-center text-white`}>
@@ -284,13 +284,13 @@ export function KeyPersonRisk() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-3 bg-slate-50 rounded-lg">
-                  <div className="text-xs text-slate-500">Sofortiger Schaden</div>
+                  <div className="text-xs text-slate-500">Immediate damage</div>
                   <div className="text-xl font-bold text-red-600">
                     {formatCurrency(totalImmediateImpact)}
                   </div>
                 </div>
                 <div className="text-center p-3 bg-slate-50 rounded-lg">
-                  <div className="text-xs text-slate-500">Wiederherstellungskosten</div>
+                  <div className="text-xs text-slate-500">Recovery cost</div>
                   <div className="text-xl font-bold text-amber-600">
                     {formatCurrency(totalRecoveryCost)}
                   </div>
@@ -303,10 +303,10 @@ export function KeyPersonRisk() {
           <Card className="bg-gradient-to-br from-slate-800 to-slate-900 text-white">
             <CardContent className="p-6 text-center">
               <TrendingUp className="w-8 h-8 mx-auto mb-3 opacity-60" />
-              <div className="text-sm opacity-60">Geschätzter Gesamtschaden</div>
+              <div className="text-sm opacity-60">Estimated total damage</div>
               <div className="text-4xl font-bold">{formatCurrency(totalImpact)}</div>
               <div className="text-sm opacity-60 mt-2">
-                Entspricht {hoursOfWorkLost.toFixed(0)}h produktiver Arbeitszeit
+                Equivalent to {hoursOfWorkLost.toFixed(0)}h of productive work time
               </div>
             </CardContent>
           </Card>
@@ -315,7 +315,7 @@ export function KeyPersonRisk() {
           {affectedSystems.size > 0 && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-base">Schaden pro System</CardTitle>
+                <CardTitle className="text-base">Damage per system</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-48">
@@ -325,8 +325,8 @@ export function KeyPersonRisk() {
                       <XAxis dataKey="name" tick={{ fontSize: 10 }} />
                       <YAxis tickFormatter={(v) => formatCurrency(v)} tick={{ fontSize: 10 }} />
                       <Tooltip formatter={(v: number) => formatCurrency(v)} />
-                      <Bar dataKey="immediateCost" name="Sofort" fill="#ef4444" />
-                      <Bar dataKey="recoveryCost" name="Wiederherstellung" fill="#f59e0b" />
+                      <Bar dataKey="immediateCost" name="Immediate" fill="#ef4444" />
+                      <Bar dataKey="recoveryCost" name="Recovery" fill="#f59e0b" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -340,7 +340,7 @@ export function KeyPersonRisk() {
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <CardTitle className="text-base">Wiederherstellungs-Zeitlinie</CardTitle>
+                  <CardTitle className="text-base">Recovery timeline</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>

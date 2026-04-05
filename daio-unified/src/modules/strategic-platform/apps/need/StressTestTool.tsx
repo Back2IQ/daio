@@ -40,33 +40,33 @@ interface AssetCategory {
 const STRESS_EVENTS: { id: StressEvent; name: string; icon: React.ReactNode; description: string }[] = [
   {
     id: "death",
-    name: "Tod",
+    name: "Death",
     icon: <Skull className="w-4 h-4" />,
-    description: "Vollständiger Ausfall des Eigentümers",
+    description: "Complete owner unavailability",
   },
   {
     id: "incapacity",
-    name: "Inkapazität",
+    name: "Incapacity",
     icon: <Brain className="w-4 h-4" />,
-    description: "Geschäftsunfähigkeit durch Krankheit/Unfall",
+    description: "Legal incapacity through illness/accident",
   },
   {
     id: "divorce",
-    name: "Scheidung",
+    name: "Divorce",
     icon: <Scale className="w-4 h-4" />,
-    description: "Vermögensauseinandersetzung",
+    description: "Asset settlement proceedings",
   },
   {
     id: "relocation",
-    name: "Umzug ins Ausland",
+    name: "Relocation abroad",
     icon: <Plane className="w-4 h-4" />,
-    description: "Internationale Verlagerung",
+    description: "International jurisdiction change",
   },
   {
     id: "trustee-failure",
-    name: "Treuhänder-Ausfall",
+    name: "Trustee failure",
     icon: <UserX className="w-4 h-4" />,
-    description: "Ausfall eines Vertrauensperson",
+    description: "Failure of a trusted party",
   },
 ];
 
@@ -93,19 +93,19 @@ export function StressTestTool() {
     const blockedAssets = assets.filter((a) => a.blockedBy.includes(selectedEvent));
     const blockedValue = blockedAssets.reduce((sum, a) => sum + a.value, 0);
     const totalValue = assets.reduce((sum, a) => sum + a.value, 0);
-    
+
     const avgRecoveryMonths =
       blockedAssets.length > 0
         ? blockedAssets.reduce((sum, a) => sum + a.recoveryMonths, 0) / blockedAssets.length
         : 0;
-    
+
     const legalCosts = blockedAssets.reduce(
       (sum, a) => sum + a.value * (a.legalCostPercent / 100),
       0
     );
 
     const riskScore = Math.min((blockedValue / totalValue) * 100, 100);
-    
+
     // With DAIO: estimated reductions based on structured governance
     // (illustrative assumptions — actual impact depends on implementation scope)
     const blockedValueWithDaio = hasDaio ? blockedValue * 0.1 : blockedValue;       // ~90% reduction
@@ -138,12 +138,12 @@ export function StressTestTool() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Stress-Test Formel:</div>
+        <div className="text-slate-500 mb-2">Stress-test formula:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          R = Σ (Assetwert × Blockierungsfaktor × Event-Multiplikator)
+          R = Σ (asset value × blocking factor × event multiplier)
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Simuliert Asset-Blockaden bei verschiedenen Lebensereignissen
+          Simulates asset blockages across different life events
         </div>
       </div>
 
@@ -154,7 +154,7 @@ export function StressTestTool() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <TestTube className="w-5 h-5 text-purple-500" />
-                <CardTitle className="text-base">Stress-Szenario</CardTitle>
+                <CardTitle className="text-base">Stress Scenario</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -191,7 +191,7 @@ export function StressTestTool() {
           {/* Asset Values */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Asset-Werte</CardTitle>
+              <CardTitle className="text-base">Asset Values</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {assets.map((asset) => (
@@ -222,12 +222,12 @@ export function StressTestTool() {
                   onCheckedChange={(c) => setHasDaio(!!c)}
                 />
                 <Label htmlFor="daio" className="cursor-pointer">
-                  <div className="font-medium">Mit DAIO-Governance</div>
+                  <div className="font-medium">With DAIO governance</div>
                   <div className="text-xs text-slate-500">
-                    Simuliert Impact mit DAIO-Struktur
+                    Simulates impact with DAIO structure in place
                   </div>
                   <div className="text-xs text-slate-400 mt-1">
-                    Annahmen: ~90% Wertschutz, ~80% Rechtskostenreduktion, ~70% schnellere Recovery (illustrativ)
+                    Assumptions: ~90% value protection, ~80% legal-cost reduction, ~70% faster recovery (illustrative)
                   </div>
                 </Label>
               </div>
@@ -242,7 +242,7 @@ export function StressTestTool() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="text-sm text-slate-500">Risiko-Score</div>
+                  <div className="text-sm text-slate-500">Risk score</div>
                   <div className="text-3xl font-bold">{results.riskScore.toFixed(0)}%</div>
                 </div>
                 <Badge
@@ -256,9 +256,9 @@ export function StressTestTool() {
                   }
                 >
                   <AlertTriangle className="w-3 h-3 mr-1" />
-                  {riskLevel === "critical" && "Kritisch"}
-                  {riskLevel === "high" && "Hoch"}
-                  {riskLevel === "medium" && "Mittel"}
+                  {riskLevel === "critical" && "Critical"}
+                  {riskLevel === "high" && "High"}
+                  {riskLevel === "medium" && "Medium"}
                 </Badge>
               </div>
               <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -283,13 +283,13 @@ export function StressTestTool() {
             <Card className="bg-red-50 dark:bg-red-900/20 border-red-200">
               <CardContent className="p-4 text-center">
                 <Lock className="w-6 h-6 text-red-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Blockierter Wert</div>
+                <div className="text-xs text-slate-500">Blocked value</div>
                 <div className="text-lg font-bold text-red-700">
                   {formatCurrency(hasDaio ? results.blockedValueWithDaio : results.blockedValue)}
                 </div>
                 {!hasDaio && (
                   <div className="text-xs text-red-600">
-                    von {formatCurrency(results.totalValue)}
+                    of {formatCurrency(results.totalValue)}
                   </div>
                 )}
               </CardContent>
@@ -298,12 +298,12 @@ export function StressTestTool() {
             <Card className="bg-amber-50 dark:bg-amber-900/20 border-amber-200">
               <CardContent className="p-4 text-center">
                 <Clock className="w-6 h-6 text-amber-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Wiederherstellung</div>
+                <div className="text-xs text-slate-500">Recovery</div>
                 <div className="text-lg font-bold text-amber-700">
                   {hasDaio
                     ? results.recoveryMonthsWithDaio.toFixed(1)
                     : results.avgRecoveryMonths.toFixed(1)}{" "}
-                  Monate
+                  months
                 </div>
               </CardContent>
             </Card>
@@ -311,7 +311,7 @@ export function StressTestTool() {
             <Card className="bg-orange-50 dark:bg-orange-900/20 border-orange-200">
               <CardContent className="p-4 text-center">
                 <DollarSign className="w-6 h-6 text-orange-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Rechtskosten</div>
+                <div className="text-xs text-slate-500">Legal costs</div>
                 <div className="text-lg font-bold text-orange-700">
                   {formatCurrency(hasDaio ? results.legalCostsWithDaio : results.legalCosts)}
                 </div>
@@ -322,7 +322,7 @@ export function StressTestTool() {
           {/* Radar Chart */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Asset-Risiko-Profil</CardTitle>
+              <CardTitle className="text-base">Asset risk profile</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-64">
@@ -332,7 +332,7 @@ export function StressTestTool() {
                     <PolarAngleAxis dataKey="subject" tick={{ fontSize: 12 }} />
                     <PolarRadiusAxis angle={30} domain={[0, 100]} />
                     <Radar
-                      name="Blockierungsrisiko"
+                      name="Blocking risk"
                       dataKey="A"
                       stroke="#8884d8"
                       fill="#8884d8"
@@ -350,7 +350,7 @@ export function StressTestTool() {
               <CardHeader className="pb-3">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4" />
-                  <CardTitle className="text-base">Betroffene Assets</CardTitle>
+                  <CardTitle className="text-base">Affected Assets</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -364,7 +364,7 @@ export function StressTestTool() {
                       <div className="text-right">
                         <div className="text-sm font-mono">{formatCurrency(asset.value)}</div>
                         <div className="text-xs text-slate-500">
-                          {asset.recoveryMonths} Monate Wiederherstellung
+                          {asset.recoveryMonths} months recovery
                         </div>
                       </div>
                     </div>

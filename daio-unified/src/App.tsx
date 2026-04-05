@@ -17,7 +17,7 @@ function LoadingFallback() {
     <div className="flex items-center justify-center h-full min-h-[60vh]">
       <div className="flex flex-col items-center gap-3">
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-        <p className="text-sm text-muted-foreground">Modul wird geladen...</p>
+        <p className="text-sm text-muted-foreground">Loading module...</p>
       </div>
     </div>
   )

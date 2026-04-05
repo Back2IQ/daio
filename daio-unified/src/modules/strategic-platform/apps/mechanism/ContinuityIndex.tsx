@@ -34,25 +34,25 @@ interface GovernanceComponent {
 
 const DEFAULT_COMPONENTS: GovernanceComponent[] = [
   // Roles
-  { id: "owner", name: "Eigentümer identifiziert", category: "roles", weight: 10, implemented: true, maturity: 1 },
-  { id: "executor", name: "Testamentsvollstrecker", category: "roles", weight: 15, implemented: false, maturity: 0 },
-  { id: "guardians", name: "Guardians (Multi-Sig)", category: "roles", weight: 12, implemented: false, maturity: 0 },
-  { id: "beneficiaries", name: "Begünstigte definiert", category: "roles", weight: 10, implemented: false, maturity: 0 },
-  
+  { id: "owner", name: "Owner identified", category: "roles", weight: 10, implemented: true, maturity: 1 },
+  { id: "executor", name: "Will executor", category: "roles", weight: 15, implemented: false, maturity: 0 },
+  { id: "guardians", name: "Guardians (Multi-sig)", category: "roles", weight: 12, implemented: false, maturity: 0 },
+  { id: "beneficiaries", name: "Beneficiaries defined", category: "roles", weight: 10, implemented: false, maturity: 0 },
+
   // Triggers
-  { id: "death_trigger", name: "Todesfall-Trigger", category: "triggers", weight: 15, implemented: false, maturity: 0 },
-  { id: "incapacity_trigger", name: "Inkapazitäts-Trigger", category: "triggers", weight: 10, implemented: false, maturity: 0 },
-  { id: "time_trigger", name: "Zeitbasierter Trigger", category: "triggers", weight: 8, implemented: false, maturity: 0 },
-  
+  { id: "death_trigger", name: "Death trigger", category: "triggers", weight: 15, implemented: false, maturity: 0 },
+  { id: "incapacity_trigger", name: "Incapacity trigger", category: "triggers", weight: 10, implemented: false, maturity: 0 },
+  { id: "time_trigger", name: "Time-based trigger", category: "triggers", weight: 8, implemented: false, maturity: 0 },
+
   // Policies
-  { id: "quorum", name: "Quorum-Regel (M-of-N)", category: "policies", weight: 12, implemented: false, maturity: 0 },
-  { id: "timelock", name: "Time-Lock Policy", category: "policies", weight: 10, implemented: false, maturity: 0 },
-  { id: "dispute", name: "Widerspruchs-Mechanismus", category: "policies", weight: 8, implemented: false, maturity: 0 },
-  
+  { id: "quorum", name: "Quorum rule (M-of-N)", category: "policies", weight: 12, implemented: false, maturity: 0 },
+  { id: "timelock", name: "Time-lock policy", category: "policies", weight: 10, implemented: false, maturity: 0 },
+  { id: "dispute", name: "Objection mechanism", category: "policies", weight: 8, implemented: false, maturity: 0 },
+
   // Documentation
-  { id: "asset_registry", name: "Asset-Register", category: "documentation", weight: 10, implemented: false, maturity: 0 },
-  { id: "access_docs", name: "Zugangsdokumentation", category: "documentation", weight: 15, implemented: false, maturity: 0 },
-  { id: "legal_docs", name: "Rechtsdokumente", category: "documentation", weight: 10, implemented: false, maturity: 0 },
+  { id: "asset_registry", name: "Asset registry", category: "documentation", weight: 10, implemented: false, maturity: 0 },
+  { id: "access_docs", name: "Access documentation", category: "documentation", weight: 15, implemented: false, maturity: 0 },
+  { id: "legal_docs", name: "Legal documents", category: "documentation", weight: 10, implemented: false, maturity: 0 },
 ];
 
 export function ContinuityIndex() {
@@ -76,7 +76,7 @@ export function ContinuityIndex() {
 
   const scores = useMemo(() => {
     const categories = ["roles", "triggers", "policies", "documentation"] as const;
-    
+
     const categoryScores = categories.map((cat) => {
       const catComponents = components.filter((c) => c.category === cat);
       const maxScore = catComponents.reduce((sum, c) => sum + c.weight, 0);
@@ -104,20 +104,20 @@ export function ContinuityIndex() {
 
   const getRecommendations = () => {
     const recommendations: string[] = [];
-    
+
     if (!components.find((c) => c.id === "executor")?.implemented) {
-      recommendations.push("Testamentsvollstrecker benennen");
+      recommendations.push("Nominate a will executor");
     }
     if (!components.find((c) => c.id === "access_docs")?.implemented) {
-      recommendations.push("Zugangsdaten dokumentieren");
+      recommendations.push("Document access credentials");
     }
     if (!components.find((c) => c.id === "quorum")?.implemented) {
-      recommendations.push("Quorum-Regel definieren");
+      recommendations.push("Define quorum rule");
     }
     if (!components.find((c) => c.id === "death_trigger")?.implemented) {
-      recommendations.push("Todesfall-Trigger einrichten");
+      recommendations.push("Set up death trigger");
     }
-    
+
     return recommendations;
   };
 
@@ -133,10 +133,10 @@ export function ContinuityIndex() {
   }));
 
   const getScoreLevel = (score: number) => {
-    if (score >= 80) return { label: "Ausgezeichnet", color: "bg-green-500" };
-    if (score >= 60) return { label: "Gut", color: "bg-blue-500" };
-    if (score >= 40) return { label: "Verbesserungsbedarf", color: "bg-amber-500" };
-    return { label: "Kritisch", color: "bg-red-500" };
+    if (score >= 80) return { label: "Excellent", color: "bg-green-500" };
+    if (score >= 60) return { label: "Good", color: "bg-blue-500" };
+    if (score >= 40) return { label: "Needs improvement", color: "bg-amber-500" };
+    return { label: "Critical", color: "bg-red-500" };
   };
 
   const scoreLevel = getScoreLevel(scores.totalScore);
@@ -145,12 +145,12 @@ export function ContinuityIndex() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Continuity Index Formel:</div>
+        <div className="text-slate-500 mb-2">Continuity Index formula:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          CI = Σ (Gewicht × Implementierung × Reifegrad) / Σ(Gewicht) × 100
+          CI = Σ (weight × implementation × maturity) / Σ(weight) × 100
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Berechnet die Governance-Reife über alle Kategorien
+          Calculates governance maturity across all categories
         </div>
       </div>
 
@@ -170,12 +170,12 @@ export function ContinuityIndex() {
                 <div className="text-sm text-slate-500">Continuity Index</div>
                 <div className="text-xl font-bold">{scoreLevel.label}</div>
                 <div className="text-sm text-slate-500">
-                  {components.filter((c) => c.implemented).length} von {components.length} Komponenten
+                  {components.filter((c) => c.implemented).length} of {components.length} components
                 </div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-slate-500">Ziel-Score</div>
+              <div className="text-sm text-slate-500">Target score</div>
               <div className="text-2xl font-bold text-green-600">80+</div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export function ContinuityIndex() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-blue-500" />
-                <CardTitle className="text-base">Governance-Komponenten</CardTitle>
+                <CardTitle className="text-base">Governance components</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -197,10 +197,10 @@ export function ContinuityIndex() {
                 {["roles", "triggers", "policies", "documentation"].map((category) => (
                   <div key={category}>
                     <div className="text-sm font-medium text-slate-500 mb-2 capitalize">
-                      {category === "roles" && "Rollen"}
-                      {category === "triggers" && "Trigger"}
-                      {category === "policies" && "Richtlinien"}
-                      {category === "documentation" && "Dokumentation"}
+                      {category === "roles" && "Roles"}
+                      {category === "triggers" && "Triggers"}
+                      {category === "policies" && "Policies"}
+                      {category === "documentation" && "Documentation"}
                     </div>
                     <div className="space-y-2">
                       {components
@@ -225,7 +225,7 @@ export function ContinuityIndex() {
                             </div>
                             {component.implemented && (
                               <div className="flex items-center gap-2">
-                                <span className="text-xs text-slate-500">Reife:</span>
+                                <span className="text-xs text-slate-500">Maturity:</span>
                                 <input
                                   type="range"
                                   min="0"
@@ -257,7 +257,7 @@ export function ContinuityIndex() {
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600" />
                   <CardTitle className="text-base text-amber-800">
-                    Empfohlene nächste Schritte
+                    Recommended next steps
                   </CardTitle>
                 </div>
               </CardHeader>
@@ -280,7 +280,7 @@ export function ContinuityIndex() {
           {/* Radar Chart */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Kategorie-Verteilung</CardTitle>
+              <CardTitle className="text-base">Category distribution</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-48">
@@ -305,7 +305,7 @@ export function ContinuityIndex() {
           {/* Bar Chart */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Scores pro Kategorie</CardTitle>
+              <CardTitle className="text-base">Scores per category</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-40">
@@ -325,7 +325,7 @@ export function ContinuityIndex() {
           {/* Category Breakdown */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Kategorie-Details</CardTitle>
+              <CardTitle className="text-base">Category details</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -333,10 +333,10 @@ export function ContinuityIndex() {
                   <div key={cat.category}>
                     <div className="flex justify-between text-sm mb-1">
                       <span className="capitalize">
-                        {cat.category === "roles" && "Rollen"}
-                        {cat.category === "triggers" && "Trigger"}
-                        {cat.category === "policies" && "Richtlinien"}
-                        {cat.category === "documentation" && "Dokumentation"}
+                        {cat.category === "roles" && "Roles"}
+                        {cat.category === "triggers" && "Triggers"}
+                        {cat.category === "policies" && "Policies"}
+                        {cat.category === "documentation" && "Documentation"}
                       </span>
                       <span className="font-mono">{cat.score.toFixed(0)}%</span>
                     </div>

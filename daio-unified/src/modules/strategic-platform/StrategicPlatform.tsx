@@ -1,5 +1,5 @@
 // DAIO Strategic Platform
-// 10 Web-Apps: 5 für Bedarfserkennung + 5 für Mechanismenerklärung
+// 10 web apps: 5 for needs identification + 5 for mechanism explanation
 
 import { useState } from "react";
 // Button import removed - not used
@@ -67,7 +67,7 @@ const APPS: AppConfig[] = [
   {
     id: "loss-simulator",
     name: "Digital Asset Loss Simulator",
-    description: "Zeigt, was passiert, wenn ein Eigentümer ausfällt",
+    description: "Shows what happens when an owner becomes unavailable",
     icon: <TrendingDown className="w-5 h-5" />,
     component: LossSimulator,
     section: "need",
@@ -75,7 +75,7 @@ const APPS: AppConfig[] = [
   {
     id: "wealth-scanner",
     name: "Invisible Wealth Scanner",
-    description: "Macht unsichtbare digitale Assets sichtbar",
+    description: "Makes invisible digital assets visible",
     icon: <Scan className="w-5 h-5" />,
     component: InvisibleWealthScanner,
     section: "need",
@@ -83,7 +83,7 @@ const APPS: AppConfig[] = [
   {
     id: "key-person",
     name: "Key Person Risk Visualizer",
-    description: "Business Shutdown Heatmap für Unternehmer",
+    description: "Business shutdown heatmap for entrepreneurs",
     icon: <UserX className="w-5 h-5" />,
     component: KeyPersonRisk,
     section: "need",
@@ -91,7 +91,7 @@ const APPS: AppConfig[] = [
   {
     id: "stress-test",
     name: "Digital Estate Stress-Test",
-    description: "Welche Assets bei welchen Ereignissen blockiert sind",
+    description: "Which assets are blocked by which events",
     icon: <TestTube className="w-5 h-5" />,
     component: StressTestTool,
     section: "need",
@@ -99,7 +99,7 @@ const APPS: AppConfig[] = [
   {
     id: "lost-counter",
     name: "The $ Lost Counter",
-    description: "Realtime-Visualisierung globaler Verluste",
+    description: "Real-time visualization of global losses",
     icon: <DollarSign className="w-5 h-5" />,
     component: LostCounter,
     section: "need",
@@ -116,7 +116,7 @@ const APPS: AppConfig[] = [
   {
     id: "no-custody",
     name: "No-Custody Architecture",
-    description: "Was DAIO NICHT macht vs. was es macht",
+    description: "What DAIO does NOT do vs. what it does",
     icon: <Shield className="w-5 h-5" />,
     component: NoCustodyArch,
     section: "mechanism",
@@ -124,7 +124,7 @@ const APPS: AppConfig[] = [
   {
     id: "continuity-map",
     name: "Access Continuity Map",
-    description: "Vergleich: Gold, BTC, DeFi - Mechanik-Unterschiede",
+    description: "Comparison: Gold, BTC, DeFi — mechanism differences",
     icon: <Map className="w-5 h-5" />,
     component: AccessContinuityMap,
     section: "mechanism",
@@ -132,7 +132,7 @@ const APPS: AppConfig[] = [
   {
     id: "lifecycle",
     name: "Asset Lifecycle Diagram",
-    description: "DAIO als Layer über dem gesamten Lebenszyklus",
+    description: "DAIO as a layer across the entire lifecycle",
     icon: <RotateCcw className="w-5 h-5" />,
     component: AssetLifecycle,
     section: "mechanism",
@@ -140,7 +140,7 @@ const APPS: AppConfig[] = [
   {
     id: "continuity-index",
     name: "Continuity Index Builder",
-    description: "Bauen Sie Ihre Governance-Struktur und sehen Sie den Score",
+    description: "Build your governance structure and see the score",
     icon: <BarChart3 className="w-5 h-5" />,
     component: ContinuityIndex,
     section: "mechanism",
@@ -180,7 +180,7 @@ function App() {
                   Strategic Platform
                 </h1>
                 <p className="text-xs text-slate-500">
-                  10 Instrumente für digitale Vermögensnachfolge
+                  10 instruments for digital asset succession
                 </p>
               </div>
             </div>
@@ -204,11 +204,11 @@ function App() {
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="need" className="flex items-center gap-2">
               <AlertTriangle className="w-4 h-4" />
-              Teil 1: Bedarf erkennen
+              Part 1: Identify the Need
             </TabsTrigger>
             <TabsTrigger value="mechanism" className="flex items-center gap-2">
               <GitBranch className="w-4 h-4" />
-              Teil 2: Mechanismen verstehen
+              Part 2: Understand the Mechanisms
             </TabsTrigger>
           </TabsList>
 
@@ -219,8 +219,8 @@ function App() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-sm">
                     {activeSection === "need"
-                      ? "Problemklarheit schaffen"
-                      : "Architektur erklären"}
+                      ? "Create Problem Clarity"
+                      : "Explain the Architecture"}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
@@ -259,8 +259,8 @@ function App() {
                 <CardContent className="pt-4">
                   <p className="text-xs text-slate-500 leading-relaxed">
                     {activeSection === "need"
-                      ? "Diese Apps erzeugen Problemklarheit, nicht Produktverkauf. Sie zeigen, wo digitale Vermögenswerte gefährdet sind."
-                      : "Diese Apps erklären die DAIO-Architektur aus verschiedenen Perspektiven. Sie machen das System verständlich."}
+                      ? "These apps create problem clarity, not product sales. They show where digital assets are at risk."
+                      : "These apps explain the DAIO architecture from different perspectives. They make the system understandable."}
                   </p>
                 </CardContent>
               </Card>
@@ -293,7 +293,7 @@ function App() {
       <footer className="border-t border-slate-200 dark:border-slate-700 mt-8">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-            <div>DAIO Strategic Platform • Kein Hype. Nur Strategie.</div>
+            <div>DAIO Strategic Platform • No hype. Just strategy.</div>
             <div>Strict No-Custody • Client-Side Only</div>
           </div>
         </div>

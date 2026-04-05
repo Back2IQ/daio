@@ -45,7 +45,7 @@ const APPS: AppConfig[] = [
     name: "Interactive Protocol Demo",
     shortName: "Protocol Demo",
     description:
-      "Interaktive Demonstration des gesamten Shamir Vault Protokolls",
+      "Interactive demonstration of the complete Shamir Vault protocol",
     icon: <Play className="w-5 h-5" />,
     component: VaultDemo,
     color: "bg-indigo-500",
@@ -55,7 +55,7 @@ const APPS: AppConfig[] = [
     name: "Vault Creator",
     shortName: "Vault Creator",
     description:
-      "Vault erstellen: Secret splitten, Shards generieren, Honeypots konfigurieren",
+      "Create vault: split secret, generate shards, configure honeypots",
     icon: <KeyRound className="w-5 h-5" />,
     component: VaultCreator,
     color: "bg-blue-500",
@@ -65,7 +65,7 @@ const APPS: AppConfig[] = [
     name: "Vault Reconstructor",
     shortName: "Reconstructor",
     description:
-      "Secret aus Shards rekonstruieren mit sicherer Canvas-Anzeige",
+      "Reconstruct secret from shards with secure canvas display",
     icon: <Unlock className="w-5 h-5" />,
     component: VaultReconstructor,
     color: "bg-green-500",
@@ -75,7 +75,7 @@ const APPS: AppConfig[] = [
     name: "Shard Verifier",
     shortName: "Shard Verifier",
     description:
-      "Einzelne Shards gegen Feldman VSS Commitments verifizieren",
+      "Verify individual shards against Feldman VSS commitments",
     icon: <ShieldCheck className="w-5 h-5" />,
     component: ShardVerifier,
     color: "bg-emerald-500",
@@ -85,7 +85,7 @@ const APPS: AppConfig[] = [
     name: "Honeypot Manager",
     shortName: "Honeypot Manager",
     description:
-      "Decoy-Container erstellen, Canary-Shards verwalten, Alerts überwachen",
+      "Create decoy containers, manage canary shards, monitor alerts",
     icon: <Bug className="w-5 h-5" />,
     component: HoneypotManager,
     color: "bg-amber-500",
@@ -238,9 +238,9 @@ function App() {
             <div className="flex items-center gap-4 text-sm text-slate-500">
               <span>Zero Knowledge by Design</span>
               <span>•</span>
-              <span>Offline-fähig</span>
+              <span>Offline-capable</span>
               <span>•</span>
-              <span>Post-Quantum sicher</span>
+              <span>Post-quantum secure</span>
             </div>
           </div>
         </div>

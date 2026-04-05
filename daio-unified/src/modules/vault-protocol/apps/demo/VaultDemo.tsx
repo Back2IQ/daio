@@ -39,50 +39,50 @@ interface DemoStep {
 const STEPS: DemoStep[] = [
   {
     id: "problem",
-    title: "Das Problem",
-    subtitle: "Warum ein einzelner Schlüssel gefährlich ist",
+    title: "The Problem",
+    subtitle: "Why a single key is dangerous",
     icon: <AlertTriangle className="w-5 h-5" />,
     color: "bg-red-500",
   },
   {
     id: "split",
-    title: "Der Split",
-    subtitle: "Secret mathematisch aufteilen",
+    title: "The Split",
+    subtitle: "Mathematically split the secret",
     icon: <Split className="w-5 h-5" />,
     color: "bg-blue-500",
   },
   {
     id: "distribute",
-    title: "Die Verteilung",
-    subtitle: "Shards an Validatoren verteilen",
+    title: "Distribution",
+    subtitle: "Distribute shards to validators",
     icon: <Users className="w-5 h-5" />,
     color: "bg-indigo-500",
   },
   {
     id: "verify",
-    title: "Die Verifikation",
+    title: "Verification",
     subtitle: "Feldman VSS — Zero-Knowledge Proof",
     icon: <ShieldCheck className="w-5 h-5" />,
     color: "bg-emerald-500",
   },
   {
     id: "reconstruct",
-    title: "Die Rekonstruktion",
-    subtitle: "Shards zusammenführen → Secret erscheint",
+    title: "Reconstruction",
+    subtitle: "Combine shards → secret appears",
     icon: <Unlock className="w-5 h-5" />,
     color: "bg-green-500",
   },
   {
     id: "honeypot",
-    title: "Der Honeypot",
-    subtitle: "Angreifer-Erkennung & Canary Shards",
+    title: "The Honeypot",
+    subtitle: "Attacker detection & canary shards",
     icon: <Bug className="w-5 h-5" />,
     color: "bg-amber-500",
   },
   {
     id: "zeroknowledge",
     title: "Zero Knowledge",
-    subtitle: "T-1 Shards = ZERO Information — Beweis",
+    subtitle: "T-1 shards = ZERO information — proof",
     icon: <EyeOff className="w-5 h-5" />,
     color: "bg-purple-500",
   },
@@ -122,7 +122,7 @@ export function VaultDemo() {
         const partial = reconstructSecret(shards.slice(0, 2));
         setPartialResult(partial);
       } catch {
-        setPartialResult("[FEHLER: Rekonstruktion unmöglich]");
+        setPartialResult("[ERROR: reconstruction impossible]");
       }
 
       coefficients.fill(0n);
@@ -153,24 +153,24 @@ export function VaultDemo() {
               <Card className="border-red-200 bg-red-50 dark:bg-red-900/10">
                 <CardContent className="pt-6">
                   <h4 className="font-bold text-red-700 mb-3">
-                    Ohne Shamir (Single Key)
+                    Without Shamir (Single Key)
                   </h4>
                   <ul className="space-y-2 text-sm text-red-600">
                     <li className="flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Schlüssel verloren = Alles verloren</span>
+                      <span>Key lost = everything lost</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Person stirbt = Kein Zugang mehr</span>
+                      <span>Person dies = no more access</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Eine kompromittierte Kopie = Total-Verlust</span>
+                      <span>One compromised copy = total loss</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Kein Backup-Plan, kein Redundanz</span>
+                      <span>No backup plan, no redundancy</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -179,26 +179,26 @@ export function VaultDemo() {
               <Card className="border-green-200 bg-green-50 dark:bg-green-900/10">
                 <CardContent className="pt-6">
                   <h4 className="font-bold text-green-700 mb-3">
-                    Mit Shamir (T-von-N Threshold)
+                    With Shamir (T-of-N Threshold)
                   </h4>
                   <ul className="space-y-2 text-sm text-green-600">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>N-T Personen können ausfallen</span>
+                      <span>N-T persons can fail</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Kein Single Point of Failure</span>
+                      <span>No single point of failure</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                       <span>
-                        T-1 Shards = mathematisch ZERO Information
+                        T-1 shards = mathematically ZERO information
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
-                      <span>Post-Quantum sicher (algebraisch)</span>
+                      <span>Post-quantum secure (algebraic)</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -209,7 +209,7 @@ export function VaultDemo() {
               <div className="text-center">
                 <div className="mb-4">
                   <label className="text-xs text-muted-foreground block mb-1">
-                    Demo-Secret (kann geändert werden):
+                    Demo secret (editable):
                   </label>
                   <Input
                     value={demoSecret}
@@ -219,7 +219,7 @@ export function VaultDemo() {
                 </div>
                 <Button size="lg" onClick={startDemo}>
                   <Play className="w-5 h-5 mr-2" />
-                  Demo starten (3-von-5 Threshold)
+                  Start demo (3-of-5 threshold)
                 </Button>
               </div>
             )}
@@ -232,9 +232,9 @@ export function VaultDemo() {
             <Alert className="bg-blue-50 border-blue-200 dark:bg-blue-900/20">
               <Split className="w-4 h-4 text-blue-600" />
               <AlertDescription className="text-blue-800 dark:text-blue-200">
-                Das Secret "<strong>{demoSecret}</strong>" wurde mit einem
-                Polynom vom Grad 2 (Threshold-1) in 5 Shards aufgeteilt. Jeder
-                Shard ist ein Punkt auf der geheimen Kurve.
+                The secret "<strong>{demoSecret}</strong>" was split into 5
+                shards using a polynomial of degree 2 (threshold-1). Each
+                shard is a point on the secret curve.
               </AlertDescription>
             </Alert>
 
@@ -259,10 +259,10 @@ export function VaultDemo() {
             <Card className="bg-slate-50 dark:bg-slate-800">
               <CardContent className="pt-4">
                 <p className="text-sm text-center">
-                  <strong>Mathematik:</strong> f(x) = secret + a₁x + a₂x² mod p
+                  <strong>Mathematics:</strong> f(x) = secret + a₁x + a₂x² mod p
                   <br />
                   <span className="text-xs text-muted-foreground">
-                    Jeder Shard = (x, f(x)) — ein Punkt auf dem geheimen Polynom
+                    Each shard = (x, f(x)) — a point on the secret polynomial
                   </span>
                 </p>
               </CardContent>
@@ -284,11 +284,11 @@ export function VaultDemo() {
               {/* Distribution lines */}
               <div className="grid grid-cols-5 gap-3">
                 {[
-                  { label: "Erbe A", role: "Primärerbe", icon: "👤" },
-                  { label: "Notar", role: "Versiegelter Umschlag", icon: "📜" },
-                  { label: "Anwalt", role: "Tresor", icon: "⚖️" },
-                  { label: "Trustee", role: "Kurier", icon: "🏛️" },
-                  { label: "Banksafe", role: "Schließfach", icon: "🏦" },
+                  { label: "Heir A", role: "Primary heir", icon: "👤" },
+                  { label: "Notary", role: "Sealed envelope", icon: "📜" },
+                  { label: "Attorney", role: "Safe", icon: "⚖️" },
+                  { label: "Trustee", role: "Courier", icon: "🏛️" },
+                  { label: "Bank safe", role: "Deposit box", icon: "🏦" },
                 ].map((recipient, i) => (
                   <Card
                     key={i}
@@ -312,10 +312,10 @@ export function VaultDemo() {
             <Alert className="bg-indigo-50 border-indigo-200 dark:bg-indigo-900/20">
               <Users className="w-4 h-4 text-indigo-600" />
               <AlertDescription className="text-indigo-800 dark:text-indigo-200">
-                Jeder Validator erhält genau einen Shard über einen separaten,
-                sicheren Kanal. Kein einzelner Validator kann das Secret alleine
-                rekonstruieren. Selbst wenn 2 Validatoren zusammenarbeiten
-                (weniger als T=3), erfahren sie NICHTS über das Secret.
+                Each validator receives exactly one shard through a separate,
+                secure channel. No single validator can reconstruct the secret
+                alone. Even if 2 validators collaborate (fewer than T=3), they
+                learn NOTHING about the secret.
               </AlertDescription>
             </Alert>
           </div>
@@ -327,9 +327,9 @@ export function VaultDemo() {
             <Alert className="bg-emerald-50 border-emerald-200 dark:bg-emerald-900/20">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
               <AlertDescription className="text-emerald-800 dark:text-emerald-200">
-                Feldman VSS: Jeder Validator kann prüfen, ob sein Shard gültig
-                ist — ohne den Shard jemandem zu zeigen und ohne etwas über das
-                Secret zu erfahren.
+                Feldman VSS: each validator can verify whether their shard is
+                valid — without showing the shard to anyone and without learning
+                anything about the secret.
               </AlertDescription>
             </Alert>
 
@@ -358,7 +358,7 @@ export function VaultDemo() {
                   >
                     {verificationResults[i]
                       ? "g^(shard) = ∏ C_j^(i^j) ✓"
-                      : "Verifikation fehlgeschlagen"}
+                      : "Verification failed"}
                   </Badge>
                 </div>
               ))}
@@ -367,8 +367,8 @@ export function VaultDemo() {
             <Card className="bg-slate-50 dark:bg-slate-800">
               <CardContent className="pt-4">
                 <p className="text-sm text-center">
-                  <strong>Commitments veröffentlicht:</strong>{" "}
-                  {demoCommitments.length} Werte
+                  <strong>Commitments published:</strong>{" "}
+                  {demoCommitments.length} values
                   <br />
                   <span className="text-xs text-muted-foreground">
                     C₀ = {demoCommitments[0]?.slice(0, 16)}... | C₁ ={" "}
@@ -387,8 +387,8 @@ export function VaultDemo() {
             <Alert className="bg-green-50 border-green-200 dark:bg-green-900/20">
               <Unlock className="w-4 h-4 text-green-600" />
               <AlertDescription className="text-green-800 dark:text-green-200">
-                3 von 5 Validatoren kommen zusammen. Ihre Shards werden per
-                Lagrange-Interpolation kombiniert. Das Secret erscheint.
+                3 of 5 validators come together. Their shards are combined via
+                Lagrange interpolation. The secret appears.
               </AlertDescription>
             </Alert>
 
@@ -411,7 +411,7 @@ export function VaultDemo() {
                       variant={i < 3 ? "secondary" : "outline"}
                       className="mt-1 text-[10px]"
                     >
-                      {i < 3 ? "VERWENDET" : "Nicht nötig"}
+                      {i < 3 ? "USED" : "Not needed"}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -423,7 +423,7 @@ export function VaultDemo() {
               <CardContent className="pt-6 pb-6 text-center">
                 <Shield className="w-8 h-8 text-green-600 mx-auto mb-2" />
                 <p className="text-xs text-muted-foreground mb-2">
-                  Rekonstruiertes Secret:
+                  Reconstructed secret:
                 </p>
                 <code className="text-lg font-mono font-bold text-green-700 bg-green-100 dark:bg-green-900/30 px-4 py-2 rounded-lg">
                   {reconstructedDemo}
@@ -431,11 +431,11 @@ export function VaultDemo() {
                 <p className="text-xs text-muted-foreground mt-3">
                   {reconstructedDemo === demoSecret ? (
                     <span className="text-green-600">
-                      ✓ Perfekte Übereinstimmung mit dem Original!
+                      ✓ Perfect match with the original!
                     </span>
                   ) : (
                     <span className="text-red-600">
-                      ✗ Stimmt nicht überein — Fehler bei der Rekonstruktion
+                      ✗ Does not match — reconstruction error
                     </span>
                   )}
                 </p>
@@ -450,8 +450,8 @@ export function VaultDemo() {
             <Alert className="bg-amber-50 border-amber-200 dark:bg-amber-900/20">
               <Bug className="w-4 h-4 text-amber-600" />
               <AlertDescription className="text-amber-800 dark:text-amber-200">
-                Honeypot-Container sehen identisch aus wie echte Container.
-                Canary-Shards lösen bei Verwendung einen stillen Alert aus.
+                Honeypot containers look identical to real containers. Canary
+                shards trigger a silent alert when used.
               </AlertDescription>
             </Alert>
 
@@ -460,14 +460,14 @@ export function VaultDemo() {
                 <CardHeader>
                   <CardTitle className="text-sm text-green-700 flex items-center gap-2">
                     <Shield className="w-4 h-4" />
-                    Echter Vault
+                    Real Vault
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm space-y-2">
-                  <div>Label: Haupt-BTC-Wallet</div>
-                  <div>Threshold: 3 von 5</div>
-                  <div>Shards: 5 echte</div>
-                  <Badge className="bg-green-500">ECHT</Badge>
+                  <div>Label: Main BTC wallet</div>
+                  <div>Threshold: 3 of 5</div>
+                  <div>Shards: 5 real</div>
+                  <Badge className="bg-green-500">REAL</Badge>
                 </CardContent>
               </Card>
 
@@ -479,13 +479,13 @@ export function VaultDemo() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm space-y-2">
-                  <div>Label: Haupt-BTC-Wallet</div>
+                  <div>Label: Main BTC wallet</div>
                   <div>
-                    Threshold: 2 von 3{" "}
-                    <span className="text-xs text-amber-600">(niedriger!)</span>
+                    Threshold: 2 of 3{" "}
+                    <span className="text-xs text-amber-600">(lower!)</span>
                   </div>
-                  <div>Shards: 3 Canary</div>
-                  <Badge className="bg-amber-500">FALLE</Badge>
+                  <div>Shards: 3 canary</div>
+                  <Badge className="bg-amber-500">TRAP</Badge>
                 </CardContent>
               </Card>
             </div>
@@ -495,13 +495,12 @@ export function VaultDemo() {
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                   <div className="text-sm">
-                    <strong className="text-red-700">Szenario:</strong> Ein
-                    Angreifer findet Canary-Shards und versucht die
-                    Rekonstruktion.
-                    <br />→ System erkennt Canary-Shard automatisch
-                    <br />→ Alert wird an ALLE echten Validatoren gesendet
-                    <br />→ Angreifer erhält ein wertloses Fake-Secret
-                    <br />→ Zugriffsversuch wird protokolliert
+                    <strong className="text-red-700">Scenario:</strong> an
+                    attacker finds canary shards and attempts reconstruction.
+                    <br />→ System automatically detects the canary shard
+                    <br />→ Alert is sent to ALL real validators
+                    <br />→ Attacker receives a worthless fake secret
+                    <br />→ Access attempt is logged
                   </div>
                 </div>
               </CardContent>
@@ -515,9 +514,9 @@ export function VaultDemo() {
             <Alert className="bg-purple-50 border-purple-200 dark:bg-purple-900/20">
               <EyeOff className="w-4 h-4 text-purple-600" />
               <AlertDescription className="text-purple-800 dark:text-purple-200">
-                <strong>Informationstheoretischer Beweis:</strong> Weniger als T
-                Shards verraten ZERO Information über das Secret. Nicht "schwer
-                zu knacken" — mathematisch UNMÖGLICH.
+                <strong>Information-theoretic proof:</strong> fewer than T
+                shards reveal ZERO information about the secret. Not "hard to
+                crack" — mathematically IMPOSSIBLE.
               </AlertDescription>
             </Alert>
 
@@ -546,7 +545,7 @@ export function VaultDemo() {
                   <code className="text-sm font-mono block bg-white dark:bg-slate-800 p-2 rounded mb-2 break-all">
                     {partialResult
                       ? partialResult.length > 40
-                        ? partialResult.slice(0, 40) + "... (Müll)"
+                        ? partialResult.slice(0, 40) + "... (garbage)"
                         : partialResult
                       : "[Unvorhersagbarer Output]"}
                   </code>
@@ -563,13 +562,13 @@ export function VaultDemo() {
                   <div>
                     <div className="text-2xl font-bold text-green-600">∞</div>
                     <div className="text-xs text-muted-foreground">
-                      Mögliche Secrets bei T-1 Shards
+                      Possible secrets with T-1 shards
                     </div>
                   </div>
                   <div>
                     <div className="text-2xl font-bold text-blue-600">0</div>
                     <div className="text-xs text-muted-foreground">
-                      Bits Information durchgesickert
+                      Bits of information leaked
                     </div>
                   </div>
                   <div>
@@ -577,7 +576,7 @@ export function VaultDemo() {
                       2²⁵⁶
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      Feldgröße (post-quantum sicher)
+                      Field size (post-quantum secure)
                     </div>
                   </div>
                 </div>
@@ -598,7 +597,7 @@ export function VaultDemo() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm text-muted-foreground">
-              Schritt {currentStep + 1} von {STEPS.length}
+              Step {currentStep + 1} of {STEPS.length}
             </span>
             <span className="text-sm font-medium">{step.title}</span>
           </div>
@@ -662,7 +661,7 @@ export function VaultDemo() {
             disabled={currentStep === 0}
           >
             <ChevronLeft className="w-4 h-4 mr-1" />
-            Zurück
+            Back
           </Button>
 
           <Button variant="outline" size="sm" onClick={reset}>
@@ -674,7 +673,7 @@ export function VaultDemo() {
             onClick={nextStep}
             disabled={currentStep === STEPS.length - 1 || !demoStarted}
           >
-            Weiter
+            Next
             <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         </div>

@@ -28,18 +28,18 @@ interface NavItem {
 }
 
 const salesModules: NavItem[] = [
-  { path: '/calculator', label: 'Value Explorer', icon: <Calculator className="w-5 h-5" />, description: 'Der Schmerz' },
-  { path: '/strategic-platform', label: 'Strategic Platform', icon: <Microscope className="w-5 h-5" />, description: 'Das Warum' },
+  { path: '/calculator', label: 'Value Explorer', icon: <Calculator className="w-5 h-5" />, description: 'The Pain' },
+  { path: '/strategic-platform', label: 'Strategic Platform', icon: <Microscope className="w-5 h-5" />, description: 'The Why' },
   { path: '/sales-blueprint', label: 'Sales Blueprint', icon: <FileText className="w-5 h-5" />, description: 'Business Case' },
-  { path: '/template-generator', label: 'Template Generator', icon: <LayoutTemplate className="w-5 h-5" />, description: 'Das Werkzeug' },
-  { path: '/portfolio-dashboard', label: 'Continuity Dashboard', icon: <LayoutDashboard className="w-5 h-5" />, description: 'Die Plattform' },
-  { path: '/pionierfall-pitch', label: 'Pionierfall Pitch', icon: <Zap className="w-5 h-5" />, description: 'Der Beweis' },
+  { path: '/template-generator', label: 'Template Generator', icon: <LayoutTemplate className="w-5 h-5" />, description: 'The Tool' },
+  { path: '/portfolio-dashboard', label: 'Continuity Dashboard', icon: <LayoutDashboard className="w-5 h-5" />, description: 'The Platform' },
+  { path: '/pionierfall-pitch', label: 'Pioneer Case Pitch', icon: <Zap className="w-5 h-5" />, description: 'The Proof' },
 ]
 
 const toolModules: NavItem[] = [
   { path: '/vault-protocol', label: 'Vault Protocol', icon: <ShieldEllipsis className="w-5 h-5" />, description: 'Shamir Vault' },
-  { path: '/btc-ticker', label: 'BTC Loss Ticker', icon: <Bitcoin className="w-5 h-5" />, description: 'Live-Daten' },
-  { path: '/document-rewriter', label: 'Document Rewriter', icon: <FileEdit className="w-5 h-5" />, description: 'Dokumente' },
+  { path: '/btc-ticker', label: 'Digital Estate Loss Clock', icon: <Bitcoin className="w-5 h-5" />, description: 'Live Data' },
+  { path: '/document-rewriter', label: 'Document Rewriter', icon: <FileEdit className="w-5 h-5" />, description: 'Documents' },
 ]
 
 export function AppSidebar() {

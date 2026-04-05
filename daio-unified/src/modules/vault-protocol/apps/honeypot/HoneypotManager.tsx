@@ -28,33 +28,33 @@ const STRATEGIES = [
     icon: <Shield className="w-5 h-5" />,
     color: "bg-amber-500",
     description:
-      "Ein komplett gefälschter Container mit plausiblem Fake-Secret. Angreifer glaubt erfolgreich gewesen zu sein und nutzt ein wertloses Secret.",
+      "A completely fake container with a plausible fake secret. The attacker believes they succeeded and uses a worthless secret.",
     mechanism:
-      "Identische Metadata-Struktur, gleicher Label, gleiches Format. Der Threshold ist bewusst niedriger gesetzt, damit der Decoy 'leichter' knackbar erscheint.",
+      "Identical metadata structure, same label, same format. The threshold is deliberately set lower so the decoy appears 'easier' to crack.",
     detection:
-      "Wenn der Angreifer das Fake-Secret verwendet, wird es als ungültig erkannt (z.B. ungültige Wallet-Adresse).",
+      "When the attacker uses the fake secret, it is detected as invalid (e.g. invalid wallet address).",
   },
   {
     name: "Canary Shard",
     icon: <Bug className="w-5 h-5" />,
     color: "bg-red-500",
     description:
-      "Einzelne Fake-Shards, die unter echten Shards gemischt werden. Erkennt, WELCHER Verteilungskanal kompromittiert wurde.",
+      "Individual fake shards mixed among real shards. Detects WHICH distribution channel was compromised.",
     mechanism:
-      "Canary-Shards nutzen einen anderen Polynom-Grad. Bei Rekonstruktion mit einem Canary-Shard wird mathematisch inkonsistenter Output erzeugt, der als Canary erkennbar ist.",
+      "Canary shards use a different polynomial degree. Reconstruction with a canary shard produces mathematically inconsistent output that is recognizable as a canary.",
     detection:
-      "Das System erkennt den Canary-Shard automatisch vor der Rekonstruktion und löst einen Alert aus. Der Angreifer erfährt, dass er entdeckt wurde.",
+      "The system detects canary shards automatically before reconstruction and triggers an alert. The attacker learns they were detected.",
   },
   {
     name: "Tripwire Container",
     icon: <Siren className="w-5 h-5" />,
     color: "bg-purple-500",
     description:
-      "Container mit bewusst niedrigerem Threshold als der echte. Wird als Frühwarnsystem eingesetzt — wird vor dem echten Container kompromittiert.",
+      "Container with a deliberately lower threshold than the real one. Used as an early-warning system — compromised before the real container.",
     mechanism:
-      "Beispiel: Echter Vault = 3-von-5, Tripwire = 2-von-3. Wenn der Tripwire geknackt wird, wissen die Validatoren, dass ein Angriff läuft, BEVOR der echte Vault gefährdet ist.",
+      "Example: real vault = 3-of-5, tripwire = 2-of-3. If the tripwire is cracked, validators know an attack is in progress BEFORE the real vault is at risk.",
     detection:
-      "Alle echten Validatoren werden über Pre-Shared Alert Keys benachrichtigt. Zeit für Gegenmaßnahmen (z.B. Secret-Rotation, Schlüssel-Widerruf).",
+      "All real validators are notified via pre-shared alert keys. Time for countermeasures (e.g. secret rotation, key revocation).",
   },
 ];
 
@@ -67,7 +67,7 @@ export function HoneypotManager() {
   const handleCreateDecoy = async (parentVaultId: string) => {
     const parentVault = vaults.find((v) => v.id === parentVaultId);
     if (!parentVault) {
-      toast.error("Vault nicht gefunden");
+      toast.error("Vault not found");
       return;
     }
 
@@ -75,9 +75,9 @@ export function HoneypotManager() {
     try {
       const decoy = await createDecoyVault(parentVault);
       addHoneypot(decoy);
-      toast.success("Decoy-Vault erstellt");
+      toast.success("Decoy vault created");
     } catch {
-      toast.error("Fehler beim Erstellen des Decoy-Vaults");
+      toast.error("Error creating decoy vault");
     } finally {
       setIsCreating(false);
     }
@@ -95,7 +95,7 @@ export function HoneypotManager() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Shield className="w-4 h-4" />
-                Honeypot-Strategien
+                Honeypot strategies
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -138,19 +138,19 @@ export function HoneypotManager() {
                       <div className="px-3 pb-3 space-y-2 border-t bg-slate-50 dark:bg-slate-800/50">
                         <div className="pt-3">
                           <p className="text-xs font-semibold uppercase text-muted-foreground mb-1">
-                            Beschreibung
+                            Description
                           </p>
                           <p className="text-sm">{strategy.description}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold uppercase text-muted-foreground mb-1">
-                            Mechanismus
+                            Mechanism
                           </p>
                           <p className="text-sm">{strategy.mechanism}</p>
                         </div>
                         <div>
                           <p className="text-xs font-semibold uppercase text-muted-foreground mb-1">
-                            Erkennung
+                            Detection
                           </p>
                           <p className="text-sm">{strategy.detection}</p>
                         </div>
@@ -167,14 +167,13 @@ export function HoneypotManager() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Bug className="w-4 h-4" />
-                Decoy-Vault erstellen
+                Create decoy vault
               </CardTitle>
             </CardHeader>
             <CardContent>
               {vaults.length === 0 ? (
                 <p className="text-sm text-muted-foreground text-center py-4">
-                  Erstelle zuerst einen Vault im "Vault Creator", um
-                  Honeypots hinzuzufügen.
+                  Create a vault in "Vault Creator" first to add honeypots.
                 </p>
               ) : (
                 <div className="space-y-2">
@@ -193,7 +192,7 @@ export function HoneypotManager() {
                           </div>
                           <div className="text-xs text-muted-foreground">
                             {vault.threshold}/{vault.totalShares} •{" "}
-                            {existingDecoys.length} Decoy
+                            {existingDecoys.length} decoy
                             {existingDecoys.length !== 1 ? "s" : ""}
                           </div>
                         </div>
@@ -221,14 +220,14 @@ export function HoneypotManager() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Eye className="w-4 h-4" />
-                Aktive Honeypots ({honeypots.length})
+                Active honeypots ({honeypots.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
               {honeypots.length === 0 ? (
                 <div className="text-center py-8 text-muted-foreground">
                   <Bug className="w-8 h-8 mx-auto mb-2 opacity-30" />
-                  <p className="text-sm">Keine Honeypots aktiv</p>
+                  <p className="text-sm">No active honeypots</p>
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -265,7 +264,7 @@ export function HoneypotManager() {
                             <Badge
                               variant={hp.triggered ? "destructive" : "outline"}
                             >
-                              {hp.triggered ? "AUSGELÖST" : "Bereit"}
+                              {hp.triggered ? "TRIGGERED" : "Ready"}
                             </Badge>
                             {hp.triggerLog.length > 0 && (
                               <Button
@@ -324,7 +323,7 @@ export function HoneypotManager() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Siren className="w-4 h-4" />
-                Alert-Log ({honeypotAttempts.length})
+                Alert log ({honeypotAttempts.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -332,7 +331,7 @@ export function HoneypotManager() {
                 <Alert className="bg-green-50 border-green-200 dark:bg-green-900/20">
                   <Shield className="w-4 h-4 text-green-600" />
                   <AlertDescription className="text-green-800 dark:text-green-200">
-                    Keine unauthorisierten Zugriffsversuche erkannt.
+                    No unauthorized access attempts detected.
                   </AlertDescription>
                 </Alert>
               ) : (
@@ -353,7 +352,7 @@ export function HoneypotManager() {
                           Vault: {attempt.vaultId.slice(0, 20)}...
                         </div>
                         <div>
-                          Zeit:{" "}
+                          Time:{" "}
                           {new Date(attempt.timestamp).toLocaleString()}
                         </div>
                         <div>

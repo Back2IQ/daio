@@ -172,7 +172,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     id: '5',
     title: 'The Boutique Advisory Firm',
-    client: 'Meridian Vermögen AG (Vienna)',
+    client: 'Meridian Vermoegen AG (Vienna)',
     challenge: 'Strategic gap - clients asking for digital succession support but no internal capability',
     solution: 'White-label implementation under own brand',
     results: [

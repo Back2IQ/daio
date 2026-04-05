@@ -74,15 +74,15 @@ export function LossSimulator() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Mathematisches Modell:</div>
+        <div className="text-slate-500 mb-2">Mathematical model:</div>
         <div className="text-blue-600 dark:text-blue-400">
           V(t) = V₀ × e^(-λt)
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          λ = Verfallrate (Self: 1.5%/Tag, Exchange: 0.5%/Tag, Inst: 0.2%/Tag, Hybrid: 0.8%/Tag)
+          λ = decay rate (Self: 1.5%/day, Exchange: 0.5%/day, Inst: 0.2%/day, Hybrid: 0.8%/day)
         </div>
         <div className="text-amber-600 dark:text-amber-400 text-xs mt-1">
-          Modellierte Schätzwerte — tatsächliche Verlustraten variieren je nach Einzelfall
+          Modeled estimates — actual loss rates vary case by case
         </div>
       </div>
 
@@ -93,14 +93,14 @@ export function LossSimulator() {
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
                 <Wallet className="w-4 h-4" />
-                Portfolio-Konfiguration
+                Portfolio Configuration
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Total Value */}
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label>Gesamtwert</Label>
+                  <Label>Total value</Label>
                   <span className="font-mono font-medium">
                     {formatCurrency(portfolio.totalValue)}
                   </span>
@@ -118,7 +118,7 @@ export function LossSimulator() {
 
               {/* Asset Allocation */}
               <div className="space-y-4">
-                <Label>Asset-Allokation</Label>
+                <Label>Asset allocation</Label>
                 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
@@ -138,7 +138,7 @@ export function LossSimulator() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>DeFi Positionen</span>
+                    <span>DeFi positions</span>
                     <span>{portfolio.defiPercent}%</span>
                   </div>
                   <Slider
@@ -154,7 +154,7 @@ export function LossSimulator() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span>Exchange-Konten</span>
+                    <span>Exchange accounts</span>
                     <span>{portfolio.exchangePercent}%</span>
                   </div>
                   <Slider
@@ -171,7 +171,7 @@ export function LossSimulator() {
 
               {/* Custody Type */}
               <div className="space-y-2">
-                <Label>Haupt-Verwahrungsart</Label>
+                <Label>Primary custody type</Label>
                 <Select
                   value={portfolio.custodyType}
                   onValueChange={(v) =>
@@ -201,7 +201,7 @@ export function LossSimulator() {
                     }
                   />
                   <Label htmlFor="docs" className="text-sm cursor-pointer">
-                    Dokumentation vorhanden
+                    Documentation in place
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -213,7 +213,7 @@ export function LossSimulator() {
                     }
                   />
                   <Label htmlFor="executor" className="text-sm cursor-pointer">
-                    Testamentsvollstreckung geregelt
+                    Executor arrangement defined
                   </Label>
                 </div>
               </div>
@@ -223,13 +223,13 @@ export function LossSimulator() {
           {/* Time Slider */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Zeitraum nach Ausfall</CardTitle>
+              <CardTitle className="text-base">Time elapsed after incident</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-slate-500">Tag {selectedDay}</span>
-                  <Badge variant="outline">{selectedDay} Tage</Badge>
+                  <span className="text-sm text-slate-500">Day {selectedDay}</span>
+                  <Badge variant="outline">{selectedDay} days</Badge>
                 </div>
                 <Slider
                   value={[selectedDay]}
@@ -239,7 +239,7 @@ export function LossSimulator() {
                   step={1}
                 />
                 <div className="flex justify-between text-xs text-slate-400">
-                  <span>Tag 0</span>
+                  <span>Day 0</span>
                   <span>90</span>
                   <span>180</span>
                 </div>
@@ -255,7 +255,7 @@ export function LossSimulator() {
             <Card className="bg-green-50 dark:bg-green-900/20 border-green-200">
               <CardContent className="p-4 text-center">
                 <CheckCircle className="w-6 h-6 text-green-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Wiederherstellbar</div>
+                <div className="text-xs text-slate-500">Recoverable</div>
                 <div className="text-lg font-bold text-green-700">
                   {formatCurrency(currentErosion.recoverable)}
                 </div>
@@ -266,7 +266,7 @@ export function LossSimulator() {
             <Card className="bg-amber-50 dark:bg-amber-900/20 border-amber-200">
               <CardContent className="p-4 text-center">
                 <Lock className="w-6 h-6 text-amber-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Blockiert</div>
+                <div className="text-xs text-slate-500">Frozen</div>
                 <div className="text-lg font-bold text-amber-700">
                   {formatCurrency(currentErosion.frozen)}
                 </div>
@@ -277,7 +277,7 @@ export function LossSimulator() {
             <Card className="bg-red-50 dark:bg-red-900/20 border-red-200">
               <CardContent className="p-4 text-center">
                 <TrendingDown className="w-6 h-6 text-red-600 mx-auto mb-2" />
-                <div className="text-xs text-slate-500">Verloren</div>
+                <div className="text-xs text-slate-500">Lost</div>
                 <div className="text-lg font-bold text-red-700">
                   {formatCurrency(currentErosion.lost)}
                 </div>
@@ -289,7 +289,7 @@ export function LossSimulator() {
           {/* Chart */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Wertverfall über Zeit</CardTitle>
+              <CardTitle className="text-base">Value decay over time</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-64">
@@ -309,7 +309,7 @@ export function LossSimulator() {
                       stroke="#22c55e"
                       fill="#22c55e"
                       fillOpacity={0.6}
-                      name="Wiederherstellbar"
+                      name="Recoverable"
                     />
                     <Area
                       type="monotone"
@@ -318,7 +318,7 @@ export function LossSimulator() {
                       stroke="#f59e0b"
                       fill="#f59e0b"
                       fillOpacity={0.6}
-                      name="Blockiert"
+                      name="Frozen"
                     />
                     <Area
                       type="monotone"
@@ -327,7 +327,7 @@ export function LossSimulator() {
                       stroke="#ef4444"
                       fill="#ef4444"
                       fillOpacity={0.6}
-                      name="Verloren"
+                      name="Lost"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -341,15 +341,15 @@ export function LossSimulator() {
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-red-500" />
-                  <CardTitle className="text-sm">Ohne DAIO</CardTitle>
+                  <CardTitle className="text-sm">Without DAIO</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
                 <ul className="text-xs space-y-1 text-slate-600">
-                  <li>• Keine dokumentierten Zugänge</li>
-                  <li>• Unklare Vererbungsstruktur</li>
-                  <li>• Rechtliche Blockaden möglich</li>
-                  <li>• DeFi-Positionen verfallen</li>
+                  <li>• No documented access</li>
+                  <li>• Unclear inheritance structure</li>
+                  <li>• Legal blockages possible</li>
+                  <li>• DeFi positions expire</li>
                 </ul>
               </CardContent>
             </Card>
@@ -358,15 +358,15 @@ export function LossSimulator() {
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-green-500" />
-                  <CardTitle className="text-sm">Mit DAIO</CardTitle>
+                  <CardTitle className="text-sm">With DAIO</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
                 <ul className="text-xs space-y-1 text-slate-600">
-                  <li>• Vollständige Dokumentation</li>
-                  <li>• Klare Executor-Struktur</li>
-                  <li>• Rechtssichere Übergabe</li>
-                  <li>• 98% Wert-erhaltung</li>
+                  <li>• Complete documentation</li>
+                  <li>• Clear executor structure</li>
+                  <li>• Legally sound transfer</li>
+                  <li>• 98% value preservation</li>
                 </ul>
               </CardContent>
             </Card>

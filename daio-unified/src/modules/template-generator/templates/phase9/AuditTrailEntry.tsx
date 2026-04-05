@@ -23,13 +23,13 @@ const REGULATORY_SOURCES = {
     { id: "OLG Oldenburg 13 U 116/23", date: "30.12.2024", title: "Aktive Weiternutzung von Social-Media-Accounts durch Erben", url: "https://www.noerr.com/de/insights/uneingeschraenkte-und-aktive-weiternutzung-von-social-media-accounts-durch-erben" },
   ],
   mica: [
-    { id: "VO (EU) 2023/1114", title: "Markets in Crypto-Assets Regulation (MiCA)", articles: "Art. 59-68: Governance & Organisation, Art. 68: Aufbewahrungspflicht (min. 5 Jahre)", url: "https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=CELEX:32023R1114" },
+    { id: "Regulation (EU) 2023/1114", title: "Markets in Crypto-Assets Regulation (MiCA)", articles: "Art. 59-68: Governance & Organisation, Art. 68: Record-keeping obligation (min. 5 years)", url: "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32023R1114" },
   ],
   national: [
-    { id: "§1922 BGB", title: "Universalsukzession — Gesamtrechtsnachfolge" },
-    { id: "HGB §§ 238-257", title: "Handelsrechtliche Aufbewahrungspflichten (6-10 Jahre)" },
-    { id: "AO § 147", title: "Steuerrechtliche Aufbewahrungspflichten (6-10 Jahre)" },
-    { id: "DSGVO Art. 5, 17", title: "Datenminimierung & Recht auf Löschung" },
+    { id: "§1922 BGB", title: "Universal succession — comprehensive legal transfer" },
+    { id: "HGB §§ 238-257", title: "Commercial record-keeping obligations (6-10 years)" },
+    { id: "AO § 147", title: "Tax record-keeping obligations (6-10 years)" },
+    { id: "GDPR Art. 5, 17", title: "Data minimization & right to erasure" },
   ],
 };
 

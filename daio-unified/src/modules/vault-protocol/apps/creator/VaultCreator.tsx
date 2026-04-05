@@ -96,11 +96,11 @@ export function VaultCreator() {
 
   const handleCreate = useCallback(async () => {
     if (!secret.trim()) {
-      toast.error("Secret darf nicht leer sein");
+      toast.error("Secret cannot be empty");
       return;
     }
     if (!label.trim()) {
-      toast.error("Vault-Label ist erforderlich");
+      toast.error("Vault label is required");
       return;
     }
 
@@ -178,10 +178,10 @@ export function VaultCreator() {
       };
 
       setResult(creationResult);
-      toast.success("Vault erstellt! Shards jetzt sicher verteilen.");
+      toast.success("Vault created! Distribute shards securely now.");
     } catch (err) {
       toast.error(
-        `Fehler: ${err instanceof Error ? err.message : "Unbekannter Fehler"}`
+        `Error: ${err instanceof Error ? err.message : "Unknown error"}`
       );
     } finally {
       setIsCreating(false);
@@ -211,11 +211,11 @@ export function VaultCreator() {
         next.set(encryptDialog.shard!.index, encrypted);
         return next;
       });
-      toast.success(`Shard #${encryptDialog.shard.index} verschlüsselt`);
+      toast.success(`Shard #${encryptDialog.shard.index} encrypted`);
       setEncryptDialog({ open: false, shard: null });
       setEncryptPassword("");
     } catch {
-      toast.error("Verschlüsselung fehlgeschlagen");
+      toast.error("Encryption failed");
     }
   }, [encryptDialog.shard, encryptPassword]);
 
@@ -251,9 +251,9 @@ export function VaultCreator() {
         <Alert className="mb-6 bg-red-50 border-red-200 dark:bg-red-900/20">
           <AlertTriangle className="w-5 h-5 text-red-600" />
           <AlertDescription className="text-red-800 dark:text-red-200">
-            <strong>WARNUNG: Netzwerkverbindung erkannt!</strong> Für maximale
-            Sicherheit sollte die Vault-Erstellung offline (air-gapped)
-            erfolgen. Trennen Sie die Internetverbindung.
+            <strong>WARNING: network connection detected!</strong> For maximum
+            security, vault creation should be done offline (air-gapped).
+            Disconnect from the internet.
           </AlertDescription>
         </Alert>
       )}
@@ -262,8 +262,8 @@ export function VaultCreator() {
         <Alert className="mb-6 bg-green-50 border-green-200 dark:bg-green-900/20">
           <WifiOff className="w-5 h-5 text-green-600" />
           <AlertDescription className="text-green-800 dark:text-green-200">
-            <strong>Offline-Modus aktiv.</strong> Sichere Umgebung für
-            Vault-Erstellung bestätigt.
+            <strong>Offline mode active.</strong> Secure environment for
+            vault creation confirmed.
           </AlertDescription>
         </Alert>
       )}
@@ -275,7 +275,7 @@ export function VaultCreator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <KeyRound className="w-4 h-4" />
-                Secret eingeben
+                Enter secret
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -287,7 +287,7 @@ export function VaultCreator() {
                   <textarea
                     value={secret}
                     onChange={(e) => setSecret(e.target.value)}
-                    placeholder="Hier das zu schützende Secret eingeben..."
+                    placeholder="Enter the secret to protect here..."
                     className="w-full min-h-[100px] rounded-md border bg-transparent px-3 py-2 text-sm font-mono placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
                     style={{ WebkitTextSecurity: showSecret ? "none" : "disc" } as React.CSSProperties}
                     disabled={!!result}
@@ -306,17 +306,17 @@ export function VaultCreator() {
                   </Button>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Das Secret wird nach dem Split sofort aus dem Speicher
-                  gelöscht.
+                  The secret is cleared from memory immediately after the
+                  split.
                 </p>
               </div>
 
               <div>
-                <Label className="text-xs">Vault-Label</Label>
+                <Label className="text-xs">Vault label</Label>
                 <Input
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
-                  placeholder="z.B. Haupt-BTC-Wallet Nachfolge"
+                  placeholder="e.g. Main BTC Wallet Succession"
                   className="mt-1"
                   disabled={!!result}
                 />
@@ -328,16 +328,16 @@ export function VaultCreator() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <Split className="w-4 h-4" />
-                Threshold-Konfiguration
+                Threshold configuration
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <Label className="text-xs">
-                    Validatoren (N): {totalShares}
+                    Validators (N): {totalShares}
                   </Label>
-                  <Badge variant="outline">{totalShares} Shards</Badge>
+                  <Badge variant="outline">{totalShares} shards</Badge>
                 </div>
                 <Slider
                   value={[totalShares]}
@@ -348,17 +348,17 @@ export function VaultCreator() {
                   disabled={!!result}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Anzahl der Shard-Empfänger
+                  Number of shard recipients
                 </p>
               </div>
 
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <Label className="text-xs">
-                    Schwellwert (T): {threshold}
+                    Threshold (T): {threshold}
                   </Label>
                   <Badge variant="outline">
-                    {threshold} von {totalShares} nötig
+                    {threshold} of {totalShares} required
                   </Badge>
                 </div>
                 <Slider
@@ -370,7 +370,7 @@ export function VaultCreator() {
                   disabled={!!result}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Minimum Shards zur Rekonstruktion
+                  Minimum shards for reconstruction
                 </p>
               </div>
 
@@ -387,7 +387,7 @@ export function VaultCreator() {
                         : ""
                     }
                   >
-                    {honeypotCount} Decoy
+                    {honeypotCount} decoy
                     {honeypotCount !== 1 ? "s" : ""}
                   </Badge>
                 </div>
@@ -402,7 +402,7 @@ export function VaultCreator() {
               </div>
 
               <div>
-                <Label className="text-xs">Anzeige-Modus</Label>
+                <Label className="text-xs">Display mode</Label>
                 <Select
                   value={displayMode}
                   onValueChange={(v) => setDisplayMode(v as DisplayMode)}
@@ -413,13 +413,13 @@ export function VaultCreator() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="canvas-timer">
-                      Canvas + Timer (Empfohlen)
+                      Canvas + Timer (recommended)
                     </SelectItem>
                     <SelectItem value="split-screen">
-                      Split-Screen (Paranoid)
+                      Split-screen (paranoid)
                     </SelectItem>
                     <SelectItem value="qr-only">
-                      QR-Code Only
+                      QR code only
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -453,12 +453,12 @@ export function VaultCreator() {
               {isCreating ? (
                 <>
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent mr-2" />
-                  Vault wird erstellt...
+                  Creating vault...
                 </>
               ) : (
                 <>
                   <Shield className="w-5 h-5 mr-2" />
-                  Vault erstellen & Shards generieren
+                  Create vault & generate shards
                 </>
               )}
             </Button>
@@ -480,7 +480,7 @@ export function VaultCreator() {
               }}
             >
               <Trash2 className="w-4 h-4 mr-2" />
-              Neuen Vault erstellen
+              Create new vault
             </Button>
           )}
         </div>
@@ -492,11 +492,11 @@ export function VaultCreator() {
               <CardContent className="text-center py-12">
                 <Shield className="w-16 h-16 mx-auto text-muted-foreground/30 mb-4" />
                 <p className="text-muted-foreground">
-                  Konfiguriere den Vault und klicke auf "Erstellen"
+                  Configure the vault and click "Create"
                 </p>
                 <p className="text-xs text-muted-foreground mt-2">
-                  {threshold}-von-{totalShares} Threshold •{" "}
-                  {honeypotCount} Honeypot{honeypotCount !== 1 ? "s" : ""}
+                  {threshold}-of-{totalShares} threshold •{" "}
+                  {honeypotCount} honeypot{honeypotCount !== 1 ? "s" : ""}
                 </p>
               </CardContent>
             </Card>
@@ -507,7 +507,7 @@ export function VaultCreator() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-sm">
                     <Shield className="w-4 h-4 text-green-600" />
-                    Vault erstellt
+                    Vault created
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -527,7 +527,7 @@ export function VaultCreator() {
                     <div>
                       <span className="text-muted-foreground">Threshold:</span>
                       <Badge className="ml-2" variant="secondary">
-                        {result.metadata.threshold} von{" "}
+                        {result.metadata.threshold} of{" "}
                         {result.metadata.totalShares}
                       </Badge>
                     </div>
@@ -553,22 +553,22 @@ export function VaultCreator() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-sm">
                     <CheckCircle2 className="w-4 h-4" />
-                    Sicherheits-Checkliste
+                    Security checklist
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
                     {[
                       {
-                        label: "Secret aus RAM gelöscht",
+                        label: "Secret cleared from RAM",
                         ok: securityChecks.secretCleared,
                       },
                       {
-                        label: "Polynom-Koeffizienten gelöscht",
+                        label: "Polynomial coefficients cleared",
                         ok: securityChecks.coefficientsCleared,
                       },
                       {
-                        label: "Offline-Modus",
+                        label: "Offline mode",
                         ok: !isOnline,
                       },
                     ].map((check) => (
@@ -629,7 +629,7 @@ export function VaultCreator() {
                                 className="bg-green-100 text-green-700"
                               >
                                 <Lock className="w-3 h-3 mr-1" />
-                                Verschlüsselt
+                                Encrypted
                               </Badge>
                             )}
                             {!isEncrypted && (
@@ -641,7 +641,7 @@ export function VaultCreator() {
                                 }
                               >
                                 <Lock className="w-3 h-3 mr-1" />
-                                Verschlüsseln
+                                Encrypt
                               </Button>
                             )}
                             <Button
@@ -707,9 +707,8 @@ export function VaultCreator() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-xs text-muted-foreground mb-3">
-                    Diese Commitments ermöglichen die Verifikation einzelner
-                    Shards ohne das Secret zu enthüllen. Können öffentlich
-                    gespeichert werden.
+                    These commitments enable verification of individual shards
+                    without revealing the secret. Can be stored publicly.
                   </p>
                   <div className="space-y-2">
                     {result.metadata.feldman.commitments.map((c, i) => (
@@ -729,7 +728,7 @@ export function VaultCreator() {
                           className="shrink-0 h-6 w-6"
                           onClick={() => {
                             navigator.clipboard.writeText(c);
-                            toast.success("Commitment kopiert");
+                            toast.success("Commitment copied");
                           }}
                         >
                           <Copy className="w-3 h-3" />
@@ -760,7 +759,7 @@ export function VaultCreator() {
                     }}
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    Alle Commitments exportieren
+                    Export all commitments
                   </Button>
                 </CardContent>
               </Card>
@@ -782,27 +781,27 @@ export function VaultCreator() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              Shard #{encryptDialog.shard?.index} verschlüsseln
+              Encrypt shard #{encryptDialog.shard?.index}
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <p className="text-sm text-muted-foreground">
-              Setze ein Passwort für diesen Shard. Der Empfänger benötigt dieses
-              Passwort um seinen Shard zu entschlüsseln.
+              Set a password for this shard. The recipient will need this
+              password to decrypt their shard.
             </p>
             <div>
-              <Label>Passwort</Label>
+              <Label>Password</Label>
               <Input
                 type="password"
                 value={encryptPassword}
                 onChange={(e) => setEncryptPassword(e.target.value)}
-                placeholder="Starkes Passwort wählen..."
+                placeholder="Choose a strong password..."
                 className="mt-1"
               />
             </div>
             {encryptPassword.length > 0 && encryptPassword.length < 8 && (
               <p className="text-xs text-amber-600">
-                Mindestens 8 Zeichen empfohlen
+                At least 8 characters recommended
               </p>
             )}
           </div>
@@ -814,14 +813,14 @@ export function VaultCreator() {
                 setEncryptPassword("");
               }}
             >
-              Abbrechen
+              Cancel
             </Button>
             <Button
               onClick={handleEncryptShard}
               disabled={encryptPassword.length < 4}
             >
               <Lock className="w-4 h-4 mr-2" />
-              Verschlüsseln
+              Encrypt
             </Button>
           </DialogFooter>
         </DialogContent>

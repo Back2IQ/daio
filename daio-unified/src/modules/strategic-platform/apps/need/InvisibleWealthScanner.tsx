@@ -40,7 +40,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "defi",
-    name: "DeFi Positionen & Yield",
+    name: "DeFi Positions & Yield",
     icon: <Wallet className="w-5 h-5" />,
     typicalValue: 75000,
     commonlyMissed: true,
@@ -48,7 +48,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "exchange",
-    name: "Exchange-Konten",
+    name: "Exchange Accounts",
     icon: <Landmark className="w-5 h-5" />,
     typicalValue: 50000,
     commonlyMissed: true,
@@ -56,7 +56,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "business",
-    name: "Geschäftskonten & SaaS",
+    name: "Business Accounts & SaaS",
     icon: <Building2 className="w-5 h-5" />,
     typicalValue: 25000,
     commonlyMissed: true,
@@ -64,7 +64,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "domain",
-    name: "Domains & DNS-Verwaltung",
+    name: "Domains & DNS Management",
     icon: <Globe className="w-5 h-5" />,
     typicalValue: 10000,
     commonlyMissed: true,
@@ -72,7 +72,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "gaming",
-    name: "Gaming-Assets & NFTs",
+    name: "Gaming Assets & NFTs",
     icon: <Gamepad2 className="w-5 h-5" />,
     typicalValue: 15000,
     commonlyMissed: true,
@@ -80,7 +80,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "social",
-    name: "Social Media & Follower",
+    name: "Social Media & Followers",
     icon: <Users className="w-5 h-5" />,
     typicalValue: 5000,
     commonlyMissed: true,
@@ -88,7 +88,7 @@ const WEALTH_ITEMS: WealthItem[] = [
   },
   {
     id: "cloud",
-    name: "Cloud-Speicher & Daten",
+    name: "Cloud Storage & Data",
     icon: <Cloud className="w-5 h-5" />,
     typicalValue: 3000,
     commonlyMissed: true,
@@ -140,12 +140,12 @@ export function InvisibleWealthScanner() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Sichtbarkeits-Index:</div>
+        <div className="text-slate-500 mb-2">Visibility index:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          SI = (Dokumentierter Wert / Gesamtwert) × 100
+          VI = (Documented value / Total value) × 100
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Ziel: SI ≥ 95% für digitale Vermögensnachfolge
+          Target: VI ≥ 95% for digital asset succession
         </div>
       </div>
 
@@ -157,11 +157,11 @@ export function InvisibleWealthScanner() {
               <div className="flex items-center gap-2">
                 <Scan className="w-5 h-5 text-blue-500" />
                 <CardTitle className="text-base">
-                  Digitale Vermögens-Scanner
+                  Digital Wealth Scanner
                 </CardTitle>
               </div>
               <p className="text-sm text-slate-500">
-                Markieren Sie alle Assets, die Sie besitzen
+                Check all assets you currently hold
               </p>
             </CardHeader>
             <CardContent>
@@ -188,7 +188,7 @@ export function InvisibleWealthScanner() {
                       <div>
                         <div className="font-medium text-sm">{item.name}</div>
                         <div className="text-xs text-slate-500">
-                          Typischer Wert: {formatCurrency(item.typicalValue)}
+                          Typical value: {formatCurrency(item.typicalValue)}
                         </div>
                       </div>
                     </div>
@@ -196,7 +196,7 @@ export function InvisibleWealthScanner() {
                       {item.commonlyMissed && (
                         <Badge variant="secondary" className="text-xs">
                           <AlertCircle className="w-3 h-3 mr-1" />
-                          Häufig übersehen
+                          Commonly missed
                         </Badge>
                       )}
                       <div className="flex items-center gap-2">
@@ -206,7 +206,7 @@ export function InvisibleWealthScanner() {
                           onCheckedChange={() => toggleOwned(item.id)}
                         />
                         <Label htmlFor={`own-${item.id}`} className="text-sm cursor-pointer">
-                          Besitze ich
+                          I own this
                         </Label>
                       </div>
                     </div>
@@ -220,9 +220,9 @@ export function InvisibleWealthScanner() {
           {ownedItems.size > 0 && (
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-base">Dokumentations-Status</CardTitle>
+                <CardTitle className="text-base">Documentation Status</CardTitle>
                 <p className="text-sm text-slate-500">
-                  Welche Assets sind für Erben dokumentiert?
+                  Which assets are documented for heirs?
                 </p>
               </CardHeader>
               <CardContent>
@@ -244,7 +244,7 @@ export function InvisibleWealthScanner() {
                             htmlFor={`doc-${item.id}`}
                             className="text-sm cursor-pointer"
                           >
-                            Dokumentiert
+                            Documented
                           </Label>
                         </div>
                       </div>
@@ -261,12 +261,12 @@ export function InvisibleWealthScanner() {
           <Card className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
             <CardContent className="p-6 text-center">
               <Eye className="w-8 h-8 mx-auto mb-3 opacity-80" />
-              <div className="text-sm opacity-80">Sichtbarer Wert</div>
+              <div className="text-sm opacity-80">Visible value</div>
               <div className="text-3xl font-bold">
                 {formatCurrency(totalDocumentedValue)}
               </div>
               <div className="text-sm opacity-80 mt-1">
-                von {formatCurrency(totalOwnedValue)} gesamt
+                of {formatCurrency(totalOwnedValue)} total
               </div>
             </CardContent>
           </Card>
@@ -274,26 +274,26 @@ export function InvisibleWealthScanner() {
           <Card className="bg-gradient-to-br from-amber-500 to-orange-600 text-white">
             <CardContent className="p-6 text-center">
               <EyeOff className="w-8 h-8 mx-auto mb-3 opacity-80" />
-              <div className="text-sm opacity-80">Unsichtbarer Wert</div>
+              <div className="text-sm opacity-80">Invisible value</div>
               <div className="text-3xl font-bold">
                 {formatCurrency(undocumentedValue)}
               </div>
               <div className="text-sm opacity-80 mt-1">
-                Für Erben nicht auffindbar
+                Not findable by heirs
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Dokumentations-Rate</CardTitle>
+              <CardTitle className="text-base">Documentation Rate</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="text-center">
                 <div className="text-4xl font-bold text-blue-600">
                   {documentationRate.toFixed(0)}%
                 </div>
-                <div className="text-sm text-slate-500">Ihr Sichtbarkeits-Index</div>
+                <div className="text-sm text-slate-500">Your visibility index</div>
               </div>
               <Progress value={documentationRate} className="h-3" />
               <div className="flex justify-between text-xs text-slate-400">
@@ -304,19 +304,19 @@ export function InvisibleWealthScanner() {
               {documentationRate < 50 && (
                 <div className="text-xs text-red-600 bg-red-50 p-2 rounded">
                   <AlertCircle className="w-3 h-3 inline mr-1" />
-                  Kritischer Zustand: Mehr als 50% unsichtbar
+                  Critical: more than 50% invisible
                 </div>
               )}
               {documentationRate >= 50 && documentationRate < 80 && (
                 <div className="text-xs text-amber-600 bg-amber-50 p-2 rounded">
                   <AlertCircle className="w-3 h-3 inline mr-1" />
-                  Verbesserungsbedarf: 20%+ nicht dokumentiert
+                  Improvement needed: 20%+ undocumented
                 </div>
               )}
               {documentationRate >= 80 && (
                 <div className="text-xs text-green-600 bg-green-50 p-2 rounded">
                   <AlertCircle className="w-3 h-3 inline mr-1" />
-                  Gut: Mehr als 80% dokumentiert
+                  Good: more than 80% documented
                 </div>
               )}
             </CardContent>
@@ -324,22 +324,22 @@ export function InvisibleWealthScanner() {
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Risiko-Analyse</CardTitle>
+              <CardTitle className="text-base">Risk Analysis</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm">Gefährdete Assets:</span>
+                <span className="text-sm">Assets at risk:</span>
                 <span className="font-mono font-medium">{ownedItems.size - documentedItems.size}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm">Risiko-Wert:</span>
+                <span className="text-sm">Risk value:</span>
                 <span className="font-mono font-medium">
                   {formatCurrency(undocumentedValue)}
                 </span>
               </div>
               <div className="text-xs text-slate-500 pt-2 border-t">
-                Bei Ausfall ohne DAIO: {formatCurrency(undocumentedValue * 0.7)} 
-                bis {formatCurrency(undocumentedValue)} potenziell verloren
+                If incident occurs without DAIO: {formatCurrency(undocumentedValue * 0.7)}{" "}
+                to {formatCurrency(undocumentedValue)} potentially lost
               </div>
             </CardContent>
           </Card>

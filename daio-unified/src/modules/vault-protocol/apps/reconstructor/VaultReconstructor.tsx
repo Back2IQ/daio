@@ -154,10 +154,10 @@ export function VaultReconstructor() {
               )
             );
 
-            toast.success(`Shard #${shard.index} importiert`);
+            toast.success(`Shard #${shard.index} imported`);
           }
         } catch {
-          toast.error("Ungültiges Shard-Format");
+          toast.error("Invalid shard format");
         }
       };
       reader.readAsText(file);
@@ -189,9 +189,9 @@ export function VaultReconstructor() {
 
       setDecryptDialog({ open: false, entryId: "", encrypted: null });
       setDecryptPassword("");
-      toast.success(`Shard #${shard.index} entschlüsselt`);
+      toast.success(`Shard #${shard.index} decrypted`);
     } catch {
-      toast.error("Falsches Passwort oder korrupter Shard");
+      toast.error("Wrong password or corrupt shard");
     }
   }, [decryptDialog, decryptPassword, feldman]);
 
@@ -217,7 +217,7 @@ export function VaultReconstructor() {
           alertToken: `canary-${Date.now()}`,
         });
 
-        toast.error("HONEYPOT ERKANNT! Unauthorized access attempt logged.");
+        toast.error("HONEYPOT DETECTED! Unauthorized access attempt logged.");
         setIsReconstructing(false);
         return;
       }
@@ -275,14 +275,14 @@ export function VaultReconstructor() {
           setReconstructedSecret(null);
           unblockClipboard();
           unblockPrint();
-          toast.info("Secret auto-destroyed nach Timer-Ablauf");
+          toast.info("Secret auto-destroyed after timer expiration");
         }
       }, 1000);
 
-      toast.success("Secret rekonstruiert! Sichere Anzeige aktiv.");
+      toast.success("Secret reconstructed! Secure display active.");
     } catch (err) {
       toast.error(
-        `Rekonstruktion fehlgeschlagen: ${err instanceof Error ? err.message : "Unbekannter Fehler"}`
+        `Reconstruction failed: ${err instanceof Error ? err.message : "Unknown error"}`
       );
     } finally {
       setIsReconstructing(false);
@@ -302,7 +302,7 @@ export function VaultReconstructor() {
     setTimerActive(false);
     setReconstructedSecret(null);
     setSecondsLeft(0);
-    toast.info("Secret manuell destroyed");
+    toast.info("Secret manually destroyed");
   };
 
   return (
@@ -313,16 +313,16 @@ export function VaultReconstructor() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-sm">
               <Unlock className="w-4 h-4" />
-              Vault identifizieren
+              Identify vault
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label className="text-xs">Vault-ID</Label>
+              <Label className="text-xs">Vault ID</Label>
               <Input
                 value={vaultId}
                 onChange={(e) => setVaultId(e.target.value)}
-                placeholder="vault-... oder aus gespeicherten Vaults wählen"
+                placeholder="vault-... or choose from saved vaults"
                 className="mt-1 font-mono text-sm"
                 disabled={timerActive}
               />
@@ -331,7 +331,7 @@ export function VaultReconstructor() {
             {vaults.length > 0 && !vaultId && (
               <div>
                 <Label className="text-xs mb-2 block">
-                  Gespeicherte Vaults:
+                  Saved vaults:
                 </Label>
                 <div className="space-y-1">
                   {vaults.map((v) => (
@@ -354,9 +354,9 @@ export function VaultReconstructor() {
               <Alert className="bg-blue-50 border-blue-200 dark:bg-blue-900/20">
                 <Shield className="w-4 h-4 text-blue-600" />
                 <AlertDescription className="text-blue-800 dark:text-blue-200">
-                  Vault "{vaultMetadata.label}" gefunden. Threshold:{" "}
-                  {vaultMetadata.threshold} von {vaultMetadata.totalShares}.
-                  Feldman-Verifikation verfügbar.
+                  Vault "{vaultMetadata.label}" found. Threshold:{" "}
+                  {vaultMetadata.threshold} of {vaultMetadata.totalShares}.
+                  Feldman verification available.
                 </AlertDescription>
               </Alert>
             )}
@@ -381,9 +381,9 @@ export function VaultReconstructor() {
           <Alert className="bg-red-50 border-red-500 dark:bg-red-900/30">
             <AlertTriangle className="w-5 h-5 text-red-600" />
             <AlertDescription className="text-red-800 dark:text-red-200">
-              <strong>HONEYPOT ERKANNT!</strong> Ein Canary-Shard wurde
-              verwendet. Dieser Zugriffsversuch wurde protokolliert und alle
-              Validatoren werden alarmiert.
+              <strong>HONEYPOT DETECTED!</strong> A canary shard was used.
+              This access attempt has been logged and all validators are
+              being alerted.
             </AlertDescription>
           </Alert>
         )}
@@ -395,10 +395,10 @@ export function VaultReconstructor() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-sm">
                   <Upload className="w-4 h-4" />
-                  Shards eingeben
+                  Enter shards
                 </CardTitle>
                 <Button variant="outline" size="sm" onClick={addShardEntry}>
-                  + Shard hinzufügen
+                  + Add shard
                 </Button>
               </div>
             </CardHeader>
@@ -411,11 +411,11 @@ export function VaultReconstructor() {
                   </span>
                   <span>
                     {quorumReached ? (
-                      <Badge className="bg-green-500">Quorum erreicht</Badge>
+                      <Badge className="bg-green-500">Quorum reached</Badge>
                     ) : (
                       <Badge variant="outline">
-                        Noch {threshold - validShards.length} Shard
-                        {threshold - validShards.length !== 1 ? "s" : ""} nötig
+                        {threshold - validShards.length} shard
+                        {threshold - validShards.length !== 1 ? "s" : ""} still needed
                       </Badge>
                     )}
                   </span>
@@ -449,7 +449,7 @@ export function VaultReconstructor() {
                       <span className="text-sm font-medium">
                         {entry.shard
                           ? `Shard #${entry.shard.index}`
-                          : "Shard importieren"}
+                          : "Import shard"}
                       </span>
                       {entry.verified !== null && (
                         <Badge
@@ -486,7 +486,7 @@ export function VaultReconstructor() {
                         />
                         <div className="flex items-center justify-center gap-2 p-3 rounded border-2 border-dashed cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 text-sm text-muted-foreground">
                           <Upload className="w-4 h-4" />
-                          JSON-Datei wählen
+                          Choose JSON file
                         </div>
                       </label>
                     </div>
@@ -504,7 +504,7 @@ export function VaultReconstructor() {
                 <div className="text-center py-8 text-muted-foreground">
                   <Upload className="w-8 h-8 mx-auto mb-2 opacity-30" />
                   <p className="text-sm">
-                    Klicke "+ Shard hinzufügen" um Shards zu importieren
+                    Click "+ Add shard" to import shards
                   </p>
                 </div>
               )}
@@ -520,13 +520,13 @@ export function VaultReconstructor() {
                   {isReconstructing ? (
                     <>
                       <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent mr-2" />
-                      Rekonstruiere...
+                      Reconstructing...
                     </>
                   ) : (
                     <>
                       <Unlock className="w-5 h-5 mr-2" />
-                      Secret rekonstruieren ({validShards.length}/{threshold}{" "}
-                      Shards)
+                      Reconstruct secret ({validShards.length}/{threshold}{" "}
+                      shards)
                     </>
                   )}
                 </Button>
@@ -542,7 +542,7 @@ export function VaultReconstructor() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-sm text-green-600">
                   <Shield className="w-4 h-4" />
-                  Sichere Anzeige — Secret
+                  Secure display — secret
                 </CardTitle>
                 <div className="flex items-center gap-2">
                   {timerActive && (
@@ -559,7 +559,7 @@ export function VaultReconstructor() {
                     size="sm"
                     onClick={handleManualDestroy}
                   >
-                    Sofort zerstören
+                    Destroy now
                   </Button>
                 </div>
               </div>
@@ -573,8 +573,8 @@ export function VaultReconstructor() {
                 />
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
-                Canvas-Rendering aktiv. Kein DOM-Text. Kopieren blockiert.
-                Auto-Destruct nach Timer.
+                Canvas rendering active. No DOM text. Copy blocked.
+                Auto-destruct on timer.
               </p>
             </CardContent>
           </Card>
@@ -591,8 +591,8 @@ export function VaultReconstructor() {
             </CardHeader>
             <CardContent>
               <p className="text-xs text-muted-foreground mb-3">
-                Importiere die Feldman-Commitments um jeden Shard vor der
-                Rekonstruktion zu verifizieren.
+                Import the Feldman commitments to verify each shard before
+                reconstruction.
               </p>
               <label>
                 <input
@@ -610,10 +610,10 @@ export function VaultReconstructor() {
                         ) as FeldmanCommitments;
                         if (parsed.commitments && parsed.generator) {
                           setFeldman(parsed);
-                          toast.success("Feldman Commitments importiert");
+                          toast.success("Feldman commitments imported");
                         }
                       } catch {
-                        toast.error("Ungültiges Commitment-Format");
+                        toast.error("Invalid commitment format");
                       }
                     };
                     reader.readAsText(file);
@@ -621,7 +621,7 @@ export function VaultReconstructor() {
                 />
                 <div className="flex items-center justify-center gap-2 p-4 rounded border-2 border-dashed cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 text-sm text-muted-foreground">
                   <Upload className="w-4 h-4" />
-                  Commitments-JSON importieren
+                  Import commitments JSON
                 </div>
               </label>
             </CardContent>
@@ -641,20 +641,20 @@ export function VaultReconstructor() {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Shard entschlüsseln</DialogTitle>
+            <DialogTitle>Decrypt shard</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <p className="text-sm text-muted-foreground">
-              Dieser Shard ist mit AES-256-GCM verschlüsselt. Gib das Passwort
-              ein, das bei der Erstellung gesetzt wurde.
+              This shard is encrypted with AES-256-GCM. Enter the password
+              that was set at creation time.
             </p>
             <div>
-              <Label>Passwort</Label>
+              <Label>Password</Label>
               <Input
                 type="password"
                 value={decryptPassword}
                 onChange={(e) => setDecryptPassword(e.target.value)}
-                placeholder="Shard-Passwort..."
+                placeholder="Shard password..."
                 className="mt-1"
               />
             </div>
@@ -667,14 +667,14 @@ export function VaultReconstructor() {
                 setDecryptPassword("");
               }}
             >
-              Abbrechen
+              Cancel
             </Button>
             <Button
               onClick={handleDecrypt}
               disabled={!decryptPassword}
             >
               <Lock className="w-4 h-4 mr-2" />
-              Entschlüsseln
+              Decrypt
             </Button>
           </DialogFooter>
         </DialogContent>

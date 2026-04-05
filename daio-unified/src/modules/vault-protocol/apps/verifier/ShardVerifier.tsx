@@ -43,7 +43,7 @@ export function ShardVerifier() {
     const vault = vaults.find((v) => v.id === vaultId);
     if (vault) {
       setFeldman(vault.feldman);
-      toast.success("Feldman-Commitments geladen");
+      toast.success("Feldman commitments loaded");
     }
   };
 
@@ -56,12 +56,12 @@ export function ShardVerifier() {
         ) as FeldmanCommitments;
         if (parsed.commitments && parsed.generator && parsed.prime) {
           setFeldman(parsed);
-          toast.success("Feldman-Commitments importiert");
+          toast.success("Feldman commitments imported");
         } else {
-          toast.error("Ungültiges Format");
+          toast.error("Invalid format");
         }
       } catch {
-        toast.error("JSON-Parse-Fehler");
+        toast.error("JSON parse error");
       }
     };
     reader.readAsText(file);
@@ -69,7 +69,7 @@ export function ShardVerifier() {
 
   const handleVerifyShard = (file: File) => {
     if (!feldman) {
-      toast.error("Commitments zuerst laden");
+      toast.error("Load commitments first");
       return;
     }
 
@@ -81,7 +81,7 @@ export function ShardVerifier() {
 
         if (parsed.ciphertext) {
           toast.error(
-            "Verschlüsselter Shard — bitte zuerst im Reconstructor entschlüsseln"
+            "Encrypted shard — please decrypt in Reconstructor first"
           );
           return;
         }
@@ -104,12 +104,12 @@ export function ShardVerifier() {
         ]);
 
         if (valid) {
-          toast.success(`Shard #${shard.index} ist GÜLTIG`);
+          toast.success(`Shard #${shard.index} is VALID`);
         } else {
-          toast.error(`Shard #${shard.index} ist UNGÜLTIG`);
+          toast.error(`Shard #${shard.index} is INVALID`);
         }
       } catch {
-        toast.error("Ungültiges Shard-Format");
+        toast.error("Invalid shard format");
       }
     };
     reader.readAsText(file);
@@ -123,7 +123,7 @@ export function ShardVerifier() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-sm">
               <Lock className="w-4 h-4" />
-              Feldman Commitments laden
+              Load Feldman commitments
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -131,7 +131,7 @@ export function ShardVerifier() {
             {vaults.length > 0 && (
               <div>
                 <Label className="text-xs mb-2 block">
-                  Aus gespeichertem Vault:
+                  From saved vault:
                 </Label>
                 <div className="space-y-1">
                   {vaults.map((v) => (
@@ -157,7 +157,7 @@ export function ShardVerifier() {
             {/* From file */}
             <div>
               <Label className="text-xs mb-2 block">
-                Oder Commitments-Datei importieren:
+                Or import commitments file:
               </Label>
               <label>
                 <input
@@ -171,7 +171,7 @@ export function ShardVerifier() {
                 />
                 <div className="flex items-center justify-center gap-2 p-3 rounded border-2 border-dashed cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 text-sm text-muted-foreground">
                   <Upload className="w-4 h-4" />
-                  JSON-Datei wählen
+                  Choose JSON file
                 </div>
               </label>
             </div>
@@ -180,8 +180,8 @@ export function ShardVerifier() {
               <Alert className="bg-green-50 border-green-200 dark:bg-green-900/20">
                 <CheckCircle2 className="w-4 h-4 text-green-600" />
                 <AlertDescription className="text-green-800 dark:text-green-200">
-                  {feldman.commitments.length} Commitments geladen. Bereit zur
-                  Shard-Verifikation.
+                  {feldman.commitments.length} commitments loaded. Ready for
+                  shard verification.
                 </AlertDescription>
               </Alert>
             )}
@@ -194,7 +194,7 @@ export function ShardVerifier() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
                 <ShieldCheck className="w-4 h-4" />
-                Shard verifizieren
+                Verify shard
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -210,7 +210,7 @@ export function ShardVerifier() {
                 />
                 <div className="flex items-center justify-center gap-2 p-6 rounded border-2 border-dashed cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 text-muted-foreground">
                   <Upload className="w-5 h-5" />
-                  <span>Shard-JSON zum Verifizieren hochladen</span>
+                  <span>Upload shard JSON to verify</span>
                 </div>
               </label>
             </CardContent>
@@ -224,14 +224,14 @@ export function ShardVerifier() {
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2 text-sm">
                   <Eye className="w-4 h-4" />
-                  Verifikations-Ergebnisse ({results.length})
+                  Verification results ({results.length})
                 </CardTitle>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setResults([])}
                 >
-                  Zurücksetzen
+                  Reset
                 </Button>
               </div>
             </CardHeader>
@@ -265,7 +265,7 @@ export function ShardVerifier() {
                       <Badge
                         variant={result.valid ? "secondary" : "destructive"}
                       >
-                        {result.valid ? "GÜLTIG" : "UNGÜLTIG"}
+                        {result.valid ? "VALID" : "INVALID"}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
                         {new Date(result.timestamp).toLocaleTimeString()}
@@ -283,7 +283,7 @@ export function ShardVerifier() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-sm">
               <Hash className="w-4 h-4" />
-              Wie Feldman VSS funktioniert
+              How Feldman VSS works
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -294,20 +294,20 @@ export function ShardVerifier() {
                 </div>
                 <h4 className="font-medium text-sm">1. Commitments</h4>
                 <p className="text-xs text-muted-foreground">
-                  Bei der Vault-Erstellung werden Commitments C_j = g^(a_j) mod
-                  p veröffentlicht. Diese verraten nichts über die
-                  Koeffizienten, binden den Ersteller aber mathematisch.
+                  At vault creation, commitments C_j = g^(a_j) mod p are
+                  published. They reveal nothing about the coefficients but
+                  mathematically bind the creator.
                 </p>
               </div>
               <div className="space-y-2">
                 <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
-                <h4 className="font-medium text-sm">2. Verifikation</h4>
+                <h4 className="font-medium text-sm">2. Verification</h4>
                 <p className="text-xs text-muted-foreground">
-                  Jeder Validator kann prüfen: g^(shard_i) =? Produkt von
-                  C_j^(i^j). Wenn die Gleichung stimmt, ist der Shard
-                  mathematisch korrekt.
+                  Each validator can check: g^(shard_i) =? product of
+                  C_j^(i^j). If the equation holds, the shard is
+                  mathematically correct.
                 </p>
               </div>
               <div className="space-y-2">
@@ -316,9 +316,8 @@ export function ShardVerifier() {
                 </div>
                 <h4 className="font-medium text-sm">3. Zero Knowledge</h4>
                 <p className="text-xs text-muted-foreground">
-                  Kein anderer Validator erfährt etwas über den Shard. Es wird
-                  nur bewiesen, dass der Shard korrekt ist — nicht, was er
-                  enthält.
+                  No other validator learns anything about the shard. Only
+                  that the shard is correct — not what it contains.
                 </p>
               </div>
             </div>

@@ -13,43 +13,43 @@ interface ComparisonItem {
 const COMPARISONS: ComparisonItem[] = [
   {
     aspect: "Key Storage",
-    traditional: "Custodial: Keys beim Anbieter",
-    daio: "Non-Custodial: Keys beim Nutzer",
+    traditional: "Custodial: keys held by provider",
+    daio: "Non-custodial: keys held by user",
     traditionalIcon: "warning",
     daioIcon: "check",
   },
   {
-    aspect: "Asset Zugriff",
-    traditional: "Anbieter kann Assets einfrieren",
-    daio: "Nur Nutzer hat Zugriff",
+    aspect: "Asset Access",
+    traditional: "Provider can freeze assets",
+    daio: "Only the user has access",
     traditionalIcon: "warning",
     daioIcon: "check",
   },
   {
-    aspect: "Nachfolge",
-    traditional: "Komplexe rechtliche Prozesse",
-    daio: "Automatisierte Smart Contracts",
+    aspect: "Succession",
+    traditional: "Complex legal processes",
+    daio: "Automated smart contracts",
     traditionalIcon: "x",
     daioIcon: "check",
   },
   {
-    aspect: "Transparenz",
-    traditional: "Innere Abläufe undurchsichtig",
-    daio: "Vollständig auditable",
+    aspect: "Transparency",
+    traditional: "Internal processes opaque",
+    daio: "Fully auditable",
     traditionalIcon: "x",
     daioIcon: "check",
   },
   {
     aspect: "Single Point of Failure",
-    traditional: "Anbieter-Insolvenz = Verlust",
-    daio: "Dezentral, kein SPOF",
+    traditional: "Provider insolvency = loss",
+    daio: "Decentralized, no SPOF",
     traditionalIcon: "warning",
     daioIcon: "check",
   },
   {
-    aspect: "Kosten",
-    traditional: "Hohe Verwahrgebühren",
-    daio: "Nur Transaktionsgebühren",
+    aspect: "Costs",
+    traditional: "High custody fees",
+    daio: "Transaction fees only",
     traditionalIcon: "warning",
     daioIcon: "check",
   },
@@ -67,49 +67,49 @@ const DAIO_LAYERS: DaioLayer[] = [
   {
     id: "identity",
     name: "Identity Layer",
-    description: "Verifizierte Identitäten ohne Zentralisierung",
+    description: "Verified identities without centralization",
     icon: <Eye className="w-5 h-5" />,
     features: [
       "DID (Decentralized Identity)",
       "Verifiable Credentials",
       "Zero-Knowledge Proofs",
-      "Keine PII-Speicherung",
+      "No PII storage",
     ],
   },
   {
     id: "governance",
     name: "Governance Layer",
-    description: "Regelbasierte Entscheidungsfindung",
+    description: "Rule-based decision-making",
     icon: <Shield className="w-5 h-5" />,
     features: [
-      "Smart Contract Policies",
-      "Multi-Sig Quorum",
-      "Time-Lock Mechanismen",
-      "Widerspruchsfristen",
+      "Smart contract policies",
+      "Multi-sig quorum",
+      "Time-lock mechanisms",
+      "Objection periods",
     ],
   },
   {
     id: "execution",
     name: "Execution Layer",
-    description: "Sichere Ausführung ohne Key-Exposure",
+    description: "Secure execution without key exposure",
     icon: <Unlock className="w-5 h-5" />,
     features: [
       "MPC (Multi-Party Computation)",
       "Shamir Secret Sharing",
-      "Threshold Signatures",
+      "Threshold signatures",
       "Hardware Security Modules",
     ],
   },
   {
     id: "storage",
     name: "Storage Layer",
-    description: "Verschlüsselte, verteilte Datenspeicherung",
+    description: "Encrypted, distributed data storage",
     icon: <Database className="w-5 h-5" />,
     features: [
-      "End-to-End Verschlüsselung",
-      "Distributed Storage",
-      "Client-Side Encryption",
-      "Zero-Knowledge Architecture",
+      "End-to-end encryption",
+      "Distributed storage",
+      "Client-side encryption",
+      "Zero-knowledge architecture",
     ],
   },
 ];
@@ -121,12 +121,12 @@ export function NoCustodyArch() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">No-Custody Prinzip:</div>
+        <div className="text-slate-500 mb-2">No-custody principle:</div>
         <div className="text-blue-600 dark:text-blue-400">
           DAIO = Governance(Assets) ≠ Custody(Assets)
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          DAIO verwaltet Regeln, nicht Assets. Private Keys bleiben immer beim Eigentümer.
+          DAIO manages rules, not assets. Private keys always remain with the owner.
         </div>
       </div>
 
@@ -140,8 +140,8 @@ export function NoCustodyArch() {
             <div>
               <h3 className="text-xl font-bold">Strict No-Custody Architecture</h3>
               <p className="text-white/80 mt-1">
-                DAIO speichert niemals private Keys oder Assets. Wir bieten Governance-Infrastruktur, 
-                keine Verwahrung.
+                DAIO never stores private keys or assets. We provide governance infrastructure,
+                not custody.
               </p>
             </div>
           </div>
@@ -151,18 +151,18 @@ export function NoCustodyArch() {
       {/* Comparison Table */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">Traditionell vs. DAIO</CardTitle>
+          <CardTitle className="text-base">Traditional vs. DAIO</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left py-3 px-4 font-medium text-slate-500">Aspekt</th>
+                  <th className="text-left py-3 px-4 font-medium text-slate-500">Aspect</th>
                   <th className="text-left py-3 px-4 font-medium text-slate-500">
                     <div className="flex items-center gap-2">
                       <EyeOff className="w-4 h-4" />
-                      Traditionell (Custodial)
+                      Traditional (Custodial)
                     </div>
                   </th>
                   <th className="text-left py-3 px-4 font-medium text-slate-500">
@@ -221,7 +221,7 @@ export function NoCustodyArch() {
       <div className="grid lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">DAIO Architektur-Layer</CardTitle>
+            <CardTitle className="text-base">DAIO architecture layers</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -288,9 +288,9 @@ export function NoCustodyArch() {
         <Card className="bg-green-50 dark:bg-green-900/20 border-green-200">
           <CardContent className="p-4 text-center">
             <Lock className="w-8 h-8 text-green-600 mx-auto mb-3" />
-            <div className="font-medium text-green-800">Keys bleiben beim Nutzer</div>
+            <div className="font-medium text-green-800">Keys stay with the user</div>
             <p className="text-xs text-green-600 mt-2">
-              DAIO speichert niemals private Keys oder Seed Phrases
+              DAIO never stores private keys or seed phrases
             </p>
           </CardContent>
         </Card>
@@ -298,9 +298,9 @@ export function NoCustodyArch() {
         <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200">
           <CardContent className="p-4 text-center">
             <Shield className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-            <div className="font-medium text-blue-800">Governance ohne Custody</div>
+            <div className="font-medium text-blue-800">Governance without custody</div>
             <p className="text-xs text-blue-600 mt-2">
-              Regeln werden verwaltet, nicht die Assets selbst
+              Rules are managed, not the assets themselves
             </p>
           </CardContent>
         </Card>
@@ -308,9 +308,9 @@ export function NoCustodyArch() {
         <Card className="bg-purple-50 dark:bg-purple-900/20 border-purple-200">
           <CardContent className="p-4 text-center">
             <Eye className="w-8 h-8 text-purple-600 mx-auto mb-3" />
-            <div className="font-medium text-purple-800">Vollständig transparent</div>
+            <div className="font-medium text-purple-800">Fully transparent</div>
             <p className="text-xs text-purple-600 mt-2">
-              Alle Abläufe sind auditierbar und nachvollziehbar
+              All processes are auditable and traceable
             </p>
           </CardContent>
         </Card>

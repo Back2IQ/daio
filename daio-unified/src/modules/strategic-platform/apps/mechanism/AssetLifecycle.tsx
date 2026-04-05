@@ -32,86 +32,86 @@ interface LifecycleStage {
 const LIFECYCLE_STAGES: LifecycleStage[] = [
   {
     id: "acquisition",
-    name: "Akquisition",
-    description: "Erwerb neuer digitaler Assets",
+    name: "Acquisition",
+    description: "Acquiring new digital assets",
     icon: <Plus className="w-5 h-5" />,
     color: "bg-green-500",
-    daioRole: "Asset-Registrierung & Kategorisierung",
+    daioRole: "Asset registration & categorization",
     activities: [
-      "Wallet-Erstellung dokumentieren",
-      "Asset-Kategorie zuweisen",
-      "Recovery-Plan initialisieren",
-      "Executor benennen",
+      "Document wallet creation",
+      "Assign asset category",
+      "Initialize recovery plan",
+      "Nominate executor",
     ],
   },
   {
     id: "custody",
-    name: "Verwahrung",
-    description: "Sichere Aufbewahrung der Assets",
+    name: "Custody",
+    description: "Secure asset storage",
     icon: <Shield className="w-5 h-5" />,
     color: "bg-blue-500",
-    daioRole: "Governance-Layer Aktivierung",
+    daioRole: "Governance layer activation",
     activities: [
-      "Multi-Sig Einrichtung",
-      "Backup-Verifikation",
-      "Zugriffsrichtlinien definieren",
-      "Notfall-Kontakte hinterlegen",
+      "Multi-sig setup",
+      "Backup verification",
+      "Define access policies",
+      "Store emergency contacts",
     ],
   },
   {
     id: "growth",
-    name: "Wachstum & Management",
-    description: "Aktives Portfolio-Management",
+    name: "Growth & Management",
+    description: "Active portfolio management",
     icon: <TrendingUp className="w-5 h-5" />,
     color: "bg-purple-500",
-    daioRole: "Kontinuierliche Dokumentation",
+    daioRole: "Continuous documentation",
     activities: [
-      "Positions-Updates tracken",
-      "Neue Assets registrieren",
-      "Governance-Regeln anpassen",
-      "Jährliche Reviews durchführen",
+      "Track position updates",
+      "Register new assets",
+      "Adapt governance rules",
+      "Conduct annual reviews",
     ],
   },
   {
     id: "monitoring",
-    name: "Überwachung",
-    description: "Kontinuierliche Zustandsüberwachung",
+    name: "Monitoring",
+    description: "Continuous status oversight",
     icon: <Bell className="w-5 h-5" />,
     color: "bg-amber-500",
-    daioRole: "Health-Checks & Alerts",
+    daioRole: "Health checks & alerts",
     activities: [
-      "Wallet-Health prüfen",
-      "Executor-Verfügbarkeit",
-      "Dokumentations-Vollständigkeit",
-      "Compliance-Status",
+      "Check wallet health",
+      "Executor availability",
+      "Documentation completeness",
+      "Compliance status",
     ],
   },
   {
     id: "transition",
-    name: "Übergang",
-    description: "Auslösung der Nachfolge",
+    name: "Transition",
+    description: "Succession activation",
     icon: <Users className="w-5 h-5" />,
     color: "bg-orange-500",
-    daioRole: "Trigger-Ausführung & Verifikation",
+    daioRole: "Trigger execution & verification",
     activities: [
-      "Trigger-Bedingung prüfen",
-      "Executor authentifizieren",
-      "Quorum-Bildung",
-      "Widerspruchsfrist starten",
+      "Verify trigger condition",
+      "Authenticate executor",
+      "Form quorum",
+      "Start objection period",
     ],
   },
   {
     id: "execution",
-    name: "Ausführung",
-    description: "Asset-Transfer an Begünstigte",
+    name: "Execution",
+    description: "Asset transfer to beneficiaries",
     icon: <Unlock className="w-5 h-5" />,
     color: "bg-red-500",
-    daioRole: "Sichere Freigabe & Transfer",
+    daioRole: "Secure release & transfer",
     activities: [
-      "Key-Rekonstruktion",
-      "Asset-Transfer ausführen",
-      "Steuer-Dokumentation",
-      "Abschluss-Protokoll",
+      "Key reconstruction",
+      "Execute asset transfer",
+      "Tax documentation",
+      "Completion protocol",
     ],
   },
 ];
@@ -169,12 +169,12 @@ export function AssetLifecycle() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Lebenszyklus-Modell:</div>
+        <div className="text-slate-500 mb-2">Lifecycle model:</div>
         <div className="text-blue-600 dark:text-blue-400">
-          L = [Akquisition → Verwahrung → Wachstum → Überwachung → Übergang → Ausführung]
+          L = [Acquisition → Custody → Growth → Monitoring → Transition → Execution]
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          DAIO als Governance-Layer über dem gesamten Asset-Lebenszyklus
+          DAIO as a governance layer across the entire asset lifecycle
         </div>
       </div>
 
@@ -184,7 +184,7 @@ export function AssetLifecycle() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <RotateCcw className="w-5 h-5 text-blue-500" />
-              <CardTitle className="text-base">DAIO Lifecycle-Layer</CardTitle>
+              <CardTitle className="text-base">DAIO lifecycle layer</CardTitle>
             </div>
             <Button
               variant="outline"
@@ -193,7 +193,7 @@ export function AssetLifecycle() {
               disabled={showAnimation}
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              Zyklus Simulieren
+              Simulate cycle
             </Button>
           </div>
         </CardHeader>
@@ -202,7 +202,7 @@ export function AssetLifecycle() {
           <div className="relative">
             {/* Connection Line */}
             <div className="absolute top-8 left-0 right-0 h-1 bg-slate-200 rounded" />
-            
+
             {/* Stages */}
             <div className="flex justify-between relative">
               {LIFECYCLE_STAGES.map((stage, index) => (
@@ -233,8 +233,8 @@ export function AssetLifecycle() {
                     </div>
                   </div>
                   {index < LIFECYCLE_STAGES.length - 1 && (
-                    <ArrowRight className="absolute w-4 h-4 text-slate-300" 
-                      style={{ left: `${(index + 0.5) * (100 / 6) + 8}%`, top: "24px" }} 
+                    <ArrowRight className="absolute w-4 h-4 text-slate-300"
+                      style={{ left: `${(index + 0.5) * (100 / 6) + 8}%`, top: "24px" }}
                     />
                   )}
                 </button>
@@ -261,7 +261,7 @@ export function AssetLifecycle() {
           <CardContent className="space-y-4">
             <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
               <div className="text-sm font-medium text-blue-800 mb-1">
-                DAIO-Rolle in dieser Phase
+                DAIO role in this phase
               </div>
               <p className="text-sm text-blue-700">{currentStage.daioRole}</p>
             </div>
@@ -269,7 +269,7 @@ export function AssetLifecycle() {
             <div>
               <div className="text-sm font-medium mb-2 flex items-center gap-2">
                 <FileText className="w-4 h-4" />
-                Aktivitäten
+                Activities
               </div>
               <ul className="space-y-2">
                 {currentStage.activities.map((activity, i) => (
@@ -286,7 +286,7 @@ export function AssetLifecycle() {
         {/* Example Assets */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base">Beispiel-Assets im Lifecycle</CardTitle>
+            <CardTitle className="text-base">Example assets in lifecycle</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -329,23 +329,23 @@ export function AssetLifecycle() {
 
             {/* Lifecycle Summary */}
             <div className="mt-4 pt-4 border-t">
-              <div className="text-sm font-medium mb-2">Lifecycle-Übersicht</div>
+              <div className="text-sm font-medium mb-2">Lifecycle overview</div>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <div className="flex justify-between p-2 bg-slate-50 rounded">
-                  <span className="text-slate-500">Assets registriert:</span>
+                  <span className="text-slate-500">Assets registered:</span>
                   <span className="font-medium">12</span>
                 </div>
                 <div className="flex justify-between p-2 bg-slate-50 rounded">
-                  <span className="text-slate-500">Gesamtwert:</span>
+                  <span className="text-slate-500">Total value:</span>
                   <span className="font-medium">$1.2M</span>
                 </div>
                 <div className="flex justify-between p-2 bg-slate-50 rounded">
-                  <span className="text-slate-500">Executor zugewiesen:</span>
+                  <span className="text-slate-500">Executor assigned:</span>
                   <span className="font-medium text-green-600">100%</span>
                 </div>
                 <div className="flex justify-between p-2 bg-slate-50 rounded">
-                  <span className="text-slate-500">Letztes Review:</span>
-                  <span className="font-medium">14 Tage</span>
+                  <span className="text-slate-500">Last review:</span>
+                  <span className="font-medium">14 days</span>
                 </div>
               </div>
             </div>
@@ -356,38 +356,37 @@ export function AssetLifecycle() {
       {/* DAIO Value Proposition */}
       <Card className="bg-slate-50 dark:bg-slate-800/50">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base">DAIO als Governance-Layer</CardTitle>
+          <CardTitle className="text-base">DAIO as governance layer</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Shield className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Kontinuierlicher Schutz</span>
+                <span className="text-sm font-medium">Continuous protection</span>
               </div>
               <p className="text-xs text-slate-500">
-                DAIO überwacht und schützt Assets während ihres gesamten Lebenszyklus,
-                nicht nur bei der Nachfolge.
+                DAIO monitors and protects assets throughout their entire lifecycle,
+                not only at succession.
               </p>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Automatisierte Dokumentation</span>
+                <span className="text-sm font-medium">Automated documentation</span>
               </div>
               <p className="text-xs text-slate-500">
-                Jede Änderung wird automatisch protokolliert und für die Nachfolge
-                vorbereitet.
+                Every change is automatically logged and prepared for succession.
               </p>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Nahtlose Übergabe</span>
+                <span className="text-sm font-medium">Seamless transfer</span>
               </div>
               <p className="text-xs text-slate-500">
-                Wenn der Zeitpunkt kommt, ist alles vorbereitet – keine Panik,
-                keine verlorenen Assets.
+                When the time comes, everything is prepared — no panic,
+                no lost assets.
               </p>
             </div>
           </div>

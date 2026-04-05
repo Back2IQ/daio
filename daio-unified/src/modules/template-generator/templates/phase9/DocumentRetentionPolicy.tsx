@@ -9,19 +9,19 @@ import { Plus, Trash2 } from "lucide-react";
 import type { DocumentRetentionPolicyData, RetentionClassEntry } from "../../types";
 
 const RETENTION_LEGAL_BASIS = [
-  { law: "MiCA Art. 68", period: "5 Jahre", scope: "Aufzeichnungen zu Kryptowerte-Dienstleistungen", source: "VO (EU) 2023/1114", url: "https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=CELEX:32023R1114" },
-  { law: "HGB § 257", period: "6-10 Jahre", scope: "Handelsbriefe (6 J.), Buchungsbelege & Jahresabschlüsse (10 J.)", source: "Handelsgesetzbuch" },
-  { law: "AO § 147", period: "6-10 Jahre", scope: "Steuerlich relevante Unterlagen", source: "Abgabenordnung" },
-  { law: "DSGVO Art. 5(1)(e)", period: "Zweckbindung", scope: "Personenbezogene Daten nur so lange wie nötig", source: "VO (EU) 2016/679" },
-  { law: "BGH III ZR 183/17", period: "Unbefristet", scope: "Digitaler Nachlass geht per §1922 BGB auf Erben über", source: "BGH 12.07.2018", url: "https://www.lto.de/recht/hintergruende/h/bgh-iii-zb-30-20-digitaler-nachlass-erben-bekommen-zugriff-auf-facebook-konto" },
-  { law: "BGH VI ZR 15/23", period: "Unbefristet", scope: "Digitale Inhalte (Fotos, Nachrichten) sind vererbbar", source: "BGH 02.2024", url: "https://www.anwalt.de/rechtstipps/digitaler-nachlass-im-erbrecht-bgh-staerkt-die-rechte-der-erben-244153.html" },
+  { law: "MiCA Art. 68", period: "5 years", scope: "Records of crypto-asset services", source: "Regulation (EU) 2023/1114", url: "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32023R1114" },
+  { law: "HGB § 257", period: "6-10 years", scope: "Commercial letters (6 y.), accounting records & annual statements (10 y.)", source: "German Commercial Code" },
+  { law: "AO § 147", period: "6-10 years", scope: "Tax-relevant documents", source: "German Fiscal Code" },
+  { law: "GDPR Art. 5(1)(e)", period: "Purpose limitation", scope: "Personal data only as long as necessary", source: "Regulation (EU) 2016/679" },
+  { law: "BGH III ZR 183/17", period: "Indefinite", scope: "Digital estate transfers to heirs per §1922 BGB", source: "BGH 2018-07-12", url: "https://juris.bundesgerichtshof.de/cgi-bin/rechtsprechung/document.py?Gericht=bgh&Art=en&nr=86602" },
+  { law: "BGH VI ZR 15/23", period: "Indefinite", scope: "Digital content (photos, messages) is inheritable", source: "BGH 2024-02", url: "https://juris.bundesgerichtshof.de/" },
 ];
 
 const DEFAULT_CLASSES: RetentionClassEntry[] = [
-  { className: "A", priority: "High", documentTypes: "Inheritance Containers, Legacy Proof Certificates, Audit Trails", retentionPeriod: "10 years p.a.", reason: "HGB § 257 Abs. 4 (10 J.), MiCA Art. 68 (5 J.), AO § 147 (10 J.)", procedureOnExpiry: "ARCHIVING" },
-  { className: "B", priority: "Medium", documentTypes: "Customer Correspondence, Contract Documents, Invoices/Receipts", retentionPeriod: "7 years", reason: "HGB § 257 Abs. 4 (6 J.), AO § 147 (6-10 J.), DSGVO Art. 5(1)(e)", procedureOnExpiry: "ARCHIVING" },
-  { className: "C", priority: "Low", documentTypes: "Internal Memos, Work Instructions, Provisional Documents", retentionPeriod: "3 years", reason: "BGB § 195 (3 J. Regelverjährung), interne Governance-Richtlinie", procedureOnExpiry: "DELETION" },
-  { className: "D", priority: "One-Time", documentTypes: "Temporary Files, Draft Documents, Duplicates", retentionPeriod: "Delete immediately", reason: "DSGVO Art. 5(1)(e) Datenminimierung — kein Aufbewahrungszweck", procedureOnExpiry: "DELETION" },
+  { className: "A", priority: "High", documentTypes: "Inheritance Containers, Legacy Proof Certificates, Audit Trails", retentionPeriod: "10 years p.a.", reason: "HGB § 257(4) (10 y.), MiCA Art. 68 (5 y.), AO § 147 (10 y.)", procedureOnExpiry: "ARCHIVING" },
+  { className: "B", priority: "Medium", documentTypes: "Customer Correspondence, Contract Documents, Invoices/Receipts", retentionPeriod: "7 years", reason: "HGB § 257(4) (6 y.), AO § 147 (6-10 y.), GDPR Art. 5(1)(e)", procedureOnExpiry: "ARCHIVING" },
+  { className: "C", priority: "Low", documentTypes: "Internal Memos, Work Instructions, Provisional Documents", retentionPeriod: "3 years", reason: "BGB § 195 (3-year statute of limitations), internal governance policy", procedureOnExpiry: "DELETION" },
+  { className: "D", priority: "One-Time", documentTypes: "Temporary Files, Draft Documents, Duplicates", retentionPeriod: "Delete immediately", reason: "GDPR Art. 5(1)(e) data minimization — no retention purpose", procedureOnExpiry: "DELETION" },
 ];
 
 const DEFAULTS: DocumentRetentionPolicyData = {

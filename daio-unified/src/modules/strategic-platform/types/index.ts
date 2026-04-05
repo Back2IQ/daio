@@ -172,9 +172,9 @@ export const CUSTODY_TYPE_NAMES: Record<CustodyType, string> = {
 };
 
 export const STRESS_EVENT_NAMES: Record<StressEvent, string> = {
-  death: "Tod",
-  incapacity: "Inkapazität",
-  divorce: "Scheidung",
-  relocation: "Umzug ins Ausland",
-  "trustee-failure": "Treuhänder-Ausfall",
+  death: "Death",
+  incapacity: "Incapacity",
+  divorce: "Divorce",
+  relocation: "Relocation abroad",
+  "trustee-failure": "Trustee failure",
 };

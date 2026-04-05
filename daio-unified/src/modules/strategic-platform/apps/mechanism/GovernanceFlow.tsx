@@ -30,12 +30,12 @@ const FLOW_STEPS: FlowStep[] = [
     id: "asset",
     type: "asset",
     label: "Asset",
-    description: "Digitales Vermögenswert",
+    description: "Digital asset",
     icon: <Database className="w-5 h-5" />,
     details: [
       "Crypto Wallets",
-      "DeFi Positionen",
-      "Exchange Konten",
+      "DeFi Positions",
+      "Exchange Accounts",
       "Business Assets",
     ],
   },
@@ -43,50 +43,50 @@ const FLOW_STEPS: FlowStep[] = [
     id: "trigger",
     type: "trigger",
     label: "Trigger",
-    description: "Auslösebedingung",
+    description: "Activation condition",
     icon: <Bell className="w-5 h-5" />,
     details: [
-      "Todesnachweis",
-      "Inkapazitätsbescheid",
-      "Zeitverzögerung",
-      "Mehrfach-Bestätigung",
+      "Death certificate",
+      "Incapacity notice",
+      "Time delay",
+      "Multi-confirmation",
     ],
   },
   {
     id: "executor",
     type: "executor",
     label: "Executor",
-    description: "Testamentsvollstrecker",
+    description: "Will executor",
     icon: <UserCheck className="w-5 h-5" />,
     details: [
-      "Verifizierte Identität",
-      "Rechtliche Vollmacht",
-      "Multi-Sig Berechtigung",
-      "Audit-Trail",
+      "Verified identity",
+      "Legal authority",
+      "Multi-sig permission",
+      "Audit trail",
     ],
   },
   {
     id: "quorum",
     type: "quorum",
     label: "Quorum",
-    description: "Mehrheitsentscheid",
+    description: "Majority decision",
     icon: <Vote className="w-5 h-5" />,
     details: [
-      "M-of-N Signatur",
-      "Zeitliche Verzögerung",
-      "Widerspruchsfrist",
-      "Konsens-Mechanismus",
+      "M-of-N signatures",
+      "Time delay",
+      "Objection period",
+      "Consensus mechanism",
     ],
   },
   {
     id: "release",
     type: "release",
     label: "Release",
-    description: "Freigabe-Mechanismus",
+    description: "Release mechanism",
     icon: <Unlock className="w-5 h-5" />,
     details: [
       "Shamir Secret Sharing",
-      "Zeitschloss-Vertrag",
+      "Time-lock contract",
       "Multi-Party Computation",
       "Zero-Knowledge Proof",
     ],
@@ -95,13 +95,13 @@ const FLOW_STEPS: FlowStep[] = [
     id: "beneficiary",
     type: "beneficiary",
     label: "Beneficiary",
-    description: "Begünstigter",
+    description: "Recipient",
     icon: <Users className="w-5 h-5" />,
     details: [
-      "Verifizierte Wallet",
-      "Identitätsnachweis",
-      "Steuer-Compliance",
-      "Dokumentation",
+      "Verified wallet",
+      "Identity proof",
+      "Tax compliance",
+      "Documentation",
     ],
   },
 ];
@@ -117,22 +117,22 @@ interface PathConfig {
 const PATHS: PathConfig[] = [
   {
     id: "standard",
-    name: "Standard-Pfad",
-    description: "Todesfall → Executor → 2-of-3 Quorum → Release",
+    name: "Standard path",
+    description: "Death → Executor → 2-of-3 Quorum → Release",
     steps: ["asset", "trigger", "executor", "quorum", "release", "beneficiary"],
     color: "bg-blue-500",
   },
   {
     id: "emergency",
-    name: "Notfall-Pfad",
-    description: "Inkapazität → 3-of-5 Quorum → Sofort-Release",
+    name: "Emergency path",
+    description: "Incapacity → 3-of-5 Quorum → Immediate release",
     steps: ["asset", "trigger", "quorum", "release", "beneficiary"],
     color: "bg-red-500",
   },
   {
     id: "time",
-    name: "Zeitverzögerter Pfad",
-    description: "Zeitschloss → 30 Tage Wartezeit → Automatischer Release",
+    name: "Time-delayed path",
+    description: "Time-lock → 30-day waiting period → Automatic release",
     steps: ["asset", "trigger", "quorum", "release", "beneficiary"],
     color: "bg-amber-500",
   },
@@ -167,12 +167,12 @@ export function GovernanceFlow() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Governance-Flow:</div>
+        <div className="text-slate-500 mb-2">Governance flow:</div>
         <div className="text-blue-600 dark:text-blue-400">
           Asset → Trigger → Executor → Quorum(m,n) → Release → Beneficiary
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Deterministischer Ablauf mit kryptographischer Verifikation auf jeder Ebene
+          Deterministic sequence with cryptographic verification at every level
         </div>
       </div>
 
@@ -200,7 +200,7 @@ export function GovernanceFlow() {
           className="ml-auto"
         >
           <GitBranch className="w-4 h-4 mr-2" />
-          Flow Simulieren
+          Simulate flow
         </Button>
       </div>
 
@@ -214,7 +214,7 @@ export function GovernanceFlow() {
             </div>
             {isAnimating && (
               <Badge variant="default" className="animate-pulse">
-                Ausführung...
+                Executing...
               </Badge>
             )}
           </div>
@@ -314,7 +314,7 @@ export function GovernanceFlow() {
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-green-500" />
-            <CardTitle className="text-base">Sicherheits-Features</CardTitle>
+            <CardTitle className="text-base">Security features</CardTitle>
           </div>
         </CardHeader>
         <CardContent>
@@ -322,37 +322,37 @@ export function GovernanceFlow() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Kryptographische Verifikation</span>
+                <span className="text-sm font-medium">Cryptographic verification</span>
               </div>
               <p className="text-xs text-slate-500 pl-6">
-                Jeder Schritt wird durch digitale Signaturen und Zero-Knowledge Proofs verifiziert.
+                Every step is verified through digital signatures and zero-knowledge proofs.
               </p>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Multi-Party Governance</span>
+                <span className="text-sm font-medium">Multi-party governance</span>
               </div>
               <p className="text-xs text-slate-500 pl-6">
-                Keine Einzelperson kann den Prozess allein steuern – Konsens erforderlich.
+                No single person can control the process alone — consensus required.
               </p>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Audit-Trail</span>
+                <span className="text-sm font-medium">Audit trail</span>
               </div>
               <p className="text-xs text-slate-500 pl-6">
-                Jede Aktion wird unveränderlich protokolliert für rechtliche Nachvollziehbarkeit.
+                Every action is immutably logged for legal traceability.
               </p>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Unlock className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium">Time-Lock Schutz</span>
+                <span className="text-sm font-medium">Time-lock protection</span>
               </div>
               <p className="text-xs text-slate-500 pl-6">
-                Optionale Verzögerung verhindert voreilige oder betrügerische Transfers.
+                Optional delays prevent premature or fraudulent transfers.
               </p>
             </div>
           </div>

@@ -35,7 +35,7 @@ interface AssetType {
 const ASSET_TYPES: AssetType[] = [
   {
     id: "gold",
-    name: "Physisches Gold",
+    name: "Physical Gold",
     icon: <Coins className="w-5 h-5" />,
     color: "bg-yellow-500",
     characteristics: {
@@ -45,9 +45,9 @@ const ASSET_TYPES: AssetType[] = [
       recoverable: true,
       timeLocked: false,
     },
-    accessMethods: ["Physischer Zugang", "Tresor-Schlüssel", "Lagerbeleg"],
+    accessMethods: ["Physical access", "Vault key", "Storage receipt"],
     recoveryDifficulty: "medium",
-    daioBenefit: "Digitale Nachweiskette + physische Lokalisierung",
+    daioBenefit: "Digital proof chain + physical localization",
   },
   {
     id: "btc",
@@ -63,11 +63,11 @@ const ASSET_TYPES: AssetType[] = [
     },
     accessMethods: ["Private Key", "Seed Phrase", "Hardware Wallet"],
     recoveryDifficulty: "impossible",
-    daioBenefit: "Sichere Key-Vererbung ohne Exposure",
+    daioBenefit: "Secure key inheritance without exposure",
   },
   {
     id: "defi",
-    name: "DeFi Positionen",
+    name: "DeFi Positions",
     icon: <Database className="w-5 h-5" />,
     color: "bg-blue-500",
     characteristics: {
@@ -77,13 +77,13 @@ const ASSET_TYPES: AssetType[] = [
       recoverable: false,
       timeLocked: true,
     },
-    accessMethods: ["Wallet Connect", "Smart Contract", "Protocol-Keys"],
+    accessMethods: ["Wallet Connect", "Smart Contract", "Protocol keys"],
     recoveryDifficulty: "hard",
-    daioBenefit: "Automatisierte Positions-Übertragung",
+    daioBenefit: "Automated position transfer",
   },
   {
     id: "exchange",
-    name: "Exchange-Konten",
+    name: "Exchange Accounts",
     icon: <Landmark className="w-5 h-5" />,
     color: "bg-green-500",
     characteristics: {
@@ -93,9 +93,9 @@ const ASSET_TYPES: AssetType[] = [
       recoverable: true,
       timeLocked: false,
     },
-    accessMethods: ["Login + 2FA", "KYC-Daten", "Support-Kontakt"],
+    accessMethods: ["Login + 2FA", "KYC data", "Support contact"],
     recoveryDifficulty: "medium",
-    daioBenefit: "Dokumentierte Zugänge + Executor-Vollmacht",
+    daioBenefit: "Documented access + executor authority",
   },
 ];
 
@@ -106,11 +106,11 @@ interface ComparisonMetric {
 }
 
 const METRICS: ComparisonMetric[] = [
-  { id: "physical", name: "Physisch", description: "Greifbares Asset" },
-  { id: "digital", name: "Digital", description: "Digitale Existenz" },
-  { id: "decentralized", name: "Dezentral", description: "Keine zentrale Kontrolle" },
-  { id: "recoverable", name: "Wiederherstellbar", description: "Ohne Original-Zugang" },
-  { id: "timeLocked", name: "Zeit-gesperrt", description: "Zeitschloss möglich" },
+  { id: "physical", name: "Physical", description: "Tangible asset" },
+  { id: "digital", name: "Digital", description: "Digital existence" },
+  { id: "decentralized", name: "Decentralized", description: "No central control" },
+  { id: "recoverable", name: "Recoverable", description: "Without original access" },
+  { id: "timeLocked", name: "Time-locked", description: "Time lock supported" },
 ];
 
 export function AccessContinuityMap() {
@@ -136,15 +136,15 @@ export function AccessContinuityMap() {
   const getDifficultyLabel = (difficulty: string) => {
     switch (difficulty) {
       case "easy":
-        return "Einfach";
+        return "Easy";
       case "medium":
-        return "Mittel";
+        return "Medium";
       case "hard":
-        return "Schwer";
+        return "Hard";
       case "impossible":
-        return "Unmöglich";
+        return "Impossible";
       default:
-        return "Unbekannt";
+        return "Unknown";
     }
   };
 
@@ -152,12 +152,12 @@ export function AccessContinuityMap() {
     <div className="space-y-6">
       {/* Formula Display */}
       <div className="bg-slate-100 dark:bg-slate-800 rounded-lg p-4 font-mono text-sm">
-        <div className="text-slate-500 mb-2">Kontinuitäts-Formel:</div>
+        <div className="text-slate-500 mb-2">Continuity formula:</div>
         <div className="text-blue-600 dark:text-blue-400">
           C = f(Access_Methods, Recovery_Time, Decentralization_Level)
         </div>
         <div className="text-slate-600 dark:text-slate-400 text-xs mt-1">
-          Vergleicht Mechanik-Unterschiede zwischen Asset-Klassen
+          Compares mechanism differences between asset classes
         </div>
       </div>
 
@@ -168,7 +168,7 @@ export function AccessContinuityMap() {
             <CardHeader className="pb-3">
               <div className="flex items-center gap-2">
                 <Map className="w-5 h-5 text-blue-500" />
-                <CardTitle className="text-base">Asset-Typ wählen</CardTitle>
+                <CardTitle className="text-base">Select asset type</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -227,7 +227,7 @@ export function AccessContinuityMap() {
             <CardContent className="space-y-4">
               {/* Characteristics */}
               <div>
-                <div className="text-sm font-medium mb-2">Eigenschaften</div>
+                <div className="text-sm font-medium mb-2">Characteristics</div>
                 <div className="grid grid-cols-2 gap-2">
                   {METRICS.map((metric) => (
                     <div
@@ -253,7 +253,7 @@ export function AccessContinuityMap() {
               <div>
                 <div className="text-sm font-medium mb-2 flex items-center gap-2">
                   <Lock className="w-4 h-4" />
-                  Zugangsmethoden
+                  Access methods
                 </div>
                 <div className="space-y-1">
                   {asset.accessMethods.map((method, i) => (
@@ -269,7 +269,7 @@ export function AccessContinuityMap() {
               <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
                 <div className="text-sm font-medium text-blue-800 mb-1 flex items-center gap-2">
                   <Unlock className="w-4 h-4" />
-                  DAIO-Vorteil
+                  DAIO benefit
                 </div>
                 <p className="text-sm text-blue-700">{asset.daioBenefit}</p>
               </div>
@@ -279,7 +279,7 @@ export function AccessContinuityMap() {
           {/* Comparison Matrix */}
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">Asset-Vergleichsmatrix</CardTitle>
+              <CardTitle className="text-base">Asset comparison matrix</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
@@ -351,7 +351,7 @@ export function AccessContinuityMap() {
               <div className="flex flex-wrap gap-3 mt-3 text-xs">
                 <div className="flex items-center gap-1">
                   <Lock className="w-3 h-3" />
-                  <span>Dezentral</span>
+                  <span>Decentralized</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Unlock className="w-3 h-3" />

@@ -63,11 +63,25 @@ Platform:
 | Ch. 6 — Tools & Templates | [Template Generator](../daio-unified/src/modules/template-generator) |
 | Ch. 7 — Case Studies | [Pionierfall Pitch](../daio-unified/src/modules/pionierfall-pitch) |
 
-## Commercial Use
+## Open Framework — Commercial Licensing Available
 
-This playbook is free for non-commercial use with attribution.
-For white-label deployment, enterprise licensing, or commercial
-implementation support, contact: **deniz@back2iq.com**
+The full playbook, all concepts, case studies, and companion tools
+(Template Generator, Value Explorer, Loss Clock, Vault Protocol Demo)
+are free to read, use, and reference under CC BY-NC-SA 4.0.
+
+The following require a separate commercial license:
+
+- **White-label deployment** — rolling out DAIO templates, platform,
+  or methodology under your own firm's brand
+- **White-label Template Generator** — removing attribution watermarks,
+  exporting client deliverables under your branding
+- **Implementation support** — 90-day guided onboarding, pilot-case
+  accompaniment, strategic workshops
+- **Regulatory update service** — ongoing MiCA / BGH / BaFin change
+  notifications with impact analysis
+
+For commercial licensing and implementation support:
+**dk@back2iq.com.tr**
 
 ## Citation
 

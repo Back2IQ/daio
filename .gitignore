@@ -66,3 +66,27 @@ AGENTS.md
 *.tmp
 *.bak
 node_modules
+
+# DAIO archive subprojects — code is preserved as history in DAIO-Unified.zip
+# and the individual *.zip/*.rar archives. Only curated documentation from
+# DAIO/ is tracked (playbook source, specs, pitch, elevator pitch).
+DAIO/.github-publish.json
+DAIO/.gitignore
+DAIO/DAIO-App/DAIO VS-Code/DAIO Portfolio Continuity Dashboard/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-BTC-Loss-Ticker/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Calculator/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Document-Rewriter/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Interactive Sales Blueprint/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Pionierfall-Pitch/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Strategic Plattform/
+DAIO/DAIO-App/DAIO VS-Code/DAIO-Template-Generator/
+DAIO/DAIO-App/Kimi_Agent_DAIO Commander MVP/
+DAIO/DAIO-App/Kimi_Agent_DAIO Commander MVP_ Big Five/
+DAIO/DAIO-App/Kimi_Agent_DAIO Template Generator App/
+DAIO/DAIO-App/Kimi_Agent_DAIO Template Generator App (1)/
+DAIO/DAIO-App/DAIO Wallet/
+DAIO/DAIO-App/daio-wallet/
+DAIO/daio-wallet/
+DAIO/daio-unified/
+DAIO/DAIO-App/DAIO VS-Code/daio-wallet/
+

@@ -106,7 +106,7 @@ For commercial use, including:
 - Resale or sublicensing rights
 - Custom implementation support
 
-Contact: **deniz@back2iq.com**
+Contact: **dk@back2iq.com.tr**
 
 ## Citation
 

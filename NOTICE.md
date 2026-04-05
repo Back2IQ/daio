@@ -3,7 +3,7 @@
 ## Autor
 
 **Deniz Kiran** (Back2IQ)
-Kontakt: deniz@back2iq.com
+Kontakt: dk@back2iq.com.tr
 
 ## Werk
 
@@ -63,7 +63,7 @@ Das bedeutet:
 Für kommerzielle Nutzung, White-Label-Deployment, institutionelle Lizenzen
 oder Beratungsanfragen:
 
-**deniz@back2iq.com**
+**dk@back2iq.com.tr**
 
 ---
 

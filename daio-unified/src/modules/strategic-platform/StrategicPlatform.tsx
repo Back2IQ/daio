@@ -163,26 +163,8 @@ function App() {
       <header className="sticky top-0 z-50 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="Back2IQ" className="h-9 w-auto" />
-                <div>
-                  <h1 className="font-bold text-slate-900 dark:text-white text-lg">
-                    Back2IQ
-                  </h1>
-                  <p className="text-xs text-slate-500 -mt-1">
-                    Ahead by Design
-                  </p>
-                </div>
-              </div>
-              <div>
-                <h1 className="font-bold text-slate-900 dark:text-white">
-                  Strategic Platform
-                </h1>
-                <p className="text-xs text-slate-500">
-                  10 instruments for digital asset succession
-                </p>
-              </div>
+            <div>
+              <h1 className="font-bold text-slate-900 dark:text-white text-lg">Strategic Platform</h1>
             </div>
             <Badge variant="outline" className="hidden sm:flex">
               {currentAppConfig.name}

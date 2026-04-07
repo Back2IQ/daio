@@ -7,10 +7,8 @@ import { Separator } from '@/components/ui/separator'
 import {
   Calculator,
   Microscope,
-  FileText,
   LayoutTemplate,
   LayoutDashboard,
-  Zap,
   Bitcoin,
   FileEdit,
   ShieldEllipsis,
@@ -30,15 +28,13 @@ interface NavItem {
 const salesModules: NavItem[] = [
   { path: '/calculator', label: 'Value Explorer', icon: <Calculator className="w-5 h-5" />, description: 'The Pain' },
   { path: '/strategic-platform', label: 'Strategic Platform', icon: <Microscope className="w-5 h-5" />, description: 'The Why' },
-  { path: '/sales-blueprint', label: 'Sales Blueprint', icon: <FileText className="w-5 h-5" />, description: 'Business Case' },
   { path: '/template-generator', label: 'Template Generator', icon: <LayoutTemplate className="w-5 h-5" />, description: 'The Tool' },
   { path: '/portfolio-dashboard', label: 'Continuity Dashboard', icon: <LayoutDashboard className="w-5 h-5" />, description: 'The Platform' },
-  { path: '/pionierfall-pitch', label: 'Pioneer Case Pitch', icon: <Zap className="w-5 h-5" />, description: 'The Proof' },
 ]
 
 const toolModules: NavItem[] = [
   { path: '/vault-protocol', label: 'Vault Protocol', icon: <ShieldEllipsis className="w-5 h-5" />, description: 'Shamir Vault' },
-  { path: '/btc-ticker', label: 'Digital Estate Loss Clock', icon: <Bitcoin className="w-5 h-5" />, description: 'Live Data' },
+  { path: '/digital-estate', label: 'Digital Estate', icon: <Bitcoin className="w-5 h-5" />, description: 'Inventory & Risk' },
   { path: '/document-rewriter', label: 'Document Rewriter', icon: <FileEdit className="w-5 h-5" />, description: 'Documents' },
 ]
 
@@ -57,8 +53,8 @@ export function AppSidebar() {
       <div className="flex items-center justify-between p-4 border-b">
         {!collapsed && (
           <div className="flex flex-col">
-            <span className="font-bold text-lg tracking-tight">DAIO</span>
-            <span className="text-xs text-muted-foreground">Back2IQ Platform</span>
+            <span className="font-bold text-lg tracking-tight text-[#c9a54e]">DAIO</span>
+            <span className="text-xs text-muted-foreground">Ahead by Design</span>
           </div>
         )}
         <Button
@@ -104,7 +100,7 @@ export function AppSidebar() {
               </div>
               {!collapsed && (
                 <div className="flex flex-col min-w-0">
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate text-[#c9a54e]">{item.label}</span>
                   <span className="text-xs text-muted-foreground truncate">{item.description}</span>
                 </div>
               )}
@@ -138,7 +134,7 @@ export function AppSidebar() {
               <div className="shrink-0">{item.icon}</div>
               {!collapsed && (
                 <div className="flex flex-col min-w-0">
-                  <span className="truncate">{item.label}</span>
+                  <span className="truncate text-[#c9a54e]">{item.label}</span>
                   <span className="text-xs text-muted-foreground truncate">{item.description}</span>
                 </div>
               )}

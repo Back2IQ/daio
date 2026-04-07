@@ -11,8 +11,8 @@ import App from './App'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <BrowserRouter basename="/app">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <TooltipProvider>
             <App />
             <Toaster />

@@ -136,12 +136,8 @@ function AppContent() {
         <header className="border-b bg-card sticky top-0 z-50">
           <div className="max-w-[1600px] mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="Back2IQ" className="h-9 w-auto" />
-                <div>
-                  <h1 className="font-semibold text-lg leading-tight">{t.app.title}</h1>
-                  <p className="text-xs text-muted-foreground">Back2IQ — Ahead by Design</p>
-                </div>
+              <div>
+                <h1 className="font-semibold text-lg leading-tight">{t.app.title}</h1>
               </div>
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">

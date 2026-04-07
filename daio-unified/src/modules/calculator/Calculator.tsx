@@ -132,18 +132,8 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
         {/* Header */}
         <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-          <div className="max-w-7xl mx-auto px-4 py-6">
-            <div className="flex items-center gap-4">
-              <img src="/logo.png" alt="Back2IQ" className="h-10 w-auto" />
-              <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  DAIO Value Explorer
-                </h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Back2IQ — Ahead by Design
-                </p>
-              </div>
-            </div>
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            <h1 className="text-lg font-bold text-slate-900 dark:text-white">Value Explorer</h1>
           </div>
         </header>
 

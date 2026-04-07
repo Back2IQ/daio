@@ -153,15 +153,8 @@ function App() {
                 </SheetContent>
               </Sheet>
 
-              {/* Logo */}
-              <div className="flex items-center gap-3">
-                <img src="/logo.png" alt="Back2IQ" className="h-9 w-auto" />
-                <div className="hidden sm:block">
-                  <h1 className="font-bold text-slate-900 dark:text-white">
-                    DAIO Portfolio Continuity
-                  </h1>
-                  <p className="text-xs text-slate-500">Back2IQ — Ahead by Design</p>
-                </div>
+              <div>
+                <h1 className="font-bold text-slate-900 dark:text-white">Continuity Dashboard</h1>
               </div>
             </div>
 

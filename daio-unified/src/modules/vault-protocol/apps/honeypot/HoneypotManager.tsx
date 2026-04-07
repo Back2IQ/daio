@@ -15,7 +15,6 @@ import {
   Siren,
   ChevronDown,
   ChevronUp,
-  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 

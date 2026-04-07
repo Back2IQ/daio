@@ -1,6 +1,7 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, type ReactNode } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppLayout } from '@/components/layout/AppLayout'
+import { ModuleIntro, MODULE_INTROS } from '@/components/ModuleIntro'
 
 const Calculator = lazy(() => import('@/modules/calculator'))
 const StrategicPlatform = lazy(() => import('@/modules/strategic-platform'))
@@ -21,18 +22,28 @@ function LoadingFallback() {
   )
 }
 
+function WithIntro({ id, children }: { id: string; children: ReactNode }) {
+  const intro = MODULE_INTROS[id]
+  return (
+    <>
+      {intro && <ModuleIntro moduleId={id} {...intro} />}
+      <Suspense fallback={<LoadingFallback />}>{children}</Suspense>
+    </>
+  )
+}
+
 export default function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<Navigate to="/calculator" replace />} />
-        <Route path="/calculator" element={<Suspense fallback={<LoadingFallback />}><Calculator /></Suspense>} />
-        <Route path="/strategic-platform" element={<Suspense fallback={<LoadingFallback />}><StrategicPlatform /></Suspense>} />
-        <Route path="/template-generator" element={<Suspense fallback={<LoadingFallback />}><TemplateGenerator /></Suspense>} />
-        <Route path="/portfolio-dashboard" element={<Suspense fallback={<LoadingFallback />}><PortfolioDashboard /></Suspense>} />
-        <Route path="/digital-estate" element={<Suspense fallback={<LoadingFallback />}><DigitalEstate /></Suspense>} />
-        <Route path="/document-rewriter" element={<Suspense fallback={<LoadingFallback />}><DocumentRewriter /></Suspense>} />
-        <Route path="/vault-protocol" element={<Suspense fallback={<LoadingFallback />}><VaultProtocol /></Suspense>} />
+        <Route path="/calculator" element={<WithIntro id="calculator"><Calculator /></WithIntro>} />
+        <Route path="/strategic-platform" element={<WithIntro id="strategic-platform"><StrategicPlatform /></WithIntro>} />
+        <Route path="/template-generator" element={<WithIntro id="template-generator"><TemplateGenerator /></WithIntro>} />
+        <Route path="/portfolio-dashboard" element={<WithIntro id="portfolio-dashboard"><PortfolioDashboard /></WithIntro>} />
+        <Route path="/digital-estate" element={<WithIntro id="digital-estate"><DigitalEstate /></WithIntro>} />
+        <Route path="/document-rewriter" element={<WithIntro id="document-rewriter"><DocumentRewriter /></WithIntro>} />
+        <Route path="/vault-protocol" element={<WithIntro id="vault-protocol"><VaultProtocol /></WithIntro>} />
       </Route>
     </Routes>
   )

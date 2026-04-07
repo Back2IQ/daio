@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import {
   Calculator,
   Microscope,
@@ -16,6 +17,7 @@ import {
   Sun,
   PanelLeftClose,
   PanelLeft,
+  Menu,
 } from 'lucide-react'
 
 interface NavItem {
@@ -38,36 +40,13 @@ const toolModules: NavItem[] = [
   { path: '/document-rewriter', label: 'Document Rewriter', icon: <FileEdit className="w-5 h-5" />, description: 'Documents' },
 ]
 
-export function AppSidebar() {
-  const [collapsed, setCollapsed] = useState(false)
+// ── Shared nav content ───────────────────────────────────────────
+
+function NavContent({ collapsed = false, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
   const { theme, setTheme } = useTheme()
 
   return (
-    <aside
-      className={cn(
-        'flex flex-col h-screen sticky top-0 border-r bg-sidebar text-sidebar-foreground transition-all duration-300 shrink-0',
-        collapsed ? 'w-16' : 'w-64'
-      )}
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
-        {!collapsed && (
-          <div className="flex flex-col">
-            <span className="font-bold text-lg tracking-tight text-[#c9a54e]">DAIO</span>
-            <span className="text-xs text-muted-foreground">Ahead by Design</span>
-          </div>
-        )}
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setCollapsed(!collapsed)}
-          className="shrink-0"
-        >
-          {collapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
-        </Button>
-      </div>
-
-      {/* Sales Dramaturgy */}
+    <>
       <nav className="flex-1 overflow-y-auto p-2">
         {!collapsed && (
           <p className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -79,6 +58,7 @@ export function AppSidebar() {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={onNavigate}
               className={({ isActive }) =>
                 cn(
                   'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
@@ -120,6 +100,7 @@ export function AppSidebar() {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={onNavigate}
               className={({ isActive }) =>
                 cn(
                   'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
@@ -155,6 +136,89 @@ export function AppSidebar() {
           {!collapsed && (theme === 'dark' ? 'Light Mode' : 'Dark Mode')}
         </Button>
       </div>
+    </>
+  )
+}
+
+// ── Desktop sidebar ──────────────────────────────────────────────
+
+function DesktopSidebar() {
+  const [collapsed, setCollapsed] = useState(false)
+
+  return (
+    <aside
+      className={cn(
+        'hidden md:flex flex-col h-screen sticky top-0 border-r bg-sidebar text-sidebar-foreground transition-all duration-300 shrink-0',
+        collapsed ? 'w-16' : 'w-64'
+      )}
+    >
+      <div className="flex items-center justify-between p-4 border-b">
+        {!collapsed && (
+          <div className="flex flex-col">
+            <span className="font-bold text-lg tracking-tight text-[#c9a54e]">DAIO</span>
+            <span className="text-xs text-muted-foreground">Ahead by Design</span>
+          </div>
+        )}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setCollapsed(!collapsed)}
+          className="shrink-0"
+        >
+          {collapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+        </Button>
+      </div>
+      <NavContent collapsed={collapsed} />
     </aside>
+  )
+}
+
+// ── Mobile header + sheet ────────────────────────────────────────
+
+function MobileNav() {
+  const [open, setOpen] = useState(false)
+  const location = useLocation()
+
+  // Find current module label
+  const allModules = [...salesModules, ...toolModules]
+  const current = allModules.find((m) => location.pathname.startsWith(m.path))
+
+  return (
+    <div className="md:hidden sticky top-0 z-40 bg-sidebar border-b">
+      <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center gap-3">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="shrink-0">
+                <Menu className="w-5 h-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72 p-0 bg-sidebar text-sidebar-foreground">
+              <div className="flex flex-col h-full">
+                <div className="p-4 border-b">
+                  <span className="font-bold text-lg tracking-tight text-[#c9a54e]">DAIO</span>
+                  <p className="text-xs text-muted-foreground">Ahead by Design</p>
+                </div>
+                <NavContent onNavigate={() => setOpen(false)} />
+              </div>
+            </SheetContent>
+          </Sheet>
+          <div>
+            <span className="font-bold text-sm text-[#c9a54e]">{current?.label || 'DAIO'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Export ────────────────────────────────────────────────────────
+
+export function AppSidebar() {
+  return (
+    <>
+      <DesktopSidebar />
+      <MobileNav />
+    </>
   )
 }

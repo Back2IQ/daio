@@ -240,6 +240,100 @@
     }).catch(function () {});
   }
 
+  // ============ CHAT WIDGET ============
+
+  function initChat() {
+    var API = window.location.origin + '/api/chat';
+    var history = [];
+
+    // Build DOM
+    var btn = document.createElement('button');
+    btn.className = 'chat-btn';
+    btn.innerHTML = '&#9993;<span class="badge"></span>';
+    btn.title = 'Ask DAIO Assistant';
+
+    var win = document.createElement('div');
+    win.className = 'chat-win';
+    win.innerHTML =
+      '<div class="chat-hd">' +
+        '<div><div class="chat-hd-t">DAIO Assistant</div><div class="chat-hd-s">Ask about digital estate planning</div></div>' +
+        '<button class="chat-close">&times;</button>' +
+      '</div>' +
+      '<div class="chat-msgs" id="chat-msgs"></div>' +
+      '<div class="chat-inp">' +
+        '<input type="text" id="chat-input" placeholder="Ask a question..." maxlength="500">' +
+        '<button id="chat-send">Send</button>' +
+      '</div>';
+
+    document.body.appendChild(btn);
+    document.body.appendChild(win);
+
+    var msgs = win.querySelector('#chat-msgs');
+    var input = win.querySelector('#chat-input');
+    var send = win.querySelector('#chat-send');
+    var close = win.querySelector('.chat-close');
+
+    // Welcome message
+    addMsg('bot', 'Hello — I can answer questions about DAIO and digital asset succession planning. I also speak German \u2014 fragen Sie gerne auf Deutsch.');
+
+    btn.addEventListener('click', function () {
+      win.classList.toggle('open');
+      if (win.classList.contains('open')) input.focus();
+    });
+
+    close.addEventListener('click', function () {
+      win.classList.remove('open');
+    });
+
+    send.addEventListener('click', doSend);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(); }
+    });
+
+    function addMsg(role, text) {
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + (role === 'user' ? 'usr' : 'bot');
+      div.textContent = text;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+      return div;
+    }
+
+    function doSend() {
+      var text = input.value.trim();
+      if (!text || send.disabled) return;
+
+      addMsg('user', text);
+      history.push({ role: 'user', content: text });
+      input.value = '';
+      send.disabled = true;
+
+      var typing = addMsg('bot', 'Thinking...');
+      typing.classList.add('typing');
+
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-6) })
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        msgs.removeChild(typing);
+        var reply = data.reply || 'Sorry, I could not process that.';
+        addMsg('bot', reply);
+        history.push({ role: 'assistant', content: reply });
+      })
+      .catch(function () {
+        msgs.removeChild(typing);
+        addMsg('bot', 'Connection error. Please try again.');
+      })
+      .finally(function () {
+        send.disabled = false;
+        input.focus();
+      });
+    }
+  }
+
   // ============ INIT ============
 
   function init() {
@@ -248,6 +342,7 @@
     initForm();
     initSmoothScroll();
     initMobileNav();
+    initChat();
   }
 
   if (document.readyState === 'loading') {

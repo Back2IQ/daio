@@ -14,7 +14,6 @@ import {
   FileEdit,
   ShieldEllipsis,
   HeartPulse,
-  Archive,
   Moon,
   Sun,
   PanelLeftClose,
@@ -38,8 +37,7 @@ const salesModules: NavItem[] = [
 
 const toolModules: NavItem[] = [
   { path: '/succession-sentinel', label: 'Succession Sentinel', icon: <HeartPulse className="w-5 h-5" />, description: 'Dead Man\'s Switch' },
-  { path: '/inheritance-vault', label: 'Inheritance Vault', icon: <Archive className="w-5 h-5" />, description: 'Container & Heirs' },
-  { path: '/vault-protocol', label: 'Vault Protocol', icon: <ShieldEllipsis className="w-5 h-5" />, description: 'Shamir Vault' },
+  { path: '/vault-protocol', label: 'Vault Protocol', icon: <ShieldEllipsis className="w-5 h-5" />, description: 'Vault & Inheritance' },
   { path: '/digital-estate', label: 'Digital Estate', icon: <Bitcoin className="w-5 h-5" />, description: 'Inventory & Risk' },
   { path: '/document-rewriter', label: 'Document Rewriter', icon: <FileEdit className="w-5 h-5" />, description: 'Documents' },
 ]

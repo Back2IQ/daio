@@ -19,6 +19,8 @@ import {
   ShieldCheck,
   Bug,
   ChevronRight,
+  Archive,
+  Users,
 } from "lucide-react";
 
 import { VaultDemo } from "./apps/demo/VaultDemo";
@@ -26,8 +28,9 @@ import { VaultCreator } from "./apps/creator/VaultCreator";
 import { VaultReconstructor } from "./apps/reconstructor/VaultReconstructor";
 import { ShardVerifier } from "./apps/verifier/ShardVerifier";
 import { HoneypotManager } from "./apps/honeypot/HoneypotManager";
+import { ContainerApp, BeneficiariesApp, FragmentsApp } from "./apps/governance/GovernanceApps";
 
-type AppId = "demo" | "creator" | "reconstructor" | "verifier" | "honeypot";
+type AppId = "demo" | "creator" | "reconstructor" | "verifier" | "honeypot" | "container" | "beneficiaries" | "fragments";
 
 interface AppConfig {
   id: AppId;
@@ -89,6 +92,33 @@ const APPS: AppConfig[] = [
     icon: <Bug className="w-5 h-5" />,
     component: HoneypotManager,
     color: "bg-amber-500",
+  },
+  {
+    id: "container",
+    name: "Inheritance Container",
+    shortName: "Container",
+    description: "Document your digital estate in three levels of depth",
+    icon: <Archive className="w-5 h-5" />,
+    component: ContainerApp,
+    color: "bg-[#c9a54e]",
+  },
+  {
+    id: "beneficiaries",
+    name: "Beneficiaries",
+    shortName: "Beneficiaries",
+    description: "Manage heirs, guardians, and notaries",
+    icon: <Users className="w-5 h-5" />,
+    component: BeneficiariesApp,
+    color: "bg-[#c9a54e]",
+  },
+  {
+    id: "fragments",
+    name: "Key Fragments",
+    shortName: "Fragments",
+    description: "Generate and manage Shamir key fragment distribution",
+    icon: <KeyRound className="w-5 h-5" />,
+    component: FragmentsApp,
+    color: "bg-[#c9a54e]",
   },
 ];
 

@@ -9,10 +9,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Archive, Users, Plus, Trash2, KeyRound, ShieldCheck,
-  UserCheck, Scale, Eye,
+  UserCheck, Scale, Eye, ExternalLink,
 } from "lucide-react";
 import { useGovernanceStore } from "@/store/governance";
 import type { Beneficiary } from "@/store/governance";
+import { useNavigate } from "react-router-dom";
 
 type TabId = "container" | "beneficiaries" | "fragments";
 
@@ -59,6 +60,19 @@ export default function InheritanceVault() {
 function ContainerTab() {
   const { inheritanceContainer, setInheritanceContainer } = useGovernanceStore();
   const ic = inheritanceContainer;
+  const navigate = useNavigate();
+
+  // Read Digital Estate assets from localStorage
+  let digitalEstateCount = 0;
+  let digitalEstateValue = 0;
+  try {
+    const raw = localStorage.getItem("daio-digital-estate-assets");
+    if (raw) {
+      const assets = JSON.parse(raw);
+      digitalEstateCount = assets.length;
+      digitalEstateValue = assets.reduce((s: number, a: { estimatedValue?: number }) => s + (a.estimatedValue ?? 0), 0);
+    }
+  } catch { /* ignore */ }
 
   const levelColor = ic.level === 3 ? "text-emerald-500" : ic.level === 2 ? "text-amber-500" : "text-muted-foreground";
 
@@ -83,12 +97,26 @@ function ContainerTab() {
         <CardContent className="space-y-4">
           <div>
             <Label>Asset Inventory</Label>
-            <Textarea
-              placeholder="List all digital assets: wallets, exchanges, accounts, domains..."
-              value={ic.assetInventory}
-              onChange={(e) => setInheritanceContainer({ assetInventory: e.target.value })}
-              rows={3}
-            />
+            {digitalEstateCount > 0 ? (
+              <div className="p-3 rounded-lg border bg-accent/20 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium">{digitalEstateCount} assets documented</span>
+                  <span className="text-sm text-muted-foreground">
+                    {digitalEstateValue > 0 ? `€${digitalEstateValue.toLocaleString("en-US", { maximumFractionDigits: 0 })}` : ""}
+                  </span>
+                </div>
+                <Button variant="outline" size="sm" onClick={() => navigate("/digital-estate")} className="w-full">
+                  <ExternalLink className="w-3 h-3 mr-1" /> Manage in Digital Estate
+                </Button>
+              </div>
+            ) : (
+              <div className="p-3 rounded-lg border border-dashed text-center space-y-2">
+                <p className="text-sm text-muted-foreground">No assets inventoried yet.</p>
+                <Button variant="outline" size="sm" onClick={() => navigate("/digital-estate")}>
+                  <ExternalLink className="w-3 h-3 mr-1" /> Go to Digital Estate
+                </Button>
+              </div>
+            )}
           </div>
           <div>
             <Label>Access Architecture</Label>

@@ -1,11 +1,36 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import { useGovernanceStore } from "@/store/governance";
 
 const API = "/api/chat";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+}
+
+function getUserContext(): string {
+  try {
+    const store = useGovernanceStore.getState();
+    const score = store.getDaiScore();
+    const bens = store.beneficiaries.length;
+    const frags = store.keyFragments.length;
+    const dms = store.deadManSwitch.enabled;
+    const level = store.inheritanceContainer.level;
+    const lastUpdate = store.inheritanceContainer.lastUpdated;
+
+    let assetsCount = 0;
+    try {
+      const raw = localStorage.getItem("daio-digital-estate-assets");
+      if (raw) assetsCount = JSON.parse(raw).length;
+    } catch { /* */ }
+
+    if (score === 0 && bens === 0 && assetsCount === 0) return "";
+
+    return `[User context: Governance Score ${score}/100, ${assetsCount} digital assets inventoried, ${bens} beneficiaries, ${frags} key fragments, DMS ${dms ? "active" : "inactive"}, Inheritance Container Level ${level}${lastUpdate ? "" : " (not started)"}]`;
+  } catch {
+    return "";
+  }
 }
 
 export function ChatWidget() {
@@ -36,7 +61,11 @@ export function ChatWidget() {
       const res = await fetch(base + API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: [...messages.slice(-6), userMsg] }),
+        body: JSON.stringify({
+          message: text,
+          history: [...messages.slice(-6), userMsg],
+          context: getUserContext(),
+        }),
       });
       const data = await res.json();
       setMessages((m) => [...m, { role: "assistant", content: data.reply || "Sorry, I could not process that." }]);

@@ -5,6 +5,11 @@ import { persist } from "zustand/middleware";
 
 export type DMSStatus = "inactive" | "active" | "warning_1" | "warning_2" | "warning_3" | "triggered";
 
+export interface ChallengeQuestion {
+  question: string;
+  answer: string; // stored as lowercase trimmed
+}
+
 export interface DeadManSwitch {
   enabled: boolean;
   intervalMonths: 3 | 6 | 12;
@@ -13,6 +18,7 @@ export interface DeadManSwitch {
   warningsSent: number;
   nextCheckIn: number;
   triggerDate?: number;
+  challengeQuestions: ChallengeQuestion[];
 }
 
 export interface DMSConfig {
@@ -82,7 +88,9 @@ interface GovernanceState {
   // Dead Man's Switch
   deadManSwitch: DeadManSwitch;
   dmsConfig: DMSConfig;
-  checkIn: () => void;
+  checkIn: (challengeAnswer?: string) => boolean;
+  setChallengeQuestions: (questions: ChallengeQuestion[]) => void;
+  getActiveChallenge: () => ChallengeQuestion | null;
   updateDMSConfig: (patch: Partial<DMSConfig>) => void;
   toggleDMS: (enabled: boolean) => void;
 
@@ -126,6 +134,7 @@ const DEFAULT_DMS: DeadManSwitch = {
   status: "inactive",
   warningsSent: 0,
   nextCheckIn: Date.now() + 180 * 24 * 60 * 60 * 1000,
+  challengeQuestions: [],
 };
 
 const DEFAULT_DMS_CONFIG: DMSConfig = {
@@ -165,8 +174,16 @@ export const useGovernanceStore = create<GovernanceState>()(
       deadManSwitch: DEFAULT_DMS,
       dmsConfig: DEFAULT_DMS_CONFIG,
 
-      checkIn: () => {
+      checkIn: (challengeAnswer?: string) => {
         const { deadManSwitch: dms } = get();
+        // If challenge questions exist, verify answer
+        if (dms.challengeQuestions.length > 0) {
+          const challenge = get().getActiveChallenge();
+          if (challenge && (!challengeAnswer || challengeAnswer.toLowerCase().trim() !== challenge.answer)) {
+            get().addAuditEntry({ action: "DMS Check-In Failed", details: "Incorrect challenge answer.", type: "warning" });
+            return false;
+          }
+        }
         const nextCheckIn = Date.now() + dms.intervalMonths * 30 * 24 * 60 * 60 * 1000;
         set({
           deadManSwitch: {
@@ -178,7 +195,18 @@ export const useGovernanceStore = create<GovernanceState>()(
             triggerDate: undefined,
           },
         });
-        get().addAuditEntry({ action: "DMS Check-In", details: "Proof of life confirmed.", type: "success" });
+        get().addAuditEntry({ action: "DMS Check-In", details: "Proof of life confirmed via challenge.", type: "success" });
+        return true;
+      },
+
+      setChallengeQuestions: (questions) =>
+        set((s) => ({ deadManSwitch: { ...s.deadManSwitch, challengeQuestions: questions.map((q) => ({ question: q.question, answer: q.answer.toLowerCase().trim() })) } })),
+
+      getActiveChallenge: () => {
+        const qs = get().deadManSwitch.challengeQuestions;
+        if (qs.length === 0) return null;
+        // Rotate based on check-in count
+        return qs[get().deadManSwitch.warningsSent % qs.length];
       },
 
       toggleDMS: (enabled) => {
@@ -203,8 +231,13 @@ export const useGovernanceStore = create<GovernanceState>()(
       setInheritanceContainer: (patch) => {
         set((s) => {
           const updated = { ...s.inheritanceContainer, ...patch, lastUpdated: Date.now(), version: s.inheritanceContainer.version + 1 };
-          // Auto-calculate level
-          const l1 = !!(updated.assetInventory && updated.accessArchitecture && updated.heirDesignation);
+          // Auto-calculate level — assetInventory can come from Digital Estate module
+          let hasAssets = !!updated.assetInventory;
+          try {
+            const raw = localStorage.getItem("daio-digital-estate-assets");
+            if (raw && JSON.parse(raw).length > 0) hasAssets = true;
+          } catch { /* ignore */ }
+          const l1 = !!(hasAssets && updated.accessArchitecture && updated.heirDesignation);
           const l2 = l1 && !!(updated.legacyContext && updated.platformInstructions);
           const l3 = l2 && !!updated.professionalContacts;
           updated.level = l3 ? 3 : l2 ? 2 : 1;

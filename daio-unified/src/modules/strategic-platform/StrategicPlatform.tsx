@@ -269,6 +269,19 @@ function App() {
             </div>
           </div>
         </Tabs>
+
+        {/* CTA */}
+        <div className="mt-8 p-6 rounded-xl border bg-accent/20 text-center space-y-3">
+          <p className="text-sm font-medium">Ready to act on what you've learned?</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href="/app/digital-estate" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#c9a54e] text-[#0a0f1a] font-semibold text-sm hover:opacity-90 transition-opacity no-underline">
+              Inventory Your Assets
+            </a>
+            <a href="/app/succession-sentinel" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#c9a54e] text-[#c9a54e] font-semibold text-sm hover:bg-[#c9a54e]/10 transition-colors no-underline">
+              Activate Succession Sentinel
+            </a>
+          </div>
+        </div>
       </main>
 
       {/* Footer */}

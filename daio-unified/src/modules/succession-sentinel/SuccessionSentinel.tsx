@@ -31,7 +31,14 @@ export default function SuccessionSentinel() {
 
   const [emergencyReason, setEmergencyReason] = useState("");
   const [confirmText, setConfirmText] = useState("");
+  const [challengeAnswer, setChallengeAnswer] = useState("");
+  const [challengeError, setChallengeError] = useState(false);
+  const [newQuestion, setNewQuestion] = useState("");
+  const [newAnswer, setNewAnswer] = useState("");
   const triggerEmergency = useGovernanceStore((s) => s.triggerEmergency);
+  const setChallengeQuestions = useGovernanceStore((s) => s.setChallengeQuestions);
+  const getActiveChallenge = useGovernanceStore((s) => s.getActiveChallenge);
+  const activeChallenge = getActiveChallenge();
 
   const score = getDaiScore();
   const breakdown = getDaiScoreBreakdown();
@@ -105,9 +112,33 @@ export default function SuccessionSentinel() {
                     <span className="text-muted-foreground">Next check-in</span>
                     <span className={`font-medium ${getDmsStatusColor()}`}>{getTimeUntilTrigger()}</span>
                   </div>
-                  <Button onClick={checkIn} className="w-full bg-emerald-600 hover:bg-emerald-700">
-                    <HeartPulse className="w-4 h-4 mr-2" /> Proof of Life Check-In
-                  </Button>
+                  {activeChallenge ? (
+                    <div className="space-y-2">
+                      <p className="text-sm font-medium">{activeChallenge.question}</p>
+                      <Input
+                        placeholder="Your answer..."
+                        value={challengeAnswer}
+                        onChange={(e) => { setChallengeAnswer(e.target.value); setChallengeError(false); }}
+                        className={challengeError ? "border-red-500" : ""}
+                      />
+                      {challengeError && <p className="text-xs text-red-500">Incorrect answer. Try again.</p>}
+                      <Button
+                        onClick={() => {
+                          const ok = checkIn(challengeAnswer);
+                          if (ok) { setChallengeAnswer(""); setChallengeError(false); }
+                          else setChallengeError(true);
+                        }}
+                        className="w-full bg-emerald-600 hover:bg-emerald-700"
+                        disabled={!challengeAnswer.trim()}
+                      >
+                        <HeartPulse className="w-4 h-4 mr-2" /> Verify & Check In
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button onClick={() => checkIn()} className="w-full bg-emerald-600 hover:bg-emerald-700">
+                      <HeartPulse className="w-4 h-4 mr-2" /> Proof of Life Check-In
+                    </Button>
+                  )}
                 </>
               )}
 
@@ -125,9 +156,79 @@ export default function SuccessionSentinel() {
                   </SelectContent>
                 </Select>
               </div>
+
+              {/* Challenge Questions */}
+              <div className="space-y-2 pt-2 border-t">
+                <Label className="text-xs">Challenge Questions ({deadManSwitch.challengeQuestions.length})</Label>
+                {deadManSwitch.challengeQuestions.map((q, i) => (
+                  <div key={i} className="text-xs p-2 rounded bg-accent/30 flex items-center justify-between">
+                    <span className="truncate">{q.question}</span>
+                    <Button variant="ghost" size="sm" className="h-6 px-2 text-muted-foreground hover:text-destructive"
+                      onClick={() => setChallengeQuestions(deadManSwitch.challengeQuestions.filter((_, j) => j !== i))}>
+                      &times;
+                    </Button>
+                  </div>
+                ))}
+                <div className="flex gap-2">
+                  <Input placeholder="Question" value={newQuestion} onChange={(e) => setNewQuestion(e.target.value)} className="text-xs" />
+                  <Input placeholder="Answer" value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} className="text-xs w-28" />
+                  <Button size="sm" variant="outline" className="shrink-0 text-xs"
+                    disabled={!newQuestion.trim() || !newAnswer.trim()}
+                    onClick={() => {
+                      setChallengeQuestions([...deadManSwitch.challengeQuestions, { question: newQuestion.trim(), answer: newAnswer.trim() }]);
+                      setNewQuestion(""); setNewAnswer("");
+                    }}>
+                    +
+                  </Button>
+                </div>
+                <p className="text-[10px] text-muted-foreground">Only you know the answers. A random question is asked at each check-in.</p>
+              </div>
             </CardContent>
           </Card>
         </div>
+
+        {/* Score-based Recommendations */}
+        {score < 100 && (
+          <Card className="border-[#c9a54e]/30">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base">Recommended Next Steps</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {!deadManSwitch.enabled && (
+                  <div className="flex items-center gap-2 text-sm p-2 rounded bg-accent/30">
+                    <HeartPulse className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Enable the Succession Sentinel to activate dead man's switch protection (+20 pts)</span>
+                  </div>
+                )}
+                {beneficiaries.length === 0 && (
+                  <div className="flex items-center gap-2 text-sm p-2 rounded bg-accent/30">
+                    <Users className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Add at least one beneficiary — heir, guardian, or notary (+5 pts)</span>
+                  </div>
+                )}
+                {keyFragments.length === 0 && beneficiaries.length > 0 && (
+                  <div className="flex items-center gap-2 text-sm p-2 rounded bg-accent/30">
+                    <KeyRound className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Generate Shamir key fragments in the Inheritance Vault (+20 pts)</span>
+                  </div>
+                )}
+                {inheritanceContainer.lastUpdated === 0 && (
+                  <div className="flex items-center gap-2 text-sm p-2 rounded bg-accent/30">
+                    <ShieldCheck className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Start documenting your Inheritance Container (+10 pts)</span>
+                  </div>
+                )}
+                {!beneficiaries.some((b) => b.role === "notary") && beneficiaries.length > 0 && (
+                  <div className="flex items-center gap-2 text-sm p-2 rounded bg-accent/30">
+                    <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Designate a notary for legal verification (+5 pts)</span>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Escalation Timeline */}
         <Card>
@@ -241,9 +342,16 @@ export default function SuccessionSentinel() {
         {/* Audit Trail (last 10) */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5" /> Recent Audit Trail
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" /> Recent Audit Trail
+              </CardTitle>
+              {auditTrail.length > 0 && (
+                <span className="text-xs text-muted-foreground">
+                  {auditTrail.length} total · {auditTrail.filter((e) => Date.now() - e.timestamp < 30 * 24 * 60 * 60 * 1000).length} in last 30 days
+                </span>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             {auditTrail.length === 0 ? (

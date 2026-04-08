@@ -10,6 +10,8 @@ const PortfolioDashboard = lazy(() => import('@/modules/portfolio-dashboard'))
 const DigitalEstate = lazy(() => import('@/modules/digital-estate'))
 const DocumentRewriter = lazy(() => import('@/modules/document-rewriter'))
 const VaultProtocol = lazy(() => import('@/modules/vault-protocol'))
+const SuccessionSentinel = lazy(() => import('@/modules/succession-sentinel'))
+const InheritanceVault = lazy(() => import('@/modules/inheritance-vault'))
 
 function LoadingFallback() {
   return (
@@ -44,6 +46,8 @@ export default function App() {
         <Route path="/digital-estate" element={<WithIntro id="digital-estate"><DigitalEstate /></WithIntro>} />
         <Route path="/document-rewriter" element={<WithIntro id="document-rewriter"><DocumentRewriter /></WithIntro>} />
         <Route path="/vault-protocol" element={<WithIntro id="vault-protocol"><VaultProtocol /></WithIntro>} />
+        <Route path="/succession-sentinel" element={<WithIntro id="succession-sentinel"><SuccessionSentinel /></WithIntro>} />
+        <Route path="/inheritance-vault" element={<WithIntro id="inheritance-vault"><InheritanceVault /></WithIntro>} />
       </Route>
     </Routes>
   )

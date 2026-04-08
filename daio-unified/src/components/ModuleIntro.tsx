@@ -270,4 +270,50 @@ export const MODULE_INTROS: Record<string, Omit<ModuleIntroProps, "moduleId">> =
       ],
     },
   },
+  "succession-sentinel": {
+    title: {
+      en: "Succession Sentinel",
+      de: "Nachfolge-Wächter",
+    },
+    description: {
+      en: "The Dead Man's Switch for digital assets — automated check-ins, 4-stage escalation, emergency protocol, and your DAIO Governance Score.",
+      de: "Der Dead Man's Switch für digitale Assets — automatische Check-ins, 4-stufige Eskalation, Notfallprotokoll und Ihr DAIO Governance Score.",
+    },
+    bullets: {
+      en: [
+        "Proof of Life check-ins with configurable intervals",
+        "4-stage escalation: warning → escalation → critical → triggered",
+        "Emergency protocol with key fragment regeneration",
+        "DAIO Governance Score across 6 categories (max 100)",
+      ],
+      de: [
+        "Proof-of-Life Check-ins mit konfigurierbaren Intervallen",
+        "4-stufige Eskalation: Warnung → Eskalation → Kritisch → Ausgelöst",
+        "Notfallprotokoll mit Key-Fragment-Regenerierung",
+        "DAIO Governance Score über 6 Kategorien (max 100)",
+      ],
+    },
+  },
+  "inheritance-vault": {
+    title: {
+      en: "Inheritance Vault",
+      de: "Erbschafts-Tresor",
+    },
+    description: {
+      en: "Document your digital estate, designate beneficiaries, and generate Shamir key fragments for secure succession.",
+      de: "Dokumentieren Sie Ihren digitalen Nachlass, benennen Sie Begünstigte und generieren Sie Shamir-Schlüsselfragmente für sichere Nachfolge.",
+    },
+    bullets: {
+      en: [
+        "3-level Inheritance Container: Foundation → Extended → Professional",
+        "Beneficiary management: heirs, guardians, notaries",
+        "Shamir key fragment generation with configurable threshold",
+      ],
+      de: [
+        "3-stufiger Inheritance Container: Basis → Erweitert → Professionell",
+        "Begünstigtenverwaltung: Erben, Vormunde, Notare",
+        "Shamir-Schlüsselfragment-Generierung mit konfigurierbarem Schwellenwert",
+      ],
+    },
+  },
 };

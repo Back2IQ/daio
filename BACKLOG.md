@@ -1,7 +1,7 @@
 # DAIO Backlog — Open Issues from Metaphor Audit
 
-Issues identified 2026-04-08 via structural metaphor analysis.
-Items marked [FIXED] were resolved in this session. Remaining items require either server-side infrastructure or deeper implementation work.
+Issues identified 2026-04-08 via structural metaphor analysis (two rounds).
+Items marked [FIXED] were resolved. Remaining items require server-side infrastructure or deeper implementation.
 
 ---
 
@@ -95,3 +95,46 @@ Audit trail now shows 30-day activity count alongside total entries. Proactive v
 2. Stale beneficiary detection (email bounces, etc.)
 3. Requires server-side monitoring
 **Complexity:** High.
+
+---
+
+## ROUND 2 — Cross-Combination Analysis (2026-04-08)
+
+### [FIXED] Domain/Asset Expiry Warnings
+Urgency alerts now appear in Digital Estate when domains expire within 90 days or high-value assets are undocumented.
+
+### [FIXED] Score Consolidation
+Digital Estate Risk Assessment now feeds into the DAIO Governance Score (replaces "Biometric" placeholder). One score, multiple sources.
+
+### [FIXED] Achievement Badge
+"Succession Ready" badge appears at Score 90+ with visual celebration and status confirmation.
+
+### [FIXED] Time-Based Urgency
+Inactivity warning appears in Succession Sentinel when no governance activity in 14+ days and score < 70.
+
+### [FIXED] Exportable Governance Report
+"Export Report" button in Succession Sentinel generates a text file with score, breakdown, beneficiaries, fragments, DMS status, and audit trail. Shareable with advisors.
+
+### [FIXED] Inline AI Assist
+"AI Suggest" buttons on every Inheritance Vault text field. Generates template text via Workers AI so users don't stare at empty fields.
+
+---
+
+## OPEN — Spiegel ohne Reflektion — System is Purely Reactive
+**Root cause:** The entire platform operates only when the user opens it. No autonomous process runs without user interaction.
+**This is the fundamental design limitation.** Every other open issue is a symptom of this.
+**Required:** Client-to-server state sync + Cloudflare Cron Triggers that evaluate governance state independently.
+**Complexity:** Very High — architectural change.
+
+## OPEN — Stakeholder Visibility — Advisor Sees Nothing
+**Problem:** Governance Report can now be exported as text file, but advisors have no live access to client governance state.
+**Required:**
+1. Read-only shared link per governance profile
+2. Real-time score visible to designated advisor
+3. Requires server-side state storage + auth
+**Complexity:** High.
+
+## OPEN — Ernstfall-Kette — DMS → Emergency → Transfer Gate Not Connected
+**Problem:** These three features should form a state machine. DMS triggered → Emergency activates → Transfer Gate advances. Currently they operate independently.
+**Required:** State machine connecting all three into a single succession execution pipeline.
+**Complexity:** High — core product logic.

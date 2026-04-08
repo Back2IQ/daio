@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,11 +9,41 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Archive, Users, Plus, Trash2, KeyRound, ShieldCheck,
-  UserCheck, Scale, Eye, ExternalLink,
+  UserCheck, Scale, Eye, ExternalLink, Sparkles, Loader2,
 } from "lucide-react";
 import { useGovernanceStore } from "@/store/governance";
 import type { Beneficiary } from "@/store/governance";
 import { useNavigate } from "react-router-dom";
+
+function AiSuggest({ field, onSuggestion }: { field: string; onSuggestion: (text: string) => void }) {
+  const [loading, setLoading] = useState(false);
+
+  const suggest = useCallback(async () => {
+    setLoading(true);
+    try {
+      const origin = window.location.origin;
+      const base = origin.includes("localhost") ? "https://daio-back2iq-static.d77kiran.workers.dev" : "";
+      const res = await fetch(base + "/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `Help me fill the "${field}" field in my Inheritance Container. Give me a concise template or example text I can customize. No explanation, just the template text.`,
+          history: [],
+        }),
+      });
+      const data = await res.json();
+      if (data.reply) onSuggestion(data.reply);
+    } catch { /* */ }
+    setLoading(false);
+  }, [field, onSuggestion]);
+
+  return (
+    <Button type="button" variant="ghost" size="sm" onClick={suggest} disabled={loading} className="text-xs text-[#c9a54e] hover:text-[#d4af5a] h-6 px-2">
+      {loading ? <Loader2 className="w-3 h-3 animate-spin mr-1" /> : <Sparkles className="w-3 h-3 mr-1" />}
+      AI Suggest
+    </Button>
+  );
+}
 
 type TabId = "container" | "beneficiaries" | "fragments";
 
@@ -119,7 +149,10 @@ function ContainerTab() {
             )}
           </div>
           <div>
-            <Label>Access Architecture</Label>
+            <div className="flex items-center justify-between">
+              <Label>Access Architecture</Label>
+              <AiSuggest field="Access Architecture" onSuggestion={(t) => setInheritanceContainer({ accessArchitecture: t })} />
+            </div>
             <Textarea
               placeholder="How are assets accessed? Keys, passwords, 2FA, hardware wallets..."
               value={ic.accessArchitecture}
@@ -128,7 +161,10 @@ function ContainerTab() {
             />
           </div>
           <div>
-            <Label>Heir Designation</Label>
+            <div className="flex items-center justify-between">
+              <Label>Heir Designation</Label>
+              <AiSuggest field="Heir Designation" onSuggestion={(t) => setInheritanceContainer({ heirDesignation: t })} />
+            </div>
             <Textarea
               placeholder="Who inherits what? Roles, shares, conditions..."
               value={ic.heirDesignation}
@@ -149,7 +185,10 @@ function ContainerTab() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Label>Legacy Context</Label>
+            <div className="flex items-center justify-between">
+              <Label>Legacy Context</Label>
+              <AiSuggest field="Legacy Context" onSuggestion={(t) => setInheritanceContainer({ legacyContext: t })} />
+            </div>
             <Textarea
               placeholder="Personal context: intentions, wishes, important background..."
               value={ic.legacyContext}
@@ -158,7 +197,10 @@ function ContainerTab() {
             />
           </div>
           <div>
-            <Label>Platform Instructions</Label>
+            <div className="flex items-center justify-between">
+              <Label>Platform Instructions</Label>
+              <AiSuggest field="Platform Instructions" onSuggestion={(t) => setInheritanceContainer({ platformInstructions: t })} />
+            </div>
             <Textarea
               placeholder="Step-by-step instructions per platform: how to access, transfer, close..."
               value={ic.platformInstructions}
@@ -179,7 +221,10 @@ function ContainerTab() {
         </CardHeader>
         <CardContent>
           <div>
-            <Label>Professional Contacts</Label>
+            <div className="flex items-center justify-between">
+              <Label>Professional Contacts</Label>
+              <AiSuggest field="Professional Contacts" onSuggestion={(t) => setInheritanceContainer({ professionalContacts: t })} />
+            </div>
             <Textarea
               placeholder="Notary, lawyer, tax advisor, wealth manager — names, contacts, mandates..."
               value={ic.professionalContacts}

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   ShieldCheck, Clock, AlertTriangle, Siren, HeartPulse,
-  CheckCircle2, Users, KeyRound, Activity,
+  CheckCircle2, Users, KeyRound, Activity, Download,
 } from "lucide-react";
 import { useGovernanceStore } from "@/store/governance";
 
@@ -45,6 +45,10 @@ export default function SuccessionSentinel() {
   const scoreColor = score >= 70 ? "text-emerald-500" : score >= 40 ? "text-amber-500" : "text-red-500";
   const strokeColor = score >= 70 ? "stroke-emerald-500" : score >= 40 ? "stroke-amber-500" : "stroke-red-500";
 
+  // Time-based urgency
+  const lastActivity = auditTrail.length > 0 ? auditTrail[0].timestamp : 0;
+  const daysSinceActivity = lastActivity > 0 ? Math.floor((Date.now() - lastActivity) / (24 * 60 * 60 * 1000)) : -1;
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b">
@@ -54,6 +58,23 @@ export default function SuccessionSentinel() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+        {/* Achievement Badge */}
+        {score >= 90 && (
+          <div className="p-4 rounded-xl border-2 border-emerald-500/40 bg-emerald-500/10 text-center">
+            <ShieldCheck className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
+            <p className="font-bold text-emerald-400">Succession Ready</p>
+            <p className="text-xs text-muted-foreground">Your digital estate is documented and secured via DAIO Governance Framework.</p>
+          </div>
+        )}
+
+        {/* Time-based urgency */}
+        {daysSinceActivity > 14 && score < 70 && (
+          <div className="flex items-center gap-2 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-sm text-amber-400">
+            <AlertTriangle className="w-4 h-4 shrink-0" />
+            <span>No governance activity in {daysSinceActivity} days. Your Score is {score}/100 — unprotected assets remain at risk.</span>
+          </div>
+        )}
+
         {/* DAIO Score + DMS Status */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* DAIO Governance Score */}
@@ -378,7 +399,71 @@ export default function SuccessionSentinel() {
             )}
           </CardContent>
         </Card>
+
+        {/* Export Governance Report */}
+        <Card>
+          <CardContent className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p className="font-medium text-sm">Governance Report</p>
+              <p className="text-xs text-muted-foreground">Export your current governance status for advisors, notaries, or compliance records.</p>
+            </div>
+            <Button variant="outline" onClick={() => exportReport(score, breakdown, beneficiaries, keyFragments, deadManSwitch, inheritanceContainer, auditTrail)}>
+              <Download className="w-4 h-4 mr-2" /> Export Report
+            </Button>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
+}
+
+function exportReport(
+  score: number,
+  breakdown: { label: string; score: number; max: number }[],
+  beneficiaries: { name: string; role: string }[],
+  keyFragments: { holder: string; status: string }[],
+  dms: { enabled: boolean; status: string; lastCheckIn: number },
+  ic: { level: number; lastUpdated: number },
+  audit: { timestamp: number; action: string; details: string }[],
+) {
+  const now = new Date().toISOString();
+  const lines = [
+    "DAIO GOVERNANCE REPORT",
+    `Generated: ${now}`,
+    `Framework: Digital Asset Inheritance Orchestration`,
+    "",
+    "═══ GOVERNANCE SCORE ═══",
+    `Overall: ${score} / 100`,
+    ...breakdown.map((b) => `  ${b.label}: ${b.score}/${b.max}`),
+    "",
+    "═══ SUCCESSION SENTINEL ═══",
+    `Status: ${dms.enabled ? dms.status.toUpperCase() : "DISABLED"}`,
+    `Last Check-In: ${dms.lastCheckIn ? new Date(dms.lastCheckIn).toISOString() : "Never"}`,
+    "",
+    "═══ INHERITANCE CONTAINER ═══",
+    `Level: ${ic.level}/3`,
+    `Last Updated: ${ic.lastUpdated ? new Date(ic.lastUpdated).toISOString() : "Not started"}`,
+    "",
+    "═══ BENEFICIARIES ═══",
+    ...(beneficiaries.length > 0 ? beneficiaries.map((b) => `  ${b.name} (${b.role})`) : ["  None designated"]),
+    "",
+    "═══ KEY FRAGMENTS ═══",
+    `Total: ${keyFragments.length}`,
+    ...(keyFragments.length > 0 ? keyFragments.map((f) => `  ${f.holder}: ${f.status}`) : []),
+    "",
+    "═══ RECENT AUDIT (last 20) ═══",
+    ...audit.slice(0, 20).map((e) => `  [${new Date(e.timestamp).toISOString()}] ${e.action}: ${e.details}`),
+    "",
+    "───",
+    "DAIO — Digital Asset Inheritance Orchestration",
+    "Back2IQ — Ahead by Design",
+  ];
+
+  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `daio-governance-report-${new Date().toISOString().slice(0, 10)}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
 }

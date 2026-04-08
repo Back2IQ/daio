@@ -342,7 +342,12 @@ export const useGovernanceStore = create<GovernanceState>()(
         // Emergency (10)
         if (s.emergencyProtocol.enabled) score += 10;
 
-        // Biometric (5) — reserved
+        // Digital Estate Risk Assessment (5)
+        try {
+          const raw = localStorage.getItem("daio-digital-estate-answers");
+          if (raw && JSON.parse(raw).length >= 5) score += 5;
+        } catch { /* */ }
+
         return score;
       },
 
@@ -374,7 +379,7 @@ export const useGovernanceStore = create<GovernanceState>()(
           { label: "Key Fragments", score: frag, max: 20 },
           { label: "Beneficiaries", score: ben, max: 15 },
           { label: "Emergency Protocol", score: emg, max: 10 },
-          { label: "Biometric (Future)", score: 0, max: 5 },
+          { label: "Risk Assessment", score: (() => { try { const r = localStorage.getItem("daio-digital-estate-answers"); return r && JSON.parse(r).length >= 5 ? 5 : 0; } catch { return 0; } })(), max: 5 },
         ];
       },
 
